@@ -66,15 +66,15 @@ const getNetConfig = (networkName, ethAccountName) => {
     hardhat: {
       // NB!: forking get enabled if env variable HARDHAT_FORKING_URL is set, see code below
       blockGasLimit: 30000000,
-      gasPrice: 0,
+      gasPrice: 1,
       initialBaseFeePerGas: 0,
       allowUnlimitedContractSize: true,
       accounts: {
         // default hardhat's node mnemonic
-        mnemonic: 'test test test test test test test test test test test junk',
+        mnemonic: 'pepper vivid badge punch magic average globe chicken island evil tube curious',
         count: 30,
         accountsBalance: '100000000000000000000000',
-        gasPrice: 0,
+        gasPrice: 1,
       },
     },
     goerli: {
@@ -93,6 +93,12 @@ const getNetConfig = (networkName, ethAccountName) => {
       ...base,
       url: RPC_URL,
       chainId: 17000,
+      timeout: 60000 * 15,
+    },
+    pulsechain: {
+      ...base,
+      url: RPC_URL,
+      chainId: 943,
       timeout: 60000 * 15,
     },
     mainnet: {

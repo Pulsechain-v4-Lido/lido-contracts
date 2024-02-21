@@ -28,6 +28,8 @@ async function deployAragonEnv({ web3, artifacts, networkStateFile = NETWORK_STA
   if (state.deployer) {
     const lowercaseOwner = state.deployer.toLowerCase()
     if (!accounts.some((acc) => acc.toLowerCase() === lowercaseOwner)) {
+      console.log('lowercaseOwner', lowercaseOwner);
+      console.log('accounts', accounts);
       throw new Error(`owner account ${state.deployer} is missing from provided accounts`)
     }
   } else {
