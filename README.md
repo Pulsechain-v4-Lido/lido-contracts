@@ -113,6 +113,9 @@ forge test
 To deploy the smart contracts and run the protocol instance either locally or on a new testnet,
 please proceed to the following [scratch deploy documentation](/docs/scratch-deploy.md)
 
+## Contract Verification
+
+Use ```NETWORK=pulsechain RPC_URL=https://rpc.v4.testnet.pulsechain.com bash ./scripts/scratch/verify-contracts-code.sh``` in the terminal
 # License
 
 2023 Lido <info@lido.fi>
@@ -128,3 +131,4 @@ GNU General Public License for more details.
 
 You should have received a copy of the [GNU General Public License](LICENSE)
 along with this program. If not, see <https://www.gnu.org/licenses/>.
+

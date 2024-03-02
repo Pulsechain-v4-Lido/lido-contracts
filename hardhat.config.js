@@ -210,6 +210,14 @@ module.exports = {
           browserURL: 'https://holesky.etherscan.io',
         },
       },
+      {
+        network: 'pulsechain',
+        chainId: 943,
+        urls: {
+          apiURL: 'https://api.scan.v4.testnet.pulsechain.com/api',
+          browserURL: 'https://scan.v4.testnet.pulsechain.com/',
+        },
+      },
     ],
   },
   ipfs: {
