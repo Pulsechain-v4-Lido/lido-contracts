@@ -254,6 +254,8 @@ contract Lido is Versioned, StETHPermit, AragonApp {
     // The `amount` of ether was sent to the deposit_contract.deposit function
     event Unbuffered(uint256 amount);
 
+
+    error CantSendValueRecipientMayHaveReverted();
     /**
     * @dev As AragonApp, Lido contract must be initialized with following variables:
     *      NB: by default, staking and the whole Lido pool are in paused state
@@ -934,16 +936,27 @@ contract Lido is Versioned, StETHPermit, AragonApp {
 
             STAKING_STATE_POSITION.setStorageStakeLimitStruct(stakeLimitData.updatePrevStakeLimit(currentStakeLimit - msg.value));
         }
-
-        uint256 sharesAmount = getSharesByPooledEth(msg.value);
-
+        uint256 treasuryFeeRate = getDepositFee();
+        address treasuryAddress = getTreasury();
+        uint256 feeAmount = msg.value * treasuryFeeRate / 10000;
+        uint256 depositAmount = msg.value - feeAmount;
+        uint256 sharesAmount = getSharesByPooledEth(depositAmount);
+        _sendValue(treasuryAddress, feeAmount)
         _mintShares(msg.sender, sharesAmount);
 
-        _setBufferedEther(_getBufferedEther().add(msg.value));
+        _setBufferedEther(_getBufferedEther().add(depositAmount));
         emit Submitted(msg.sender, msg.value, _referral);
 
         _emitTransferAfterMintingShares(msg.sender, sharesAmount);
         return sharesAmount;
+    }
+
+    function _sendValue(address _recipient, uint256 _amount) internal {
+        if (address(this).balance < _amount) revert NotEnoughEther();
+
+        // solhint-disable-next-line
+        (bool success,) = _recipient.call{value: _amount}("");
+        if (!success) revert CantSendValueRecipientMayHaveReverted();
     }
 
     /**
