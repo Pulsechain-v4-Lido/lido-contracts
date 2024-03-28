@@ -1405,4 +1405,36 @@ contract Lido is Versioned, StETHPermit, AragonApp {
             _mintInitialShares(balance);
         }
     }
+
+    /**
+     * The structure is used to get Fee percentage of deposit / withdraw pool.
+     */
+    struct FeeStructure {
+        uint256 depositFee;
+        uint256 withdrawFee;
+    }
+
+    FeeStructure public poolFee;
+
+    /**
+     * @notice only owner can execute this function
+     * @dev set DepositFee and Withdraw Fee
+     * @param _depositFee:  deposit fee percentage
+     * @param _withdrawFee:  withdraw fee percentage
+     * @author 0xlancerlab 
+     */
+    function setStakingFee(uint256 _depositFee, uint256 _withdrawFee) external {
+        _auth(STAKING_CONTROL_ROLE);
+        require(_depositFee >= 0 && _withdrawFee >= 0, "Invalid Fee %")
+        poolFee.depositFee = _depositFee;
+        poolFee.withdrawFee = _withdrawFee;
+    }
+
+    function getDepositFee() public view returns (uint256) {
+        return poolFee.depositFee;
+    }
+
+    function getWithdrawFee() public view returns (uint256) {
+        return poolFee.withdrawFee;
+    }
 }

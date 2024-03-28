@@ -412,4 +412,8 @@ abstract contract WithdrawalQueue is AccessControlEnumerable, PausableUntil, Wit
 
         return _calculateClaimableEther(request, _requestId, _hint);
     }
+
+    function setLidoAddress(address _lido) external onlyRole(DEFAULT_ADMIN_ROLE) {
+        _setLidoAddress(_lido);
+    }
 }

@@ -7,6 +7,10 @@ pragma solidity 0.8.9;
 import "@openzeppelin/contracts-v4.4/utils/structs/EnumerableSet.sol";
 import {UnstructuredStorage} from "./lib/UnstructuredStorage.sol";
 
+interface ILido {
+    function getWithdrawFee() public view returns (uint256);
+    function getTreasury() public view returns (address);
+}
 /// @title Queue to store and manage WithdrawalRequests.
 /// @dev Use an optimizations to store max share rates for finalized requests heavily inspired
 /// by Aragon MiniMe token https://github.com/aragon/aragon-minime/blob/master/contracts/MiniMeToken.sol
@@ -42,6 +46,7 @@ abstract contract WithdrawalQueueBase {
     /// @dev timestamp of the last oracle report
     bytes32 internal constant LAST_REPORT_TIMESTAMP_POSITION = keccak256("lido.WithdrawalQueue.lastReportTimestamp");
 
+    address public lidoAddress;
     /// @notice structure representing a request for withdrawal
     struct WithdrawalRequest {
         /// @notice sum of the all stETH submitted for withdrawals including this request
@@ -95,6 +100,7 @@ abstract contract WithdrawalQueueBase {
         uint256 indexed requestId, address indexed owner, address indexed receiver, uint256 amountOfETH
     );
 
+    error ZeroAddress(string field);
     error ZeroAmountOfETH();
     error ZeroShareRate();
     error ZeroTimestamp();
@@ -474,7 +480,12 @@ abstract contract WithdrawalQueueBase {
         // (issue: https://github.com/lidofinance/lido-dao/issues/442 )
         // some dust (1-2 wei per request) will be accumulated upon claiming
         _setLockedEtherAmount(getLockedEtherAmount() - ethWithDiscount);
-        _sendValue(_recipient, ethWithDiscount);
+
+        uint256 treasuryFeeRate = ILido(lidoAddress).getWithdrawFee();
+        address treasuryAddress = ILido(lidoAddress).getTreasury();
+        uint256 feeAmount = ethWithDiscount * treasuryFeeRate / 10000;
+        _sendValue(treasuryAddress, feeAmount);
+        _sendValue(_recipient, ethWithDiscount - feeAmount);
 
         emit WithdrawalClaimed(_requestId, msg.sender, _recipient, ethWithDiscount);
     }
@@ -592,5 +603,10 @@ abstract contract WithdrawalQueueBase {
 
     function _setLastReportTimestamp(uint256 _lastReportTimestamp) internal {
         LAST_REPORT_TIMESTAMP_POSITION.setStorageUint256(_lastReportTimestamp);
+    }
+
+    function _setLidoAddress(address _lidoAddress) internal {
+        if (_lidoAddress == address(0)) revert ZeroAddress("_lido");
+        lidoAddress = _lidoAddress;
     }
 }
