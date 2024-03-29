@@ -1030,7 +1030,7 @@ contract Lido is Versioned, StETHPermit, AragonApp {
         // Thus, no need to check protocol pause explicitly.
         require(!stakeLimitData.isStakingPaused(), 'STAKING_PAUSED');
 
-        uint256 treasuryFeeRate = getDepositFee();
+        uint256 treasuryFeeRate = poolFee.withdrawFee;
         address treasuryAddress = getTreasury();
         uint256 feeAmount = (msg.value * treasuryFeeRate) / 10000;
         uint256 depositAmount = msg.value - feeAmount;
