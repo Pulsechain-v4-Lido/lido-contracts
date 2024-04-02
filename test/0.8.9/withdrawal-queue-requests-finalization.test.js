@@ -61,9 +61,9 @@ contract('WithdrawalQueue', ([owner, deployer, depositor, daoAgent, user, anothe
   }
 
   before('Deploy', async () => {
-  const TOTAL_EXITED_VALIDATORS = 5
-  const TOTAL_DEPOSITED_VALIDATORS = 16
-  const DEPOSITABLE_VALIDATORS_COUNT = 2
+    const TOTAL_EXITED_VALIDATORS = 5
+    const TOTAL_DEPOSITED_VALIDATORS = 16
+    const DEPOSITABLE_VALIDATORS_COUNT = 2
     const stakingModuleStub = await ContractStub('IStakingModule')
       .on('getStakingModuleSummary', {
         return: {
@@ -104,7 +104,7 @@ contract('WithdrawalQueue', ([owner, deployer, depositor, daoAgent, user, anothe
       queueResumer: daoAgent,
       queueFinalizer: daoAgent,
       queueOracle: daoAgent,
-      lido: protocol.pool
+      lido: protocol.pool,
     })
 
     steth = deployed.steth
