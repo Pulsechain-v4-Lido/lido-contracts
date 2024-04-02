@@ -7,8 +7,11 @@ const { MAX_UINT256 } = require('../helpers/constants')
 const { EvmSnapshot } = require('../helpers/blockchain')
 
 const { deployWithdrawalQueue } = require('./withdrawal-queue-deploy.test')
+const { ContractStub } = require('../helpers/contract-stub')
+const { deployProtocol } = require('../helpers/protocol')
+const { wei } = require('../helpers/wei')
 
-contract('WithdrawalQueue', ([owner, daoAgent, user, anotherUser]) => {
+contract('WithdrawalQueue', ([owner, deployer, depositor, daoAgent, user, anotherUser]) => {
   let withdrawalQueue, steth
 
   const snapshot = new EvmSnapshot(ethers.provider)
@@ -58,6 +61,42 @@ contract('WithdrawalQueue', ([owner, daoAgent, user, anotherUser]) => {
   }
 
   before('Deploy', async () => {
+  const TOTAL_EXITED_VALIDATORS = 5
+  const TOTAL_DEPOSITED_VALIDATORS = 16
+  const DEPOSITABLE_VALIDATORS_COUNT = 2
+    const stakingModuleStub = await ContractStub('IStakingModule')
+      .on('getStakingModuleSummary', {
+        return: {
+          type: ['uint256', 'uint256', 'uint256'],
+          value: [TOTAL_EXITED_VALIDATORS, TOTAL_DEPOSITED_VALIDATORS, DEPOSITABLE_VALIDATORS_COUNT],
+        },
+      })
+      .create({ from: deployer })
+
+    const depositContractStub = await ContractStub('contracts/0.6.11/deposit_contract.sol:IDepositContract')
+      .on('deposit') // just accept all ether and do nothing
+      .create({ from: deployer })
+
+    const protocol = await deployProtocol({
+      stakingModulesFactory: async () => {
+        return [
+          {
+            module: stakingModuleStub,
+            name: 'stubbed staking module',
+            targetShares: 100_00,
+            moduleFee: 5_00,
+            treasuryFee: 5_00,
+          },
+        ]
+      },
+      depositSecurityModuleFactory: async () => ({ address: depositor }),
+      depositContractFactory: () => depositContractStub,
+      postSetup: async ({ pool, lidoLocator, eip712StETH, voting }) => {
+        await pool.initialize(lidoLocator.address, eip712StETH.address, { value: wei.str`1 ether` })
+        await pool.resumeProtocolAndStaking({ from: voting.address })
+      },
+    })
+    // lido = protocol.pool
     const deployed = await deployWithdrawalQueue({
       stethOwner: owner,
       queueAdmin: daoAgent,
@@ -65,6 +104,7 @@ contract('WithdrawalQueue', ([owner, daoAgent, user, anotherUser]) => {
       queueResumer: daoAgent,
       queueFinalizer: daoAgent,
       queueOracle: daoAgent,
+      lido: protocol.pool
     })
 
     steth = deployed.steth
