@@ -254,8 +254,6 @@ contract Lido is Versioned, StETHPermit, AragonApp {
     // The `amount` of ether was sent to the deposit_contract.deposit function
     event Unbuffered(uint256 amount);
 
-
-    error CantSendValueRecipientMayHaveReverted();
     /**
     * @dev As AragonApp, Lido contract must be initialized with following variables:
     *      NB: by default, staking and the whole Lido pool are in paused state
@@ -746,7 +744,7 @@ contract Lido is Versioned, StETHPermit, AragonApp {
      * @notice Returns the treasury address
      * @dev DEPRECATED: use LidoLocator.treasury()
      */
-    function getTreasury() external view returns (address) {
+    function getTreasury() public view returns (address) {
         return _treasury();
     }
 
@@ -924,6 +922,11 @@ contract Lido is Versioned, StETHPermit, AragonApp {
     function _submit(address _referral) internal returns (uint256) {
         require(msg.value != 0, "ZERO_DEPOSIT");
 
+        uint256 treasuryFeeRate = getDepositFee();
+        address treasuryAddress = getTreasury();
+        uint256 feeAmount = msg.value * treasuryFeeRate / 1 ether;
+        uint256 depositAmount = msg.value - feeAmount;
+
         StakeLimitState.Data memory stakeLimitData = STAKING_STATE_POSITION.getStorageStakeLimitStruct();
         // There is an invariant that protocol pause also implies staking pause.
         // Thus, no need to check protocol pause explicitly.
@@ -932,16 +935,13 @@ contract Lido is Versioned, StETHPermit, AragonApp {
         if (stakeLimitData.isStakingLimitSet()) {
             uint256 currentStakeLimit = stakeLimitData.calculateCurrentStakeLimit();
 
-            require(msg.value <= currentStakeLimit, "STAKE_LIMIT");
+            require(depositAmount <= currentStakeLimit, "STAKE_LIMIT");
 
-            STAKING_STATE_POSITION.setStorageStakeLimitStruct(stakeLimitData.updatePrevStakeLimit(currentStakeLimit - msg.value));
+            STAKING_STATE_POSITION.setStorageStakeLimitStruct(stakeLimitData.updatePrevStakeLimit(currentStakeLimit - depositAmount));
         }
-        uint256 treasuryFeeRate = getDepositFee();
-        address treasuryAddress = getTreasury();
-        uint256 feeAmount = msg.value * treasuryFeeRate / 10000;
-        uint256 depositAmount = msg.value - feeAmount;
+        
         uint256 sharesAmount = getSharesByPooledEth(depositAmount);
-        _sendValue(treasuryAddress, feeAmount)
+        treasuryAddress.transfer(depositAmount);
         _mintShares(msg.sender, sharesAmount);
 
         _setBufferedEther(_getBufferedEther().add(depositAmount));
@@ -949,14 +949,6 @@ contract Lido is Versioned, StETHPermit, AragonApp {
 
         _emitTransferAfterMintingShares(msg.sender, sharesAmount);
         return sharesAmount;
-    }
-
-    function _sendValue(address _recipient, uint256 _amount) internal {
-        if (address(this).balance < _amount) revert NotEnoughEther();
-
-        // solhint-disable-next-line
-        (bool success,) = _recipient.call{value: _amount}("");
-        if (!success) revert CantSendValueRecipientMayHaveReverted();
     }
 
     /**
@@ -1432,15 +1424,15 @@ contract Lido is Versioned, StETHPermit, AragonApp {
     /**
      * @notice only owner can execute this function
      * @dev set DepositFee and Withdraw Fee
-     * @param _depositFee:  deposit fee percentage
-     * @param _withdrawFee:  withdraw fee percentage
+     * @param _depositFee  deposit fee percentage
+     * @param _withdrawFee  withdraw fee percentage
      * @author 0xlancerlab 
      */
     function setStakingFee(uint256 _depositFee, uint256 _withdrawFee) external {
         _auth(STAKING_CONTROL_ROLE);
-        require(_depositFee >= 0 && _withdrawFee >= 0, "Invalid Fee %")
-        poolFee.depositFee = _depositFee;
-        poolFee.withdrawFee = _withdrawFee;
+        require(_depositFee >= 0 && _withdrawFee >= 0, "Invalid Fee %");
+        
+        poolFee = FeeStructure(_depositFee, _withdrawFee);
     }
 
     function getDepositFee() public view returns (uint256) {

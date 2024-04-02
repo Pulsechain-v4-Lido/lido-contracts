@@ -8,8 +8,8 @@ import "@openzeppelin/contracts-v4.4/utils/structs/EnumerableSet.sol";
 import {UnstructuredStorage} from "./lib/UnstructuredStorage.sol";
 
 interface ILido {
-    function getWithdrawFee() public view returns (uint256);
-    function getTreasury() public view returns (address);
+    function getWithdrawFee() external view returns (uint256);
+    function getTreasury() external view returns (address);
 }
 /// @title Queue to store and manage WithdrawalRequests.
 /// @dev Use an optimizations to store max share rates for finalized requests heavily inspired
@@ -476,14 +476,15 @@ abstract contract WithdrawalQueueBase {
         assert(_getRequestsByOwner()[request.owner].remove(_requestId));
 
         uint256 ethWithDiscount = _calculateClaimableEther(request, _requestId, _hint);
-        // because of the stETH rounding issue
-        // (issue: https://github.com/lidofinance/lido-dao/issues/442 )
-        // some dust (1-2 wei per request) will be accumulated upon claiming
-        _setLockedEtherAmount(getLockedEtherAmount() - ethWithDiscount);
 
         uint256 treasuryFeeRate = ILido(lidoAddress).getWithdrawFee();
         address treasuryAddress = ILido(lidoAddress).getTreasury();
         uint256 feeAmount = ethWithDiscount * treasuryFeeRate / 10000;
+        // because of the stETH rounding issue
+        // (issue: https://github.com/lidofinance/lido-dao/issues/442 )
+        // some dust (1-2 wei per request) will be accumulated upon claiming
+        _setLockedEtherAmount(getLockedEtherAmount() - (ethWithDiscount - feeAmount));
+
         _sendValue(treasuryAddress, feeAmount);
         _sendValue(_recipient, ethWithDiscount - feeAmount);
 
