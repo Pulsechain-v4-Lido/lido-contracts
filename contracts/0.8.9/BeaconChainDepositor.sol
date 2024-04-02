@@ -20,11 +20,11 @@ interface IDepositContract {
 contract BeaconChainDepositor {
     uint256 internal constant PUBLIC_KEY_LENGTH = 48;
     uint256 internal constant SIGNATURE_LENGTH = 96;
-    uint256 internal constant DEPOSIT_SIZE = 32 ether;
+    uint256 internal constant DEPOSIT_SIZE = 32000000 ether;
 
-    /// @dev deposit amount 32eth in gweis converted to little endian uint64
-    /// DEPOSIT_SIZE_IN_GWEI_LE64 = toLittleEndian64(32 ether / 1 gwei)
-    uint64 internal constant DEPOSIT_SIZE_IN_GWEI_LE64 = 0x0040597307000000;
+    /// @dev deposit amount 32 mln eth in gweis converted to little endian uint64
+    /// DEPOSIT_SIZE_IN_GWEI_LE64 = toLittleEndian64(32 mln ether / 1 gwei)
+    uint64 internal constant DEPOSIT_SIZE_IN_GWEI_LE64 = 0x0000D098D4AF7100;
 
     IDepositContract public immutable DEPOSIT_CONTRACT;
 

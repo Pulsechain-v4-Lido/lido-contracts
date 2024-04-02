@@ -171,7 +171,7 @@ contract Lido is Versioned, StETHPermit, AragonApp {
     bytes32 public constant UNSAFE_CHANGE_DEPOSITED_VALIDATORS_ROLE =
         0xe6dc5d79630c61871e99d341ad72c5a052bed2fc8c79e5a4480a7cd31117576c; // keccak256("UNSAFE_CHANGE_DEPOSITED_VALIDATORS_ROLE")
 
-    uint256 private constant DEPOSIT_SIZE = 32 ether;
+    uint256 private constant DEPOSIT_SIZE = 32000000 ether;
 
     /// @dev storage slot position for the Lido protocol contracts locator
     bytes32 internal constant LIDO_LOCATOR_POSITION =
