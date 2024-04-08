@@ -21,6 +21,7 @@ async function deployWithdrawalQueue({
   queueResumer,
   queueFinalizer,
   queueOracle,
+  lido,
   queueName = QUEUE_NAME,
   symbol = QUEUE_SYMBOL,
   doResume = true,
@@ -38,7 +39,7 @@ async function deployWithdrawalQueue({
     symbol
   )
 
-  const initTx = await withdrawalQueue.initialize(queueAdmin)
+  const initTx = await withdrawalQueue.initialize(queueAdmin, lido)
 
   await withdrawalQueue.grantRole(await withdrawalQueue.FINALIZE_ROLE(), queueFinalizer || steth.address, {
     from: queueAdmin,

@@ -1,0 +1,1190 @@
+(base) Avo@Book lido-dao-fork % bash scripts/scratch/dao-pulsechain-deploy.sh
+DEPLOYER is 0x9F3cafA814362AF8963560070ea8636b39c84a70
+NETWORK is pulsechain
+Nothing to compile
+ ·----------------------------------|-------------|---------------·
+ |  Contract Name                   ·  Size (KB)  ·  Change (KB)  │
+ ···································|·············|················
+ |  SigningKeys                     ·      0.076  ·               │
+ ···································|·············|················
+ |  StakeLimitState                 ·      0.076  ·               │
+ ···································|·············|················
+ |  Packed64x4                      ·      0.076  ·               │
+ ···································|·············|················
+ |  StakeLimitUnstructuredStorage   ·      0.076  ·               │
+ ···································|·············|················
+ |  StakeLimitUtils                 ·      0.076  ·               │
+ ···································|·············|················
+ |  Address                         ·      0.086  ·               │
+ ···································|·············|················
+ |  StorageSlot                     ·      0.086  ·               │
+ ···································|·············|················
+ |  UnstructuredRefStorage          ·      0.086  ·               │
+ ···································|·············|················
+ |  Math                            ·      0.086  ·               │
+ ···································|·············|················
+ |  UnstructuredStorage             ·      0.086  ·               │
+ ···································|·············|················
+ |  LimitsListUnpacker              ·      0.086  ·               │
+ ···································|·············|················
+ |  LimitsListPacker                ·      0.086  ·               │
+ ···································|·············|················
+ |  ECDSA                           ·      0.086  ·               │
+ ···································|·············|················
+ |  Math256                         ·      0.086  ·               │
+ ···································|·············|················
+ |  MinFirstAllocationStrategy      ·      0.086  ·               │
+ ···································|·············|················
+ |  SignatureUtils                  ·      0.086  ·               │
+ ···································|·············|················
+ |  MemUtils                        ·      0.086  ·               │
+ ···································|·············|················
+ |  WithdrawalsManagerStub          ·      0.127  ·               │
+ ···································|·············|················
+ |  PositiveTokenRebaseLimiter      ·      0.162  ·               │
+ ···································|·············|················
+ |  BeaconChainDepositor            ·      0.165  ·               │
+ ···································|·············|················
+ |  Pausable                        ·      0.172  ·               │
+ ···································|·············|················
+ |  Versioned                       ·      0.173  ·               │
+ ···································|·············|················
+ |  Versioned                       ·      0.173  ·               │
+ ···································|·············|················
+ |  PausableUntil                   ·      0.267  ·               │
+ ···································|·············|················
+ |  ERC1967Proxy                    ·      0.653  ·               │
+ ···································|·············|················
+ |  EIP712StETH                     ·      0.942  ·               │
+ ···································|·············|················
+ |  LidoLocator                     ·      1.452  ·               │
+ ···································|·············|················
+ |  WithdrawalsManagerProxy         ·      1.959  ·               │
+ ···································|·············|················
+ |  LidoExecutionLayerRewardsVault  ·      2.019  ·               │
+ ···································|·············|················
+ |  WithdrawalVault                 ·      2.140  ·               │
+ ···································|·············|················
+ |  OssifiableProxy                 ·      2.497  ·               │
+ ···································|·············|················
+ |  OracleDaemonConfig              ·      5.737  ·               │
+ ···································|·············|················
+ |  DepositContract                 ·      6.358  ·               │
+ ···································|·············|················
+ |  WstETH                          ·      6.492  ·               │
+ ···································|·············|················
+ |  DepositSecurityModule           ·      7.529  ·               │
+ ···································|·············|················
+ |  LegacyOracle                    ·      7.857  ·               │
+ ···································|·············|················
+ |  Burner                          ·      8.059  ·               │
+ ···································|·············|················
+ |  ValidatorsExitBusOracle         ·     11.813  ·               │
+ ···································|·············|················
+ |  HashConsensus                   ·     13.199  ·               │
+ ···································|·············|················
+ |  OracleReportSanityChecker       ·     13.401  ·               │
+ ···································|·············|················
+ |  AccountingOracle                ·     16.514  ·               │
+ ···································|·············|················
+ |  Lido                            ·     23.361  ·               │
+ ···································|·············|················
+ |  NodeOperatorsRegistry           ·     23.397  ·               │
+ ···································|·············|················
+ |  WithdrawalQueueERC721           ·     24.190  ·               │
+ ···································|·············|················
+ |  StakingRouter                   ·     24.469  ·               │
+ ·----------------------------------|-------------|---------------·
+Extracting ABI for ILidoExecutionLayerRewardsVault...
+Extracting ABI for IOracleReportSanityChecker...
+Extracting ABI for IPostTokenRebaseReceiver...
+Extracting ABI for IStakingRouter...
+Extracting ABI for IWithdrawalQueue...
+Extracting ABI for IWithdrawalVault...
+Extracting ABI for Lido...
+Extracting ABI for StETH...
+Extracting ABI for IERC2612...
+Extracting ABI for StETHPermit...
+Extracting ABI for SigningKeys...
+Extracting ABI for IStETH...
+Extracting ABI for NodeOperatorsRegistry...
+Extracting ABI for IAccountingOracle...
+Extracting ABI for IHashConsensus...
+Extracting ABI for LegacyOracle...
+Extracting ABI for IETHRegistrarController...
+Extracting ABI for IInterfaceResolver...
+Extracting ABI for LidoTemplate...
+Extracting ABI for Versioned...
+Extracting ABI for WstETH...
+Extracting ABI for ERC1967Proxy...
+Extracting ABI for Proxy...
+Extracting ABI for WithdrawalsManagerProxy...
+Extracting ABI for WithdrawalsManagerStub...
+Extracting ABI for BeaconChainDepositor...
+Extracting ABI for IDepositContract...
+Extracting ABI for Burner...
+Extracting ABI for IStETH...
+Extracting ABI for DepositSecurityModule...
+Extracting ABI for IDepositContract...
+Extracting ABI for ILido...
+Extracting ABI for IStakingRouter...
+Extracting ABI for EIP712StETH...
+Extracting ABI for ILido...
+Extracting ABI for LidoExecutionLayerRewardsVault...
+Extracting ABI for LidoLocator...
+Extracting ABI for OracleDaemonConfig...
+Extracting ABI for StakingRouter...
+Extracting ABI for IStETH...
+Extracting ABI for IWstETH...
+Extracting ABI for WithdrawalQueue...
+Extracting ABI for WithdrawalQueueBase...
+Extracting ABI for INFTDescriptor...
+Extracting ABI for WithdrawalQueueERC721...
+Extracting ABI for ILido...
+Extracting ABI for WithdrawalVault...
+Extracting ABI for PositiveTokenRebaseLimiter...
+Extracting ABI for AccountingOracle...
+Extracting ABI for ILegacyOracle...
+Extracting ABI for ILido...
+Extracting ABI for IOracleReportSanityChecker...
+Extracting ABI for IStakingRouter...
+Extracting ABI for IWithdrawalQueue...
+Extracting ABI for BaseOracle...
+Extracting ABI for IConsensusContract...
+Extracting ABI for HashConsensus...
+Extracting ABI for IReportAsyncProcessor...
+Extracting ABI for IOracleReportSanityChecker...
+Extracting ABI for ValidatorsExitBusOracle...
+Extracting ABI for OssifiableProxy...
+Extracting ABI for IWithdrawalQueue...
+Extracting ABI for OracleReportSanityChecker...
+Extracting ABI for Versioned...
+Extracting ABI for AccessControl...
+Extracting ABI for AccessControlEnumerable...
+Extracting ABI for Finance...
+Extracting ABI for Vault...
+Extracting ABI for Voting...
+Extracting ABI for TokenManager...
+All done!
+Using env values:
+{
+  DEPLOYER: '0x9F3cafA814362AF8963560070ea8636b39c84a70',
+  GATE_SEAL_FACTORY: '0x0000000000000000000000000000000000000000',
+  GENESIS_TIME: 1695902400,
+  DEPOSIT_CONTRACT: '0x0662bd0B45292cd2639232140F0Fe555a1fd281F',
+  WITHDRAWAL_QUEUE_BASE_URI: undefined
+}
+========================================
+Network ID: 943
+Using DepositContract at: 0x0662bd0B45292cd2639232140F0Fe555a1fd281F
+(node:43587) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/ansi-mark/package.json' of 'ansi-mark'. Please either fix that or report it to the module author
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:43587) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/super-split/package.json' of 'super-split'. Please either fix that or report it to the module author
+====================
+>>> =============================
+>>> Deposit contract deployed or is specified.
+>>> =============================
+========================================
+Network ID: 943
+Using Aragon ENS label: aragonpm
+
+========================================
+= ENS                                  =
+========================================
+
+====================
+Deploying ENSFactory...
+(node:43595) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/ansi-mark/package.json' of 'ansi-mark'. Please either fix that or report it to the module author
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:43595) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/super-split/package.json' of 'super-split'. Please either fix that or report it to the module author
+ENSFactory address: 0xd41147eCa2fa955F41e0Ee45c8483a0E4cEe102d
+TX hash: 0x33f2b51829045ea4c0f1673fa6bbc3f1d150edbbf18894672297c10de05d8b5d
+Gas used: 1593531
+Creating ENS...
+TX hash: 0xfa99ab1f359f57c5615aa9eca686b10041d648a5e6e89ee46475ecf1f14b71e6
+Gas used: 1373757
+ENS address: 0x2bB46a6305e1519A2432595504115a6f3EcE2668
+
+========================================
+= DAO factory                          =
+========================================
+
+Deploying DAOFactory with EVMScripts...
+Deploying implementation for proxy of Kernel... done: 0x6C423B9Da2654C2d6347457C38594cc3036996E1 (gas used 2382268)
+Deploying implementation for proxy of ACL... done: 0x0cD2B7dd983614AF04eC90EF4A4E528a04a3FF15 (gas used 2230849)
+====================
+Deploying EVMScriptRegistryFactory...
+EVMScriptRegistryFactory address: 0xE7C107A3f510532f14DE82E382144793c92A2754
+TX hash: 0x8a3e9c7ad1236774e74718668cd95ba104145267b40727ce956f5d68447fd9ea
+Gas used: 2235922
+====================
+Deploying DAOFactory...
+DAOFactory address: 0x39aF343E8f1AaFc70Ec07B4DF96dd7E7EC210788
+TX hash: 0xfeb03f35c8460a4cdae7363da1ea367a964b7f59354ebb9dc74587ba8f78c879
+Gas used: 911704
+
+========================================
+= APM registry factory                 =
+========================================
+
+====================
+Deploying APMRegistry...
+APMRegistry address: 0xaADE8F4F3f6bf17Cdc982ab3F84eE8fD65C7178c
+TX hash: 0xe2cc92542ba7edc0be411cde6573d990f9bc42785567bf8e6650e8a7e7b8b58c
+Gas used: 2911592
+====================
+Deploying Repo...
+Repo address: 0x4d6f2bF2DA621D131D5b7d46BB273d5a13A418a3
+TX hash: 0x29044bc411fe309236c3e3205ca276397d4f7262124d919d4071563ee5dcfec6
+Gas used: 1501517
+====================
+Deploying ENSSubdomainRegistrar...
+ENSSubdomainRegistrar address: 0xc0c5C8F828C1be06E052994ba1C12C7a6D5493FE
+TX hash: 0x65aaf0260d374efd4fd9be586e6edaf02bc3aa3698c69b73bdb7b53b36660759
+Gas used: 1611267
+====================
+Deploying APMRegistryFactory...
+APMRegistryFactory address: 0xB2313634318840739FdFCa89Eb734a244C93F8B0
+TX hash: 0xa1effa35485dc1a51561b4da62dc5fa2388611750dcc54234d3a01f444b83457
+Gas used: 1839191
+
+========================================
+= Aragon APM                           =
+========================================
+
+Deploying APM for node aragonpm.eth...
+====================
+Assigning ENS name 'aragonpm.eth' to APMRegistryFactory at 0xB2313634318840739FdFCa89Eb734a244C93F8B0...
+Node: aragonpm.eth (0x9065c3e7f7b7ef1ef4e53d2d0b8e0cef02874ab020c1ece79d5f0d3d0111c0ba)
+Parent node: eth (0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae)
+Label: aragonpm (0x1542111b4698ac085139692eae7c6efb632a4ae2779f8686da94511ebbbff594)
+Creating the subdomain and assigning it to 0xB2313634318840739FdFCa89Eb734a244C93F8B0...
+TX hash: 0x67660c7fec0cde5468ff81da5be972359f1469e7a48848db3303fa4f43a347a5
+Gas used: 49289
+====================
+Using APMRegistryFactory: 0xB2313634318840739FdFCa89Eb734a244C93F8B0
+Deploying APMRegistry...
+TX hash: 0x678083a3407e8ea180b2c694bbf4deb52dd5ba2d665e66a162f6f6f66bdcfcc1
+Gas used: 4835482
+APMRegistry address: 0x17b5Ee4C53BD76040f0ccd27607576a1A0451b21
+====================
+
+========================================
+= MiniMeTokenFactory                   =
+========================================
+
+====================
+Deploying MiniMeTokenFactory...
+MiniMeTokenFactory address: 0x82B3Abb990f2128b536B670Ff0eD531e4b7e5989
+TX hash: 0x0799e81aad002732a89f517e6d12e707fee74474231ceb2acd52163311c536fa
+Gas used: 1737370
+
+========================================
+= AragonID                             =
+========================================
+
+Using public resolver: 0x0204e1169bFA0681AE3Ed2842Be3dA671B5C0998
+ENS node: aragonid.eth (0x7e74a86b6e146964fb965db04dc2590516da77f720bb6759337bf5632415fd86)
+====================
+Deploying FIFSResolvingRegistrar...
+FIFSResolvingRegistrar address: 0x96eE20a52c853ffB96527834515Fcd8ab43FE60d
+TX hash: 0x1138e7cf4911c9d03d2ce14ba8442560cbb513344eb60a61026f6b8f0f5e082c
+Gas used: 386926
+====================
+Assigning ENS name 'aragonid.eth' to AragonID at 0x96eE20a52c853ffB96527834515Fcd8ab43FE60d...
+Node: aragonid.eth (0x7e74a86b6e146964fb965db04dc2590516da77f720bb6759337bf5632415fd86)
+Parent node: eth (0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae)
+Label: aragonid (0xb50225e66585b05f85fa55923224991b0517e07903ac43c0e5258b4d48950a97)
+Creating the subdomain and assigning it to 0x96eE20a52c853ffB96527834515Fcd8ab43FE60d...
+TX hash: 0x28c7239b3200e7b58a5f4cf58ba92bf1317774b674f6956c9df64347c109d45d
+Gas used: 49289
+====================
+Assigning owner name...
+TX hash: 0x42f2bb5ffe8ea080288240d70206bfef007ecac3c3f81eb2e496bc5965d32211
+Gas used: 121323
+>>> =============================
+>>> Aragon ENV deployed.
+>>> =============================
+Deploying implementation for proxy of Agent... done: 0x6f2066B19C4383F6Abe445B4dDf2035c5a69E1b5 (gas used 3594681)
+(node:43699) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/ansi-mark/package.json' of 'ansi-mark'. Please either fix that or report it to the module author
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:43699) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/super-split/package.json' of 'super-split'. Please either fix that or report it to the module author
+Deploying implementation for proxy of Finance... done: 0x5CF3ab56DD2dbc9514124c6260C5ABFB9DF78196 (gas used 4338654)
+Deploying implementation for proxy of TokenManager... done: 0x28e6FFF8c7A772c6F0a1291af4582a5687d68355 (gas used 3100985)
+Deploying implementation for proxy of Voting... done: 0x38f7635C2583588e7a37aa67e95E543ffFc49BF9 (gas used 3491281)
+>>> =============================
+>>> Aragon STD apps deployed.
+>>> =============================
+====================
+Network ID: 943
+====================
+Deploying LidoTemplate (NO proxy)... done: 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb (gas used 4875232)
+
+(node:43718) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/ansi-mark/package.json' of 'ansi-mark'. Please either fix that or report it to the module author
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:43718) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/super-split/package.json' of 'super-split'. Please either fix that or report it to the module author
+Deploying implementation for proxy of Lido... done: 0x171d68d65D57caa787cb8a3535a338382B96C56c (gas used 5143028)
+Deploying implementation for proxy of LegacyOracle... done: 0xd913616C5431E4Bd1c6fB0d96400a58640d53Ee4 (gas used 1801025)
+Deploying implementation for proxy of NodeOperatorsRegistry... done: 0x595e12fb98539c7e6dCa150446f525571204512D (gas used 5156719)
+====================
+========================================
+Network ID: 943
+
+========================================
+= DAO template                         =
+========================================
+
+(node:43766) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/ansi-mark/package.json' of 'ansi-mark'. Please either fix that or report it to the module author
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:43766) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/super-split/package.json' of 'super-split'. Please either fix that or report it to the module author
+Checking...
+[✓] the bytecode at 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb matches LidoTemplate
+[✓] the config
+
+========================================
+= Lido app base                        =
+========================================
+
+Checking...
+[✓] the bytecode at 0x171d68d65D57caa787cb8a3535a338382B96C56c matches Lido
+[✓] is a petrified Aragon base
+
+========================================
+= NodeOperatorsRegistry app base       =
+========================================
+
+Checking...
+[✓] the bytecode at 0x595e12fb98539c7e6dCa150446f525571204512D matches NodeOperatorsRegistry
+[✓] is a petrified Aragon base
+
+========================================
+= LegacyOracle app base                =
+========================================
+
+Checking...
+[✓] the bytecode at 0xd913616C5431E4Bd1c6fB0d96400a58640d53Ee4 matches LegacyOracle
+[✓] is a petrified Aragon base
+>>> =============================
+>>> Apps instances deployed
+>>> =============================
+========================================
+Network ID: 943
+====================
+Using ENS: 0x2bB46a6305e1519A2432595504115a6f3EcE2668
+(node:43778) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/ansi-mark/package.json' of 'ansi-mark'. Please either fix that or report it to the module author
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:43778) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/super-split/package.json' of 'super-split'. Please either fix that or report it to the module author
+ENS domain: lidopm.eth (0xbfc3884a938047d1e93d1dbd85bfcfb929a63a4ed292efc654596c10e96a88c9)
+TLD node: eth (0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae)
+Label: lidopm (0x90a9580abeb24937fc658e497221c81ce8553b560304f9525821f32b17dbdaec)
+ENS domain new owner: 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb
+Creating the subdomain and assigning it to template 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb
+ENS[0x2bB46a6305e1519A2432595504115a6f3EcE2668].setSubnodeOwner()...
+[✓] tx: 0x7203134b86acffc1fb1418465887efa404245eb4c4ba8d7d7aa320e92da5c6fd (gasUsed 49289)
+====================
+>>> =============================
+>>> ENS registered
+>>> =============================
+========================================
+Network ID: 943
+====================
+APM ENS domain: lidopm.eth
+Using DAO template: 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb
+(node:43785) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/ansi-mark/package.json' of 'ansi-mark'. Please either fix that or report it to the module author
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:43785) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/super-split/package.json' of 'super-split'. Please either fix that or report it to the module author
+Using LidoTemplate deploy block: 18591197
+====================
+{ allEvents: [] }
+[✓] LidoTemplate has generated no events
+[✓] ENS node is owned by the DAO template
+====================
+Parent domain: eth 0x93cdeb708b7545dc668eb9280176169d1c33cfd8ed6f04690a0bcc88a93fc4ae
+Subdomain label: lidopm 0x90a9580abeb24937fc658e497221c81ce8553b560304f9525821f32b17dbdaec
+====================
+LidoTemplate[0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb].deployLidoAPM()...
+[✓] tx: 0x9aa2f703c460aad5f618a8f84db96efaa3d67f92c0e059be51d242c1c89ff983 (gasUsed 4892248)
+========================================
+Network ID: 943
+====================
+Using LidoTemplate: 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb
+(node:43797) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/ansi-mark/package.json' of 'ansi-mark'. Please either fix that or report it to the module author
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:43797) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/super-split/package.json' of 'super-split'. Please either fix that or report it to the module author
+Using LidoTemplate deploy block: 18591197
+[✓] the last event from LidoTemplate at 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb is TmplAPMDeployed
+Using deployLidoAPM transaction: 0x9aa2f703c460aad5f618a8f84db96efaa3d67f92c0e059be51d242c1c89ff983
+====================
+Using APMRegistry: 0x87eB7579398c642Ad54aa8594665676bE730D4D1
+[✓] proxy: the bytecode at 0x87eB7579398c642Ad54aa8594665676bE730D4D1 matches AppProxyUpgradeable
+[✓] impl: the bytecode at 0xaADE8F4F3f6bf17Cdc982ab3F84eE8fD65C7178c matches APMRegistry
+[✓] registry.ens: 0x2bB46a6305e1519A2432595504115a6f3EcE2668
+[✓] registry.registrar: 0xbF0A490aC858DC7bc038e0D4971C52f80014ee61
+[✓] registry.registrar.ens: 0x2bB46a6305e1519A2432595504115a6f3EcE2668
+[✓] registry.registrar.rootNode: 0xbfc3884a938047d1e93d1dbd85bfcfb929a63a4ed292efc654596c10e96a88c9
+[✓] registry.registrar.rootNode owner: 0xbF0A490aC858DC7bc038e0D4971C52f80014ee61
+[✓] registry.kernel: 0xb9D9177c63a451A38dB3a00c62226E1aEAA8610A
+[✓] registry.kernel.acl: 0x22dadfc39032ba20341dB18754Ee937a07ab0EaB
+[✓] registry.registrar.kernel: 0xb9D9177c63a451A38dB3a00c62226E1aEAA8610A
+[✓] registry.CREATE_REPO_ROLE perm manager: 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb
+[✓] registry.CREATE_REPO_ROLE perm is accessible by 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb
+[✓] registry.CREATE_REPO_ROLE perm is not accessible by any other entities
+[✓] registry.kernel.APP_MANAGER_ROLE perm manager: 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb
+[✓] registry.kernel.acl.CREATE_PERMISSIONS_ROLE perm manager: 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb
+[✓] registry.kernel.acl.CREATE_PERMISSIONS_ROLE perm is accessible by 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb
+[✓] registry.kernel.acl.CREATE_PERMISSIONS_ROLE perm is accessible by 0x87eB7579398c642Ad54aa8594665676bE730D4D1
+[✓] registry.kernel.acl.CREATE_PERMISSIONS_ROLE perm is not accessible by any other entities
+[✓] registry.registrar.CREATE_NAME_ROLE perm manager: 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb
+[✓] registry.registrar.CREATE_NAME_ROLE perm is accessible by 0x87eB7579398c642Ad54aa8594665676bE730D4D1
+[✓] registry.registrar.CREATE_NAME_ROLE perm is not accessible by any other entities
+[✓] registry.registrar.POINT_ROOTNODE_ROLE perm manager: 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb
+[✓] registry.registrar.POINT_ROOTNODE_ROLE perm is accessible by 0x87eB7579398c642Ad54aa8594665676bE730D4D1
+[✓] registry.registrar.POINT_ROOTNODE_ROLE perm is not accessible by any other entities
+[✓] registry.registrar.DELETE_NAME_ROLE has no perm manager
+[✓] registry.registrar.DELETE_NAME_ROLE has no grantees
+====================
+>>> =============================
+>>> APM deployed
+>>> =============================
+========================================
+Network ID: 943
+====================
+Using LidoTemplate: 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb
+(node:43805) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/ansi-mark/package.json' of 'ansi-mark'. Please either fix that or report it to the module author
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:43805) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/super-split/package.json' of 'super-split'. Please either fix that or report it to the module author
+Using LidoTemplate deploy block: 18591197
+[✓] the last event from LidoTemplate at 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb is TmplAPMDeployed
+====================
+{
+  arguments: [Arguments] { '0': { artifacts: [Artifacts], web3: [Web3] } },
+  from: '0x9F3cafA814362AF8963560070ea8636b39c84a70'
+}
+LidoTemplate[0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb].createRepos()...
+[✓] tx: 0xe29d89e6bb52c8cb6d28f56a4c758956c7f4c9d29364c5ebcc105bff28750911 (gasUsed 2331483)
+=== Aragon Lido Apps Repos (Lido, AccountingOracle, NodeOperatorsRegistry deployed: 0xe29d89e6bb52c8cb6d28f56a4c758956c7f4c9d29364c5ebcc105bff28750911 ===
+LidoTemplate[0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb].createStdAragonRepos()...
+[✓] tx: 0x02a543d0ab7bb76c833b7963b6f731ae15d915531cf61d52e56323c7d7de9ede (gasUsed 2972126)
+=== Aragon Std Apps Repos (Agent, Finance, TokenManager, Voting deployed: 0x02a543d0ab7bb76c833b7963b6f731ae15d915531cf61d52e56323c7d7de9ede ===
+====================
+>>> =============================
+>>> App repos created
+>>> =============================
+====================
+Network ID: 943
+====================
+Using LidoTemplate: 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb
+(node:43818) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/ansi-mark/package.json' of 'ansi-mark'. Please either fix that or report it to the module author
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:43818) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/super-split/package.json' of 'super-split'. Please either fix that or report it to the module author
+Using LidoTemplate deploy block: 18591197
+[✓] the last event from LidoTemplate at 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb is TmplReposCreated
+Using createRepos transaction: 0xe29d89e6bb52c8cb6d28f56a4c758956c7f4c9d29364c5ebcc105bff28750911
+====================
+[✓] repo lido.lidopm.eth: latest version contract address is correct
+[✓] repo lido.lidopm.eth: latest version content URI is correct
+[✓] repo node-operators-registry.lidopm.eth: latest version contract address is correct
+[✓] repo node-operators-registry.lidopm.eth: latest version content URI is correct
+[✓] repo oracle.lidopm.eth: latest version contract address is correct
+[✓] repo oracle.lidopm.eth: latest version content URI is correct
+====================
+Using DAO token settings: { name: 'TEST Lido DAO Token', symbol: 'TLDO' }
+Using DAO voting settings: {
+  minSupportRequired: '500000000000000000',
+  minAcceptanceQuorum: '50000000000000000',
+  voteDuration: 900,
+  objectionPhaseDuration: 300
+}
+LidoTemplate[0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb].newDAO()...
+[✓] tx: 0x68d102a60b5281bb0b03af79c1e1fde3efe1ff295e05e1aa6da1e525f93e374e (gasUsed 6214426)
+========================================
+Network ID: 943
+====================
+Using LidoTemplate: 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb
+(node:43828) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/ansi-mark/package.json' of 'ansi-mark'. Please either fix that or report it to the module author
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:43828) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/super-split/package.json' of 'super-split'. Please either fix that or report it to the module author
+Using LidoTemplate deploy block: 18591197
+[✓] the last event from LidoTemplate at 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb is TmplDAOAndTokenDeployed
+aragon-agent: 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04 0x701a4fd1f5174d12a0f1d9ad2c88d0ad11ab6aad0ac72b7d9ce621815f8016a9 0x8129fc1c
+aragon-finance: 0xEbe33E012256c32044DF3276d73eBCeda5073b74 0x5c9918c99c4081ca9459c178381be71d9da40e49e151687da55099c49a4237f1 0x1798de810000000000000000000000008e797edfe1a9ff2b72fdca95a8e00ee9756b6b040000000000000000000000000000000000000000000000000000000000278d00
+aragon-token-manager: 0xdF412BF1e1FC1e5421B34793eb33B59D94481D86 0xcd567bdf93dd0f6acc3bc7f2155f83244d56a65abbfbefb763e015420102c67b null
+aragon-voting: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e 0x0abcd104777321a82b010357f20887d61247493d89d2e987ff57bcecbde00e1e 0x13e0945300000000000000000000000064b9f9a850732bd132c3b6a68810dbafb487e15400000000000000000000000000000000000000000000000006f05b59d3b2000000000000000000000000000000000000000000000000000000b1a2bc2ec500000000000000000000000000000000000000000000000000000000000000000384000000000000000000000000000000000000000000000000000000000000012c
+lido: 0xF433b2137e9C5804e8D07D9a97da54C1e02748BB 0x3ca7c3e38968823ccb4c78ea688df41356f182ae1d159e4ee608d30d68cef320 null
+node-operators-registry: 0xb9a519f5F008BE9abD095FAC19a2B39B6eB847cD 0x7071f283424072341f856ac9e947e7ec0eb68719f757a7e785979b6b8717579d null
+oracle: 0x5efc24f9EE087dE7892c5D0fa339A303503BB380 0x8b47ba2a8454ec799cd91646e7ec47168e91fd139b23f017455f3e5898aaba93 null
+Using newDao transaction: 0x68d102a60b5281bb0b03af79c1e1fde3efe1ff295e05e1aa6da1e525f93e374e
+====================
+Using Kernel: 0x82eB15a352aC66989318E5bF978e57af101Fb4A7
+Using MiniMeToken: 0x64B9f9A850732bd132C3b6A68810dBAfB487e154
+====================
+[✓] all (and only) expected apps are installed
+====================
+[✓] aragon-agent proxy: the bytecode at 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04 matches AppProxyUpgradeable
+[✓] aragon-agent impl: the bytecode at 0x6f2066B19C4383F6Abe445B4dDf2035c5a69E1b5 matches Agent
+[✓] aragon-agent: the installed app base is 0x6f2066B19C4383F6Abe445B4dDf2035c5a69E1b5
+[✓] aragon-agent: is an initialized Aragon app
+[✓] aragon-agent kernel: 0x82eB15a352aC66989318E5bF978e57af101Fb4A7
+====================
+[✓] aragon-finance proxy: the bytecode at 0xEbe33E012256c32044DF3276d73eBCeda5073b74 matches AppProxyUpgradeable
+[✓] aragon-finance impl: the bytecode at 0x5CF3ab56DD2dbc9514124c6260C5ABFB9DF78196 matches Finance
+[✓] aragon-finance: the installed app base is 0x5CF3ab56DD2dbc9514124c6260C5ABFB9DF78196
+[✓] aragon-finance: is an initialized Aragon app
+[✓] aragon-finance kernel: 0x82eB15a352aC66989318E5bF978e57af101Fb4A7
+====================
+[✓] aragon-token-manager proxy: the bytecode at 0xdF412BF1e1FC1e5421B34793eb33B59D94481D86 matches AppProxyUpgradeable
+[✓] aragon-token-manager impl: the bytecode at 0x28e6FFF8c7A772c6F0a1291af4582a5687d68355 matches TokenManager
+[✓] aragon-token-manager: the installed app base is 0x28e6FFF8c7A772c6F0a1291af4582a5687d68355
+[✓] aragon-token-manager: is an initialized Aragon app
+[✓] aragon-token-manager kernel: 0x82eB15a352aC66989318E5bF978e57af101Fb4A7
+====================
+[✓] aragon-voting proxy: the bytecode at 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e matches AppProxyUpgradeable
+[✓] aragon-voting impl: the bytecode at 0x38f7635C2583588e7a37aa67e95E543ffFc49BF9 matches Voting
+[✓] aragon-voting: the installed app base is 0x38f7635C2583588e7a37aa67e95E543ffFc49BF9
+[✓] aragon-voting: is an initialized Aragon app
+[✓] aragon-voting kernel: 0x82eB15a352aC66989318E5bF978e57af101Fb4A7
+====================
+[✓] lido proxy: the bytecode at 0xF433b2137e9C5804e8D07D9a97da54C1e02748BB matches AppProxyUpgradeable
+[✓] lido impl: the bytecode at 0x171d68d65D57caa787cb8a3535a338382B96C56c matches Lido
+[✓] lido: the installed app base is 0x171d68d65D57caa787cb8a3535a338382B96C56c
+====================
+[✓] node-operators-registry proxy: the bytecode at 0xb9a519f5F008BE9abD095FAC19a2B39B6eB847cD matches AppProxyUpgradeable
+[✓] node-operators-registry impl: the bytecode at 0x595e12fb98539c7e6dCa150446f525571204512D matches NodeOperatorsRegistry
+[✓] node-operators-registry: the installed app base is 0x595e12fb98539c7e6dCa150446f525571204512D
+====================
+[✓] oracle proxy: the bytecode at 0x5efc24f9EE087dE7892c5D0fa339A303503BB380 matches AppProxyUpgradeable
+[✓] oracle impl: the bytecode at 0xd913616C5431E4Bd1c6fB0d96400a58640d53Ee4 matches LegacyOracle
+[✓] oracle: the installed app base is 0xd913616C5431E4Bd1c6fB0d96400a58640d53Ee4
+====================
+>>> =============================
+>>> DAO deploy started
+>>> =============================
+====================
+Network ID: 943
+====================
+Using LidoTemplate: 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb
+(node:43838) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/ansi-mark/package.json' of 'ansi-mark'. Please either fix that or report it to the module author
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:43838) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/super-split/package.json' of 'super-split'. Please either fix that or report it to the module author
+Using LidoTemplate deploy block: 18591197
+[✓] the last event from LidoTemplate at 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb is TmplDAOAndTokenDeployed
+====================
+Using vesting settings:
+  Start: Thu, 01 Jan 1970 00:00:00 GMT
+  Cliff: Thu, 01 Jan 1970 00:00:00 GMT
+  End: Thu, 01 Jan 1970 00:00:00 GMT
+  Revokable: false
+  Total supply: 1000000
+  Unvested tokens amount: 0
+  Token receivers (total 4):
+    0xCD1f9954330AF39a74Fd6e7B25781B4c24ee373f: 820000 (82%)
+    0xaa6bfBCD634EE744CB8FE522b29ADD23124593D3: 60000 (6%)
+    0xBA59A84C6440E8cccfdb5448877E26F1A431Fc8B: 60000 (6%)
+    0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04: 60000 (6%)
+====================
+Total batches: 1
+LidoTemplate[0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb].issueTokens()...
+[✓] tx: 0x5366887b0b45012c6650f93e0f45b1e92ab24688a4a1c0839af842a69ee6d8cc (gasUsed 729280)
+>>> =============================
+>>> Tokens issued
+>>> =============================
+========================================
+Network ID: 943
+========================================
+Deploying OracleDaemonConfig (NO proxy)... done: 0xbEf5f19D09b3Ca928E74338cDC844aC170ea197a (gas used 1399918)
+
+========================================
+(node:43845) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/ansi-mark/package.json' of 'ansi-mark'. Please either fix that or report it to the module author
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:43845) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/super-split/package.json' of 'super-split'. Please either fix that or report it to the module author
+Deploying DummyEmptyContract (NO proxy)... done: 0x9b480245738bAb511FAC4b823061fD0D727EFbA3 (gas used 67060)
+
+Using pre-deployed implementation of DummyEmptyContract: 0x9b480245738bAb511FAC4b823061fD0D727EFbA3
+Deploying OssifiableProxy for DummyEmptyContract... done: 0xd2b5F55254b2FB15dCc5C6043A558AF410af67bB (gas used 669988)
+
+========================================
+Deploying OracleReportSanityChecker (NO proxy)... done: 0x7e4ab14cd8f4698bfAc1A90978a6d18D8Fd8b5B4 (gas used 3153499)
+
+========================================
+Deploying EIP712StETH (NO proxy)... done: 0xd72EABB88c21A957DF4a07f6dF7512d795a514aE (gas used 261705)
+
+========================================
+Deploying WstETH (NO proxy)... done: 0x77C061115730f98449D2E6146e93065F4758e249 (gas used 1554817)
+
+========================================
+Deploying implementation for proxy of WithdrawalQueueERC721... done: 0xe1AffD0985Eb5561e6494fC9b763ACFD6E972A43 (gas used 5320633)
+Deploying OssifiableProxy for WithdrawalQueueERC721... done: 0xFe833065Dc7f079e2E7758Cc1DB0022e08e2bC44 (gas used 669988)
+
+========================================
+Deploying implementation for proxy of WithdrawalVault... done: 0x9df2D517e755F5789Ef19Dc1aA92Ba91b4Cd045C (gas used 541757)
+========================================
+Deploying LidoExecutionLayerRewardsVault (NO proxy)... done: 0x2deec96A937398B76745fE93d05018404e2cD9f0 (gas used 493710)
+
+========================================
+Deploying implementation for proxy of StakingRouter... done: 0xB545C66EB3dA405f859dE4DaA6B63dc384Cb73c0 (gas used 5363225)
+Deploying OssifiableProxy for StakingRouter... done: 0xfb911923fbB1227CA0023b92afAE954610e9B453 (gas used 669988)
+
+Deploying DepositSecurityModule (NO proxy)... done: 0x1694B43D1eb40708A5066699C2039E66F008702F (gas used 1788113)
+
+========================================
+Deploying implementation for proxy of AccountingOracle... done: 0x2e3D37cD8a57e325dd8A945aCa5b26e0af064181 (gas used 3644831)
+Deploying OssifiableProxy for AccountingOracle... done: 0xa64c80dae01248Ee7B3a7C35149C0152749EE434 (gas used 669988)
+
+========================================
+Deploying HashConsensus (NO proxy)... done: 0xe87b3E17726eC49a4FCC8F532119c1EAc70CCb0C (gas used 3070639)
+
+========================================
+Deploying implementation for proxy of ValidatorsExitBusOracle... done: 0xDEa64A7378CE0aE1Fc53f836fc20A0704929c22D (gas used 2630428)
+Deploying OssifiableProxy for ValidatorsExitBusOracle... done: 0x8C7fa4aB37791927FC159DFc69751b64be0E29E4 (gas used 669988)
+
+========================================
+Deploying HashConsensus (NO proxy)... done: 0x3AdD75263833Fc93027Ce3BDb8a96F4fE8B3d97F (gas used 3070639)
+
+========================================
+Deploying Burner (NO proxy)... done: 0xC62d59293dE9A3C2D5f3E973C22100008b85057a (gas used 1991581)
+
+========================================
+OssifiableProxy[0xd2b5F55254b2FB15dCc5C6043A558AF410af67bB].proxy__upgradeTo()...
+[✓] tx: 0xc5083a130b2407f51a8217e98133c0285456ad1610329c9cb7bc53a080246661 (gasUsed 32916)
+>>> =============================
+>>> Non-aragon contracts deployed
+>>> =============================
+========================================
+Network ID: 943
+Using the specified GateSeal address 0x0000000000000000000000000000000000000000
+====================
+Network ID: 943
+====================
+Using AragonID name: lido-dao
+Using LidoTemplate: 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb
+(node:43944) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/ansi-mark/package.json' of 'ansi-mark'. Please either fix that or report it to the module author
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:43944) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/super-split/package.json' of 'super-split'. Please either fix that or report it to the module author
+Using LidoTemplate deploy block: 18591197
+[✓] the last event from LidoTemplate at 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb is TmplTokensIssued
+====================
+Using TokenManager: 0xdF412BF1e1FC1e5421B34793eb33B59D94481D86
+Using MiniMeToken 0x64B9f9A850732bd132C3b6A68810dBAfB487e154
+Using fee initial settings:
+  total fee: 10%
+  treasury fee: 50%
+  node operators fee: 50%
+[✓] holder 0xCD1f9954330AF39a74Fd6e7B25781B4c24ee373f: vesting is correct, token balance is 820000000000000000000000 (82%)
+[✓] holder 0xaa6bfBCD634EE744CB8FE522b29ADD23124593D3: vesting is correct, token balance is 60000000000000000000000 (6%)
+[✓] holder 0xBA59A84C6440E8cccfdb5448877E26F1A431Fc8B: vesting is correct, token balance is 60000000000000000000000 (6%)
+[✓] holder 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04: vesting is correct, token balance is 60000000000000000000000 (6%)
+====================
+[✓] no other tokens are issued, totalSupply is 1000000000000000000000000
+====================
+LidoTemplate[0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb].finalizeDAO()...
+[✓] tx: 0xa312b94a37f648c67f8bbe28b8735f4604e5d7f37d813b08d3dd11ae39b48064 (gasUsed 2693917)
+>>> =============================
+>>> DAO deploy finalized
+>>> =============================
+========================================
+Network ID: 943
+(node:43952) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/ansi-mark/package.json' of 'ansi-mark'. Please either fix that or report it to the module author
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:43952) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/super-split/package.json' of 'super-split'. Please either fix that or report it to the module author
+NodeOperatorsRegistry[0xb9a519f5F008BE9abD095FAC19a2B39B6eB847cD].initialize()...
+[✓] tx: 0xa6ef1569b7a402509e710e173d56c6671dbba305a986ab6f0df86b9abdff64e1 (gasUsed 206866)
+Lido[0xF433b2137e9C5804e8D07D9a97da54C1e02748BB].initialize()...
+[✓] tx: 0xe7b989fb86dad09f46b6cd3327304c1e2f090d8793990d927db9e829c5f2ab6b (gasUsed 249167)
+========================================
+LegacyOracle[0x5efc24f9EE087dE7892c5D0fa339A303503BB380].initialize()...
+[✓] tx: 0x3d3e0fe8cb1a2c3c4a22d378b1f4b86696fa25e953f2901ac12fed21b62ef33c (gasUsed 172365)
+AccountingOracle[0xa64c80dae01248Ee7B3a7C35149C0152749EE434].initializeWithoutMigration()...
+[✓] tx: 0xe3141bbece9eeac25b46e02c8e5a01099fcbad7301dae74501624418279f6873 (gasUsed 202678)
+ValidatorsExitBusOracle[0x8C7fa4aB37791927FC159DFc69751b64be0E29E4].initialize()...
+[✓] tx: 0x6004458580a818a04fab6257694308d6d2ff3c96bb41cca46e22953dca2e713e (gasUsed 226167)
+WithdrawalQueueERC721[0xFe833065Dc7f079e2E7758Cc1DB0022e08e2bC44].initialize()...
+[✓] tx: 0x094eb205a2568adb6960e6c67dbf208b3807ed1ea9f8a96c43e061deed438b61 (gasUsed 220192)
+StakingRouter[0xfb911923fbB1227CA0023b92afAE954610e9B453].initialize()...
+[✓] tx: 0x53b494458b00c3e66044cd522d2885189b1dec0fb8e11de15d826369ef0aed77 (gasUsed 188305)
+========================================
+OracleDaemonConfig[0xbEf5f19D09b3Ca928E74338cDC844aC170ea197a].grantRole()...
+[✓] tx: 0x75d45df6e8e07c180b40e267039f615cdd3d5a618ddb347d5101cb77e4606986 (gasUsed 118433)
+OracleDaemonConfig[0xbEf5f19D09b3Ca928E74338cDC844aC170ea197a].set()...
+[✓] tx: 0xac87f25306ed371f60558d52128c98c71e78cda082860c743b3dc723a2dfcaca (gasUsed 51201)
+OracleDaemonConfig[0xbEf5f19D09b3Ca928E74338cDC844aC170ea197a].set()...
+[✓] tx: 0x0393e3c168bb92043796d6771fb37fecbd6ef7e5c4b652c9a8534e57b7ff567d (gasUsed 51693)
+OracleDaemonConfig[0xbEf5f19D09b3Ca928E74338cDC844aC170ea197a].set()...
+[✓] tx: 0xf7d24e90f13d7ac42e852095e346354e546f82d26c867ca0073ca5c0bd466852 (gasUsed 51669)
+OracleDaemonConfig[0xbEf5f19D09b3Ca928E74338cDC844aC170ea197a].set()...
+[✓] tx: 0x416d5ed8a3cf3edc55e3acc4bb88ee028d53683e2c286820f54d8af26d19fa19 (gasUsed 51669)
+OracleDaemonConfig[0xbEf5f19D09b3Ca928E74338cDC844aC170ea197a].set()...
+[✓] tx: 0x6fd1c031ac70074494b4beec097080d56b97960d535f93aee0b7e7666d4e1db0 (gasUsed 51669)
+OracleDaemonConfig[0xbEf5f19D09b3Ca928E74338cDC844aC170ea197a].set()...
+[✓] tx: 0xc8d4d2940ef3a80fad36e21742a0adaacf5d23a5703620fc838a0ae535ba7073 (gasUsed 51705)
+OracleDaemonConfig[0xbEf5f19D09b3Ca928E74338cDC844aC170ea197a].set()...
+[✓] tx: 0x3013b3ad187e35a1bfd9ca75522e56cdee354bc33268c2dddf596dec03f04df3 (gasUsed 51801)
+OracleDaemonConfig[0xbEf5f19D09b3Ca928E74338cDC844aC170ea197a].set()...
+[✓] tx: 0xdc441820411ed97c60341156611de41afd7fd57000d267dff46bd5457f98feee (gasUsed 51189)
+OracleDaemonConfig[0xbEf5f19D09b3Ca928E74338cDC844aC170ea197a].set()...
+[✓] tx: 0xadf78f5cce269bb93d8775c4c6f32853d8469bf4469cf8eee6e5b0c46e753d91 (gasUsed 51789)
+OracleDaemonConfig[0xbEf5f19D09b3Ca928E74338cDC844aC170ea197a].renounceRole()...
+[✓] tx: 0x94e490e6847c1e28ac1473c7292187667d39d10714edb0576b311da801a3acd7 (gasUsed 36553)
+>>> =============================
+>>> Non-aragon contracts initialized
+>>> =============================
+========================================
+Network ID: 943
+(node:44028) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/ansi-mark/package.json' of 'ansi-mark'. Please either fix that or report it to the module author
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:44028) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/super-split/package.json' of 'super-split'. Please either fix that or report it to the module author
+StakingRouter[0xfb911923fbB1227CA0023b92afAE954610e9B453].grantRole()...
+[✓] tx: 0x4447b09162a82f0c84f14dee52509bb69e87ca1ed44e31be59c44fb0783da640 (gasUsed 123532)
+StakingRouter[0xfb911923fbB1227CA0023b92afAE954610e9B453].grantRole()...
+[✓] tx: 0x3b0d1d271711beb023996ebde7aacf08faa25763c683a87547936121317a28a7 (gasUsed 123568)
+StakingRouter[0xfb911923fbB1227CA0023b92afAE954610e9B453].grantRole()...
+[✓] tx: 0xc54a529b8ad4aad4b537f632b0bc9a5da9b0d08a6519f6d315a5020ba136aa49 (gasUsed 123568)
+StakingRouter[0xfb911923fbB1227CA0023b92afAE954610e9B453].grantRole()...
+[✓] tx: 0x3ac5cba302b94c7d92af4d94cc8ecf999b233bb2722c61e20c3542ebbe4ed745 (gasUsed 123556)
+========================================
+ValidatorsExitBusOracle[0x8C7fa4aB37791927FC159DFc69751b64be0E29E4].grantRole()...
+[✓] tx: 0x1805974f68afd1f9537d6be7d27a1dbb8c1b3627d3d23f74b20c1eaf4fc4c509 (gasUsed 103426)
+========================================
+WithdrawalQueueERC721[0xFe833065Dc7f079e2E7758Cc1DB0022e08e2bC44].grantRole()...
+[✓] tx: 0x27c08ba8fcc0022d96f499bc0a3441e3d8dbf7852d45a5c103eb2d643444ae4c (gasUsed 103471)
+WithdrawalQueueERC721[0xFe833065Dc7f079e2E7758Cc1DB0022e08e2bC44].grantRole()...
+[✓] tx: 0xc399d5890e1bb13f40ec3de52b6474ebebf219c405103a1fb797763c34c46519 (gasUsed 123611)
+WithdrawalQueueERC721[0xFe833065Dc7f079e2E7758Cc1DB0022e08e2bC44].grantRole()...
+[✓] tx: 0x3903492575f586917793fb1d3936624e6eece8d031c7efb0b9c21f19ad64529b (gasUsed 123611)
+========================================
+Burner[0xC62d59293dE9A3C2D5f3E973C22100008b85057a].grantRole()...
+[✓] tx: 0xd23141fd9f59619f2e2f561c3d7db2f6fbbee49ffadc403a45c8c2696b4e2f86 (gasUsed 101430)
+>>> =============================
+>>> Roles granted
+>>> =============================
+========================================
+Network ID: 943
+(node:44075) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/ansi-mark/package.json' of 'ansi-mark'. Please either fix that or report it to the module author
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:44075) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/super-split/package.json' of 'super-split'. Please either fix that or report it to the module author
+StakingRouter[0xfb911923fbB1227CA0023b92afAE954610e9B453].grantRole()...
+[✓] tx: 0x43f598cb09c963da0688d4fbeb13d037f1a33ac9c1489d5ffc1bbf3248c9d811 (gasUsed 123568)
+StakingRouter[0xfb911923fbB1227CA0023b92afAE954610e9B453].addStakingModule()...
+[✓] tx: 0xba3f5f751f2b59568c269d84982309dc0553c0b6d8d8ec79ca7265de48cec701 (gasUsed 195093)
+StakingRouter[0xfb911923fbB1227CA0023b92afAE954610e9B453].renounceRole()...
+[✓] tx: 0x230f7b947ce0eafd510a51ba50ca871cd200d8151dc2bbc210e047df50152b8e (gasUsed 40679)
+>>> =============================
+>>> Plugged NodeOperatorsRegistry as Curated staking module
+>>> =============================
+========================================
+Network ID: 943
+Transferring OZ admin of 0xC62d59293dE9A3C2D5f3E973C22100008b85057a from 0x9F3cafA814362AF8963560070ea8636b39c84a70 to 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04:
+(node:44088) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/ansi-mark/package.json' of 'ansi-mark'. Please either fix that or report it to the module author
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:44088) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/super-split/package.json' of 'super-split'. Please either fix that or report it to the module author
+Burner[0xC62d59293dE9A3C2D5f3E973C22100008b85057a].grantRole()...
+[✓] tx: 0xb60ebf7919d0e198e55009d9a280f99b2e9f5134f34cc2ad5fd32f07603283bd (gasUsed 101046)
+Burner[0xC62d59293dE9A3C2D5f3E973C22100008b85057a].renounceRole()...
+[✓] tx: 0x427900b56925f7798272544b5aa36e8d84f738de15f02631637084722c5922ba (gasUsed 44625)
+
+Transferring OZ admin of 0xe87b3E17726eC49a4FCC8F532119c1EAc70CCb0C from 0x9F3cafA814362AF8963560070ea8636b39c84a70 to 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04:
+HashConsensus[0xe87b3E17726eC49a4FCC8F532119c1EAc70CCb0C].grantRole()...
+[✓] tx: 0x5c548381127ed674a934463879cd223667515cb157cfc4d359ad565a4ea2338b (gasUsed 101046)
+HashConsensus[0xe87b3E17726eC49a4FCC8F532119c1EAc70CCb0C].renounceRole()...
+[✓] tx: 0x64895b5650ffcec70c6582419d077532077428dfcf29f30998a76b97405c78e6 (gasUsed 44679)
+
+Transferring OZ admin of 0x3AdD75263833Fc93027Ce3BDb8a96F4fE8B3d97F from 0x9F3cafA814362AF8963560070ea8636b39c84a70 to 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04:
+HashConsensus[0x3AdD75263833Fc93027Ce3BDb8a96F4fE8B3d97F].grantRole()...
+[✓] tx: 0x06491db3517d8bf4c98b1f4a37df5090bc262fbc88969ca35e9d082dfc68820d (gasUsed 101046)
+HashConsensus[0x3AdD75263833Fc93027Ce3BDb8a96F4fE8B3d97F].renounceRole()...
+[✓] tx: 0x40cae9a6a6261662a6f549718f6d301b471b4606ce76b86d945946baef873d54 (gasUsed 44679)
+
+Transferring OZ admin of 0xfb911923fbB1227CA0023b92afAE954610e9B453 from 0x9F3cafA814362AF8963560070ea8636b39c84a70 to 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04:
+StakingRouter[0xfb911923fbB1227CA0023b92afAE954610e9B453].grantRole()...
+[✓] tx: 0x798efcf97defa6e60e8f0b008db5b628afb0c4d9d625646b175174eca98186c4 (gasUsed 106084)
+StakingRouter[0xfb911923fbB1227CA0023b92afAE954610e9B453].renounceRole()...
+[✓] tx: 0x65bf04de360f1fafbe23d69692e6d4d466dea44e6f30ae30a7b029be19e27f9b (gasUsed 48762)
+
+Transferring OZ admin of 0xa64c80dae01248Ee7B3a7C35149C0152749EE434 from 0x9F3cafA814362AF8963560070ea8636b39c84a70 to 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04:
+AccountingOracle[0xa64c80dae01248Ee7B3a7C35149C0152749EE434].grantRole()...
+[✓] tx: 0x773ed077427733858f40543cf086822009dc3b7b679fcfdb78239e65cb8803dc (gasUsed 106082)
+AccountingOracle[0xa64c80dae01248Ee7B3a7C35149C0152749EE434].renounceRole()...
+[✓] tx: 0x973e915ac2fdf1b12b7b52bc5e82d7355fa6e9927a1a06350ecd64030553d584 (gasUsed 48690)
+
+Transferring OZ admin of 0x8C7fa4aB37791927FC159DFc69751b64be0E29E4 from 0x9F3cafA814362AF8963560070ea8636b39c84a70 to 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04:
+ValidatorsExitBusOracle[0x8C7fa4aB37791927FC159DFc69751b64be0E29E4].grantRole()...
+[✓] tx: 0xb0e77866ee28f42b3fb1c3a347d033f84db5c6286effcfeac9b06ff163630a0a (gasUsed 106082)
+ValidatorsExitBusOracle[0x8C7fa4aB37791927FC159DFc69751b64be0E29E4].renounceRole()...
+[✓] tx: 0xf3ca0e72ddaf8d5655f58b62774b0f5f69514cc0208209d13c6dc8c10d923480 (gasUsed 48690)
+
+Transferring OZ admin of 0xFe833065Dc7f079e2E7758Cc1DB0022e08e2bC44 from 0x9F3cafA814362AF8963560070ea8636b39c84a70 to 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04:
+WithdrawalQueueERC721[0xFe833065Dc7f079e2E7758Cc1DB0022e08e2bC44].grantRole()...
+[✓] tx: 0x8417371a3bd986ac7c0a6a09e7de45cc26a804d44764fc952b7cc3225cf47841 (gasUsed 106127)
+WithdrawalQueueERC721[0xFe833065Dc7f079e2E7758Cc1DB0022e08e2bC44].renounceRole()...
+[✓] tx: 0xde138ea0a0fd675e6b9d3517bd0549fab5e345d75ee967d8a657e2f39ffd9b6c (gasUsed 48709)
+
+Transferring OZ admin of 0xbEf5f19D09b3Ca928E74338cDC844aC170ea197a from 0x9F3cafA814362AF8963560070ea8636b39c84a70 to 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04:
+OracleDaemonConfig[0xbEf5f19D09b3Ca928E74338cDC844aC170ea197a].grantRole()...
+[✓] tx: 0x9340d88035c10fee3bc14f4d195df6a9a87dcbbbb2e1cc355f637c7a0963130c (gasUsed 100949)
+OracleDaemonConfig[0xbEf5f19D09b3Ca928E74338cDC844aC170ea197a].renounceRole()...
+[✓] tx: 0xd44b8fd276bf8a206725778656d6070b00bbc06428c6994cb6ee5830e3a88010 (gasUsed 44636)
+
+Transferring OZ admin of 0x7e4ab14cd8f4698bfAc1A90978a6d18D8Fd8b5B4 from 0x9F3cafA814362AF8963560070ea8636b39c84a70 to 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04:
+OracleReportSanityChecker[0x7e4ab14cd8f4698bfAc1A90978a6d18D8Fd8b5B4].grantRole()...
+[✓] tx: 0x2860b6da69aba2386ab30c268cbbef864a4839ca3a5328b26dde05342f2c0ce5 (gasUsed 101001)
+OracleReportSanityChecker[0x7e4ab14cd8f4698bfAc1A90978a6d18D8Fd8b5B4].renounceRole()...
+[✓] tx: 0x93e9985d8372c31d425226b49d27a768f072063cd9bf94c995f3f154e39d6532 (gasUsed 44643)
+
+Transferring OssifiableProxy admin of 0xd2b5F55254b2FB15dCc5C6043A558AF410af67bB from 0x9F3cafA814362AF8963560070ea8636b39c84a70 to 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04...
+OssifiableProxy[0xd2b5F55254b2FB15dCc5C6043A558AF410af67bB].proxy__changeAdmin()...
+[✓] tx: 0x33dfb82776523d714d45633a48f6b9ea8780a348730f824fe857f9269efd4fc7 (gasUsed 28712)
+
+Transferring OssifiableProxy admin of 0xfb911923fbB1227CA0023b92afAE954610e9B453 from 0x9F3cafA814362AF8963560070ea8636b39c84a70 to 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04...
+OssifiableProxy[0xfb911923fbB1227CA0023b92afAE954610e9B453].proxy__changeAdmin()...
+[✓] tx: 0x4cd4c3fe0ba494eaca42a7861ba76f6aaa3c91348470da23931460dbb781cfc7 (gasUsed 28712)
+
+Transferring OssifiableProxy admin of 0xa64c80dae01248Ee7B3a7C35149C0152749EE434 from 0x9F3cafA814362AF8963560070ea8636b39c84a70 to 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04...
+OssifiableProxy[0xa64c80dae01248Ee7B3a7C35149C0152749EE434].proxy__changeAdmin()...
+[✓] tx: 0xb4163d651a14fe8bb73ce4c14287c5fa92b01a97cf07e87939f96310ca286377 (gasUsed 28712)
+
+Transferring OssifiableProxy admin of 0x8C7fa4aB37791927FC159DFc69751b64be0E29E4 from 0x9F3cafA814362AF8963560070ea8636b39c84a70 to 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04...
+OssifiableProxy[0x8C7fa4aB37791927FC159DFc69751b64be0E29E4].proxy__changeAdmin()...
+[✓] tx: 0x1cc50dc4f36fa3c6e6356508a3adc31a0068568ddd0de5db52f2fd35bcb5deb4 (gasUsed 28712)
+
+Transferring OssifiableProxy admin of 0xFe833065Dc7f079e2E7758Cc1DB0022e08e2bC44 from 0x9F3cafA814362AF8963560070ea8636b39c84a70 to 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04...
+OssifiableProxy[0xFe833065Dc7f079e2E7758Cc1DB0022e08e2bC44].proxy__changeAdmin()...
+[✓] tx: 0xc9eefa86b6fe5d8d3d5b849632e7e4be356a01bcc0cca38595e68694aafeb581 (gasUsed 28712)
+
+Changing DepositSecurityModule owner of 0x1694B43D1eb40708A5066699C2039E66F008702F from 0x9F3cafA814362AF8963560070ea8636b39c84a70 to 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04...
+DepositSecurityModule[0x1694B43D1eb40708A5066699C2039E66F008702F].setOwner()...
+[✓] tx: 0xbf3f907585191e58762706d5d10c10009684a5aa178b8b7b429472c64110eb5c (gasUsed 28095)
+
+>>> =============================
+>>> Role admin permissions transferred to Agent
+>>> =============================
+====================
+Network ID: 943
+====================
+Using ENS: 0x2bB46a6305e1519A2432595504115a6f3EcE2668
+(node:44230) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/ansi-mark/package.json' of 'ansi-mark'. Please either fix that or report it to the module author
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:44230) [DEP0128] DeprecationWarning: Invalid 'main' field in '/Users/rostyslav/Desktop/lido-dao-fork/node_modules/super-split/package.json' of 'super-split'. Please either fix that or report it to the module author
+====================
+Using LidoTemplate: 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb
+Using LidoTemplate deploy block: 18591197
+[✓] the last event from LidoTemplate at 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb is TmplDaoFinalized
+[✓] LidoTemplate at 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb generated exactly one TmplAPMDeployed event
+[✓] LidoTemplate at 0xDc98aaf3B566c8e4821f2D7C95Cd35C6F95C6acb generated exactly one TmplDAOAndTokenDeployed event
+====================
+Using APMRegistry: 0x87eB7579398c642Ad54aa8594665676bE730D4D1
+Using Kernel: 0x82eB15a352aC66989318E5bF978e57af101Fb4A7
+Using MiniMeToken: 0x64B9f9A850732bd132C3b6A68810dBAfB487e154
+====================
+[✓] all (and only) expected apps are installed
+====================
+[✓] aragon-agent proxy: the bytecode at 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04 matches AppProxyUpgradeable
+[✓] aragon-agent impl: the bytecode at 0x6f2066B19C4383F6Abe445B4dDf2035c5a69E1b5 matches Agent
+[✓] aragon-agent: the installed app base is 0x6f2066B19C4383F6Abe445B4dDf2035c5a69E1b5
+[✓] aragon-agent: is an initialized Aragon app
+[✓] aragon-agent kernel: 0x82eB15a352aC66989318E5bF978e57af101Fb4A7
+====================
+[✓] aragon-finance proxy: the bytecode at 0xEbe33E012256c32044DF3276d73eBCeda5073b74 matches AppProxyUpgradeable
+[✓] aragon-finance impl: the bytecode at 0x5CF3ab56DD2dbc9514124c6260C5ABFB9DF78196 matches Finance
+[✓] aragon-finance: the installed app base is 0x5CF3ab56DD2dbc9514124c6260C5ABFB9DF78196
+[✓] aragon-finance: is an initialized Aragon app
+[✓] aragon-finance kernel: 0x82eB15a352aC66989318E5bF978e57af101Fb4A7
+====================
+[✓] aragon-token-manager proxy: the bytecode at 0xdF412BF1e1FC1e5421B34793eb33B59D94481D86 matches AppProxyUpgradeable
+[✓] aragon-token-manager impl: the bytecode at 0x28e6FFF8c7A772c6F0a1291af4582a5687d68355 matches TokenManager
+[✓] aragon-token-manager: the installed app base is 0x28e6FFF8c7A772c6F0a1291af4582a5687d68355
+[✓] aragon-token-manager: is an initialized Aragon app
+[✓] aragon-token-manager kernel: 0x82eB15a352aC66989318E5bF978e57af101Fb4A7
+====================
+[✓] aragon-voting proxy: the bytecode at 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e matches AppProxyUpgradeable
+[✓] aragon-voting impl: the bytecode at 0x38f7635C2583588e7a37aa67e95E543ffFc49BF9 matches Voting
+[✓] aragon-voting: the installed app base is 0x38f7635C2583588e7a37aa67e95E543ffFc49BF9
+[✓] aragon-voting: is an initialized Aragon app
+[✓] aragon-voting kernel: 0x82eB15a352aC66989318E5bF978e57af101Fb4A7
+====================
+[✓] lido proxy: the bytecode at 0xF433b2137e9C5804e8D07D9a97da54C1e02748BB matches AppProxyUpgradeable
+[✓] lido impl: the bytecode at 0x171d68d65D57caa787cb8a3535a338382B96C56c matches Lido
+[✓] lido: the installed app base is 0x171d68d65D57caa787cb8a3535a338382B96C56c
+====================
+[✓] node-operators-registry proxy: the bytecode at 0xb9a519f5F008BE9abD095FAC19a2B39B6eB847cD matches AppProxyUpgradeable
+[✓] node-operators-registry impl: the bytecode at 0x595e12fb98539c7e6dCa150446f525571204512D matches NodeOperatorsRegistry
+[✓] node-operators-registry: the installed app base is 0x595e12fb98539c7e6dCa150446f525571204512D
+====================
+[✓] oracle proxy: the bytecode at 0x5efc24f9EE087dE7892c5D0fa339A303503BB380 matches AppProxyUpgradeable
+[✓] oracle impl: the bytecode at 0xd913616C5431E4Bd1c6fB0d96400a58640d53Ee4 matches LegacyOracle
+[✓] oracle: the installed app base is 0xd913616C5431E4Bd1c6fB0d96400a58640d53Ee4
+====================
+Using aragon-agent app proxy: 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04
+Using aragon-finance app proxy: 0xEbe33E012256c32044DF3276d73eBCeda5073b74
+Using aragon-token-manager app proxy: 0xdF412BF1e1FC1e5421B34793eb33B59D94481D86
+Using aragon-voting app proxy: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+Using lido app proxy: 0xF433b2137e9C5804e8D07D9a97da54C1e02748BB
+Using node-operators-registry app proxy: 0xb9a519f5F008BE9abD095FAC19a2B39B6eB847cD
+Using oracle app proxy: 0x5efc24f9EE087dE7892c5D0fa339A303503BB380
+====================
+[✓] Aragon ID lido-dao resolves to 0x82eB15a352aC66989318E5bF978e57af101Fb4A7
+====================
+[✓] dao.getRecoveryVault() is 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04
+====================
+[✓] daoToken.name is TEST Lido DAO Token
+[✓] daoToken.symbol is TLDO
+[✓] daoToken.decimals is 18
+[✓] daoToken.controller is 0xdF412BF1e1FC1e5421B34793eb33B59D94481D86
+[✓] daoToken.transfersEnabled is true
+====================
+[✓] agent.kernel is 0x82eB15a352aC66989318E5bF978e57af101Fb4A7
+====================
+[✓] voting.kernel is 0x82eB15a352aC66989318E5bF978e57af101Fb4A7
+[✓] voting.token is 0x64B9f9A850732bd132C3b6A68810dBAfB487e154
+[✓] voting.supportRequiredPct is 500000000000000000
+[✓] voting.minAcceptQuorumPct is 50000000000000000
+[✓] voting.voteTime is 900
+[✓] voting.votesLength is 0
+====================
+[✓] tokenManager.kernel is 0x82eB15a352aC66989318E5bF978e57af101Fb4A7
+[✓] tokenManager.token is 0x64B9f9A850732bd132C3b6A68810dBAfB487e154
+[✓] tokenManager.maxAccountTokens is 115792089237316195423570985008687907853269984665640564039457584007913129639935
+====================
+[✓] finance.kernel is 0x82eB15a352aC66989318E5bF978e57af101Fb4A7
+[✓] finance.getPeriodDuration() is 2592000
+[✓] finance.vault is 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04
+====================
+[✓] lido.kernel is 0x82eB15a352aC66989318E5bF978e57af101Fb4A7
+[✓] lido.name is Liquid staked Ether 2.0
+[✓] lido.symbol is stETH
+[✓] lido.decimals is 18
+[✓] lido.isStopped is true
+[✓] lido.getWithdrawalCredentials() is 0x010000000000000000000000be05e29d05ec8ff0fa9eaa1888cfc394c48446aa
+[✓] stakingRouter.DEPOSIT_CONTRACT() is [object Promise]
+[✓] lido.getOracle() is 0x5efc24f9EE087dE7892c5D0fa339A303503BB380
+[✓] lido.getTreasury() is 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04
+====================
+[✓] oracle.kernel is 0x82eB15a352aC66989318E5bF978e57af101Fb4A7
+[✓] legacyOracle.getLido() is 0xF433b2137e9C5804e8D07D9a97da54C1e02748BB
+[✓] legacyOracle.getBeaconSpec().slotsPerEpoch is 32
+[✓] legacyOracle.getBeaconSpec().secondsPerSlot is 12
+[✓] legacyOracle.getBeaconSpec().genesisTime is 1695902400
+====================
+[✓] nopsRegistry.kernel is 0x82eB15a352aC66989318E5bF978e57af101Fb4A7
+[✓] nopsRegistry.getNodeOperatorsCount() is 0
+[✓] nopsRegistry.getActiveNodeOperatorsCount() is 0
+====================
+[✓] kernel.acl.CREATE_PERMISSIONS_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] kernel.acl.CREATE_PERMISSIONS_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] kernel.acl.CREATE_PERMISSIONS_ROLE perm is not accessible by any other entities
+[✓] kernel.APP_MANAGER_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] kernel.APP_MANAGER_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] kernel.APP_MANAGER_ROLE perm is not accessible by any other entities
+====================
+[✓] evmScriptRegistry.REGISTRY_MANAGER_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] evmScriptRegistry.REGISTRY_MANAGER_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] evmScriptRegistry.REGISTRY_MANAGER_ROLE perm is not accessible by any other entities
+[✓] evmScriptRegistry.REGISTRY_ADD_EXECUTOR_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] evmScriptRegistry.REGISTRY_ADD_EXECUTOR_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] evmScriptRegistry.REGISTRY_ADD_EXECUTOR_ROLE perm is not accessible by any other entities
+====================
+[✓] agent.EXECUTE_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] agent.EXECUTE_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] agent.EXECUTE_ROLE perm is not accessible by any other entities
+[✓] agent.RUN_SCRIPT_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] agent.RUN_SCRIPT_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] agent.RUN_SCRIPT_ROLE perm is not accessible by any other entities
+[✓] agent.SAFE_EXECUTE_ROLE has no perm manager
+[✓] agent.SAFE_EXECUTE_ROLE has no grantees
+[✓] agent.ADD_PROTECTED_TOKEN_ROLE has no perm manager
+[✓] agent.ADD_PROTECTED_TOKEN_ROLE has no grantees
+[✓] agent.REMOVE_PROTECTED_TOKEN_ROLE has no perm manager
+[✓] agent.REMOVE_PROTECTED_TOKEN_ROLE has no grantees
+[✓] agent.ADD_PRESIGNED_HASH_ROLE has no perm manager
+[✓] agent.ADD_PRESIGNED_HASH_ROLE has no grantees
+[✓] agent.DESIGNATE_SIGNER_ROLE has no perm manager
+[✓] agent.DESIGNATE_SIGNER_ROLE has no grantees
+====================
+[✓] finance.CREATE_PAYMENTS_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] finance.CREATE_PAYMENTS_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] finance.CREATE_PAYMENTS_ROLE perm is not accessible by any other entities
+[✓] finance.EXECUTE_PAYMENTS_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] finance.EXECUTE_PAYMENTS_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] finance.EXECUTE_PAYMENTS_ROLE perm is not accessible by any other entities
+[✓] finance.MANAGE_PAYMENTS_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] finance.MANAGE_PAYMENTS_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] finance.MANAGE_PAYMENTS_ROLE perm is not accessible by any other entities
+[✓] finance.CHANGE_PERIOD_ROLE has no perm manager
+[✓] finance.CHANGE_PERIOD_ROLE has no grantees
+[✓] finance.CHANGE_BUDGETS_ROLE has no perm manager
+[✓] finance.CHANGE_BUDGETS_ROLE has no grantees
+====================
+[✓] tokenManager.ASSIGN_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] tokenManager.ASSIGN_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] tokenManager.ASSIGN_ROLE perm is not accessible by any other entities
+[✓] tokenManager.MINT_ROLE has no perm manager
+[✓] tokenManager.MINT_ROLE has no grantees
+[✓] tokenManager.ISSUE_ROLE has no perm manager
+[✓] tokenManager.ISSUE_ROLE has no grantees
+[✓] tokenManager.REVOKE_VESTINGS_ROLE has no perm manager
+[✓] tokenManager.REVOKE_VESTINGS_ROLE has no grantees
+====================
+[✓] voting.MODIFY_SUPPORT_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] voting.MODIFY_SUPPORT_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] voting.MODIFY_SUPPORT_ROLE perm is not accessible by any other entities
+[✓] voting.MODIFY_QUORUM_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] voting.MODIFY_QUORUM_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] voting.MODIFY_QUORUM_ROLE perm is not accessible by any other entities
+[✓] voting.CREATE_VOTES_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] voting.CREATE_VOTES_ROLE perm is accessible by 0xdF412BF1e1FC1e5421B34793eb33B59D94481D86
+[✓] voting.CREATE_VOTES_ROLE perm is not accessible by any other entities
+====================
+[✓] lido.PAUSE_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] lido.PAUSE_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] lido.PAUSE_ROLE perm is not accessible by any other entities
+[✓] lido.RESUME_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] lido.RESUME_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] lido.RESUME_ROLE perm is not accessible by any other entities
+[✓] lido.STAKING_PAUSE_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] lido.STAKING_PAUSE_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] lido.STAKING_PAUSE_ROLE perm is not accessible by any other entities
+[✓] lido.STAKING_CONTROL_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] lido.STAKING_CONTROL_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] lido.STAKING_CONTROL_ROLE perm is not accessible by any other entities
+[✓] lido.UNSAFE_CHANGE_DEPOSITED_VALIDATORS_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] lido.UNSAFE_CHANGE_DEPOSITED_VALIDATORS_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] lido.UNSAFE_CHANGE_DEPOSITED_VALIDATORS_ROLE perm is not accessible by any other entities
+====================
+[✓] nopsRegistry.MANAGE_SIGNING_KEYS perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] nopsRegistry.MANAGE_SIGNING_KEYS perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] nopsRegistry.MANAGE_SIGNING_KEYS perm is not accessible by any other entities
+[✓] nopsRegistry.SET_NODE_OPERATOR_LIMIT_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] nopsRegistry.SET_NODE_OPERATOR_LIMIT_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] nopsRegistry.SET_NODE_OPERATOR_LIMIT_ROLE perm is not accessible by any other entities
+[✓] nopsRegistry.STAKING_ROUTER_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] nopsRegistry.STAKING_ROUTER_ROLE perm is accessible by 0xfb911923fbB1227CA0023b92afAE954610e9B453
+[✓] nopsRegistry.STAKING_ROUTER_ROLE perm is not accessible by any other entities
+====================
+[✓] registry.CREATE_REPO_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] registry.CREATE_REPO_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] registry.CREATE_REPO_ROLE perm is not accessible by any other entities
+[✓] registry.kernel.APP_MANAGER_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] registry.kernel.acl.CREATE_PERMISSIONS_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] registry.kernel.acl.CREATE_PERMISSIONS_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] registry.kernel.acl.CREATE_PERMISSIONS_ROLE perm is accessible by 0x87eB7579398c642Ad54aa8594665676bE730D4D1
+[✓] registry.kernel.acl.CREATE_PERMISSIONS_ROLE perm is not accessible by any other entities
+[✓] registry.registrar.CREATE_NAME_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] registry.registrar.CREATE_NAME_ROLE perm is accessible by 0x87eB7579398c642Ad54aa8594665676bE730D4D1
+[✓] registry.registrar.CREATE_NAME_ROLE perm is not accessible by any other entities
+[✓] registry.registrar.POINT_ROOTNODE_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] registry.registrar.POINT_ROOTNODE_ROLE perm is accessible by 0x87eB7579398c642Ad54aa8594665676bE730D4D1
+[✓] registry.registrar.POINT_ROOTNODE_ROLE perm is not accessible by any other entities
+[✓] registry.registrar.DELETE_NAME_ROLE has no perm manager
+[✓] registry.registrar.DELETE_NAME_ROLE has no grantees
+====================
+[✓] repo<apm-registry>.CREATE_VERSION_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] repo<apm-registry>.CREATE_VERSION_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] repo<apm-enssub>.CREATE_VERSION_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] repo<apm-enssub>.CREATE_VERSION_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] repo<apm-repo>.CREATE_VERSION_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] repo<apm-repo>.CREATE_VERSION_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] repo<lido>.CREATE_VERSION_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] repo<lido>.CREATE_VERSION_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] repo<node-operators-registry>.CREATE_VERSION_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] repo<node-operators-registry>.CREATE_VERSION_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] repo<oracle>.CREATE_VERSION_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] repo<oracle>.CREATE_VERSION_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] repo<aragon-agent>.CREATE_VERSION_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] repo<aragon-agent>.CREATE_VERSION_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] repo<aragon-finance>.CREATE_VERSION_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] repo<aragon-finance>.CREATE_VERSION_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] repo<aragon-token-manager>.CREATE_VERSION_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] repo<aragon-token-manager>.CREATE_VERSION_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] repo<aragon-voting>.CREATE_VERSION_ROLE perm manager: 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+[✓] repo<aragon-voting>.CREATE_VERSION_ROLE perm is accessible by 0x6E944ca3875c20A71ACF9872d3CbFCc442aA087e
+====================
+[✓] holder 0xCD1f9954330AF39a74Fd6e7B25781B4c24ee373f: vesting is correct, token balance is 820000000000000000000000 (82%)
+[✓] holder 0xaa6bfBCD634EE744CB8FE522b29ADD23124593D3: vesting is correct, token balance is 60000000000000000000000 (6%)
+[✓] holder 0xBA59A84C6440E8cccfdb5448877E26F1A431Fc8B: vesting is correct, token balance is 60000000000000000000000 (6%)
+[✓] holder 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04: vesting is correct, token balance is 60000000000000000000000 (6%)
+====================
+[✓] no other tokens are issued, totalSupply is 1000000000000000000000000
+====================
+[✓] lidoLocator OssifiableProxy admin is 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04
+[✓] Contract burner AccessControlEnumerable has correct number of DEFAULT_ADMIN_ROLE holders
+[✓] Contract burner AccessControlEnumerable has role DEFAULT_ADMIN_ROLE holer app:aragon-agent
+[✓] Contract burner AccessControlEnumerable has correct number of REQUEST_BURN_MY_STETH_ROLE holders
+[✓] Contract burner AccessControlEnumerable has correct number of REQUEST_BURN_SHARES_ROLE holders
+[✓] Contract burner AccessControlEnumerable has role REQUEST_BURN_SHARES_ROLE holer app:lido
+[✓] Contract burner AccessControlEnumerable has role REQUEST_BURN_SHARES_ROLE holer app:node-operators-registry
+[✓] Contract stakingRouter AccessControlEnumerable has correct number of DEFAULT_ADMIN_ROLE holders
+[✓] Contract stakingRouter AccessControlEnumerable has role DEFAULT_ADMIN_ROLE holer app:aragon-agent
+[✓] Contract stakingRouter AccessControlEnumerable has correct number of MANAGE_WITHDRAWAL_CREDENTIALS_ROLE holders
+[✓] Contract stakingRouter AccessControlEnumerable has correct number of STAKING_MODULE_PAUSE_ROLE holders
+[✓] Contract stakingRouter AccessControlEnumerable has role STAKING_MODULE_PAUSE_ROLE holer depositSecurityModule
+[✓] Contract stakingRouter AccessControlEnumerable has correct number of STAKING_MODULE_RESUME_ROLE holders
+[✓] Contract stakingRouter AccessControlEnumerable has role STAKING_MODULE_RESUME_ROLE holer depositSecurityModule
+[✓] Contract stakingRouter AccessControlEnumerable has correct number of STAKING_MODULE_MANAGE_ROLE holders
+[✓] Contract stakingRouter AccessControlEnumerable has correct number of REPORT_EXITED_VALIDATORS_ROLE holders
+[✓] Contract stakingRouter AccessControlEnumerable has role REPORT_EXITED_VALIDATORS_ROLE holer accountingOracle
+[✓] Contract stakingRouter AccessControlEnumerable has correct number of UNSAFE_SET_EXITED_VALIDATORS_ROLE holders
+[✓] Contract stakingRouter AccessControlEnumerable has correct number of REPORT_REWARDS_MINTED_ROLE holders
+[✓] Contract stakingRouter AccessControlEnumerable has role REPORT_REWARDS_MINTED_ROLE holer app:lido
+[✓] stakingRouter OssifiableProxy admin is 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04
+[✓] Contract withdrawalQueueERC721 AccessControlEnumerable has correct number of DEFAULT_ADMIN_ROLE holders
+[✓] Contract withdrawalQueueERC721 AccessControlEnumerable has role DEFAULT_ADMIN_ROLE holer app:aragon-agent
+[✓] Contract withdrawalQueueERC721 AccessControlEnumerable has correct number of PAUSE_ROLE holders
+[✓] Contract withdrawalQueueERC721 AccessControlEnumerable has role PAUSE_ROLE holer gateSeal
+[✓] Contract withdrawalQueueERC721 AccessControlEnumerable has correct number of RESUME_ROLE holders
+[✓] Contract withdrawalQueueERC721 AccessControlEnumerable has correct number of FINALIZE_ROLE holders
+[✓] Contract withdrawalQueueERC721 AccessControlEnumerable has role FINALIZE_ROLE holer app:lido
+[✓] Contract withdrawalQueueERC721 AccessControlEnumerable has correct number of ORACLE_ROLE holders
+[✓] Contract withdrawalQueueERC721 AccessControlEnumerable has role ORACLE_ROLE holer accountingOracle
+[✓] Contract withdrawalQueueERC721 AccessControlEnumerable has correct number of MANAGE_TOKEN_URI_ROLE holders
+[✓] withdrawalQueueERC721 OssifiableProxy admin is 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04
+[✓] Contract accountingOracle AccessControlEnumerable has correct number of DEFAULT_ADMIN_ROLE holders
+[✓] Contract accountingOracle AccessControlEnumerable has role DEFAULT_ADMIN_ROLE holer app:aragon-agent
+[✓] Contract accountingOracle AccessControlEnumerable has correct number of SUBMIT_DATA_ROLE holders
+[✓] Contract accountingOracle AccessControlEnumerable has correct number of MANAGE_CONSENSUS_CONTRACT_ROLE holders
+[✓] Contract accountingOracle AccessControlEnumerable has correct number of MANAGE_CONSENSUS_VERSION_ROLE holders
+[✓] accountingOracle OssifiableProxy admin is 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04
+[✓] Contract validatorsExitBusOracle AccessControlEnumerable has correct number of DEFAULT_ADMIN_ROLE holders
+[✓] Contract validatorsExitBusOracle AccessControlEnumerable has role DEFAULT_ADMIN_ROLE holer app:aragon-agent
+[✓] Contract validatorsExitBusOracle AccessControlEnumerable has correct number of SUBMIT_DATA_ROLE holders
+[✓] Contract validatorsExitBusOracle AccessControlEnumerable has correct number of PAUSE_ROLE holders
+[✓] Contract validatorsExitBusOracle AccessControlEnumerable has role PAUSE_ROLE holer gateSeal
+[✓] Contract validatorsExitBusOracle AccessControlEnumerable has correct number of RESUME_ROLE holders
+[✓] Contract validatorsExitBusOracle AccessControlEnumerable has correct number of MANAGE_CONSENSUS_CONTRACT_ROLE holders
+[✓] Contract validatorsExitBusOracle AccessControlEnumerable has correct number of MANAGE_CONSENSUS_VERSION_ROLE holders
+[✓] validatorsExitBusOracle OssifiableProxy admin is 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04
+[✓] Contract hashConsensusForAccountingOracle AccessControlEnumerable has correct number of DEFAULT_ADMIN_ROLE holders
+[✓] Contract hashConsensusForAccountingOracle AccessControlEnumerable has role DEFAULT_ADMIN_ROLE holer app:aragon-agent
+[✓] Contract hashConsensusForAccountingOracle AccessControlEnumerable has correct number of MANAGE_MEMBERS_AND_QUORUM_ROLE holders
+[✓] Contract hashConsensusForAccountingOracle AccessControlEnumerable has correct number of DISABLE_CONSENSUS_ROLE holders
+[✓] Contract hashConsensusForAccountingOracle AccessControlEnumerable has correct number of MANAGE_FRAME_CONFIG_ROLE holders
+[✓] Contract hashConsensusForAccountingOracle AccessControlEnumerable has correct number of MANAGE_FAST_LANE_CONFIG_ROLE holders
+[✓] Contract hashConsensusForAccountingOracle AccessControlEnumerable has correct number of MANAGE_REPORT_PROCESSOR_ROLE holders
+[✓] Contract hashConsensusForValidatorsExitBusOracle AccessControlEnumerable has correct number of DEFAULT_ADMIN_ROLE holders
+[✓] Contract hashConsensusForValidatorsExitBusOracle AccessControlEnumerable has role DEFAULT_ADMIN_ROLE holer app:aragon-agent
+[✓] Contract hashConsensusForValidatorsExitBusOracle AccessControlEnumerable has correct number of MANAGE_MEMBERS_AND_QUORUM_ROLE holders
+[✓] Contract hashConsensusForValidatorsExitBusOracle AccessControlEnumerable has correct number of DISABLE_CONSENSUS_ROLE holders
+[✓] Contract hashConsensusForValidatorsExitBusOracle AccessControlEnumerable has correct number of MANAGE_FRAME_CONFIG_ROLE holders
+[✓] Contract hashConsensusForValidatorsExitBusOracle AccessControlEnumerable has correct number of MANAGE_FAST_LANE_CONFIG_ROLE holders
+[✓] Contract hashConsensusForValidatorsExitBusOracle AccessControlEnumerable has correct number of MANAGE_REPORT_PROCESSOR_ROLE holders
+[✓] Contract oracleReportSanityChecker AccessControlEnumerable has correct number of DEFAULT_ADMIN_ROLE holders
+[✓] Contract oracleReportSanityChecker AccessControlEnumerable has role DEFAULT_ADMIN_ROLE holer app:aragon-agent
+[✓] Contract oracleReportSanityChecker AccessControlEnumerable has correct number of ALL_LIMITS_MANAGER_ROLE holders
+[✓] Contract oracleReportSanityChecker AccessControlEnumerable has correct number of CHURN_VALIDATORS_PER_DAY_LIMIT_MANAGER_ROLE holders
+[✓] Contract oracleReportSanityChecker AccessControlEnumerable has correct number of ONE_OFF_CL_BALANCE_DECREASE_LIMIT_MANAGER_ROLE holders
+[✓] Contract oracleReportSanityChecker AccessControlEnumerable has correct number of ANNUAL_BALANCE_INCREASE_LIMIT_MANAGER_ROLE holders
+[✓] Contract oracleReportSanityChecker AccessControlEnumerable has correct number of SHARE_RATE_DEVIATION_LIMIT_MANAGER_ROLE holders
+[✓] Contract oracleReportSanityChecker AccessControlEnumerable has correct number of MAX_VALIDATOR_EXIT_REQUESTS_PER_REPORT_ROLE holders
+[✓] Contract oracleReportSanityChecker AccessControlEnumerable has correct number of MAX_ACCOUNTING_EXTRA_DATA_LIST_ITEMS_COUNT_ROLE holders
+[✓] Contract oracleReportSanityChecker AccessControlEnumerable has correct number of MAX_NODE_OPERATORS_PER_EXTRA_DATA_ITEM_COUNT_ROLE holders
+[✓] Contract oracleReportSanityChecker AccessControlEnumerable has correct number of REQUEST_TIMESTAMP_MARGIN_MANAGER_ROLE holders
+[✓] Contract oracleReportSanityChecker AccessControlEnumerable has correct number of MAX_POSITIVE_TOKEN_REBASE_MANAGER_ROLE holders
+[✓] depositSecurityModule DepositSecurityModule getOwner is 0x8E797edfe1a9fF2b72FDCA95a8E00ee9756b6B04
+[✓] Contract oracleDaemonConfig AccessControlEnumerable has correct number of DEFAULT_ADMIN_ROLE holders
+[✓] Contract oracleDaemonConfig AccessControlEnumerable has role DEFAULT_ADMIN_ROLE holer app:aragon-agent
+[✓] Contract oracleDaemonConfig AccessControlEnumerable has correct number of CONFIG_MANAGER_ROLE holders
+====================
+[✓] HashConsensus 0xe87b3E17726eC49a4FCC8F532119c1EAc70CCb0C members are expected: []
+[✓] HashConsensus 0x3AdD75263833Fc93027Ce3BDb8a96F4fE8B3d97F members are expected: []
+Total gas used during scratch deployment: 99128963
+>>> =============================
+>>> The deployed protocol state checked
+>>> =============================
+(base) Avo@Book lido-dao-fork %

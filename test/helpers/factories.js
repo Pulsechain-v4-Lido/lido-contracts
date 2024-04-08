@@ -258,7 +258,7 @@ async function elRewardsVaultFactory({ pool, treasury }) {
 async function withdrawalQueueFactory({ appManager, pool, oracle, wsteth }) {
   const withdrawalQueue = (await withdrawals.deploy(appManager.address, wsteth.address)).queue
 
-  await withdrawalQueue.initialize(appManager.address)
+  await withdrawalQueue.initialize(appManager.address, pool.address)
 
   const ORACLE_ROLE = await withdrawalQueue.ORACLE_ROLE()
   await withdrawalQueue.grantRole(ORACLE_ROLE, oracle.address, { from: appManager.address })

@@ -66,6 +66,7 @@ abstract contract WithdrawalQueue is AccessControlEnumerable, PausableUntil, Wit
     event BunkerModeDisabled();
 
     error AdminZeroAddress();
+    error LidoZeroAddress();
     error RequestAmountTooSmall(uint256 _amountOfStETH);
     error RequestAmountTooLarge(uint256 _amountOfStETH);
     error InvalidReportTimestamp();
@@ -85,10 +86,11 @@ abstract contract WithdrawalQueue is AccessControlEnumerable, PausableUntil, Wit
     /// @dev Reverts if `_admin` equals to `address(0)`
     /// @dev NB! It's initialized in paused state by default and should be resumed explicitly to start
     /// @dev NB! Bunker mode is disabled by default
-    function initialize(address _admin) external {
+    function initialize(address _admin, address _lidoAddress) external {
         if (_admin == address(0)) revert AdminZeroAddress();
+        if (_lidoAddress == address(0)) revert LidoZeroAddress();
 
-        _initialize(_admin);
+        _initialize(_admin, _lidoAddress);
     }
 
     /// @notice Resume withdrawal requests placement and finalization
@@ -357,7 +359,7 @@ abstract contract WithdrawalQueue is AccessControlEnumerable, PausableUntil, Wit
     function _emitTransfer(address from, address to, uint256 _requestId) internal virtual;
 
     /// @dev internal initialization helper. Doesn't check provided addresses intentionally
-    function _initialize(address _admin) internal {
+    function _initialize(address _admin, address _lidoAddress) internal {
         _initializeQueue();
         // _pauseFor(PAUSE_INFINITELY); // @todo: make sure if it right
 
@@ -366,6 +368,8 @@ abstract contract WithdrawalQueue is AccessControlEnumerable, PausableUntil, Wit
         _grantRole(DEFAULT_ADMIN_ROLE, _admin);
 
         BUNKER_MODE_SINCE_TIMESTAMP_POSITION.setStorageUint256(BUNKER_MODE_DISABLED_TIMESTAMP);
+
+        _setLidoAddress(_lidoAddress);
 
         emit InitializedV1(_admin);
     }
