@@ -268,6 +268,7 @@ contract Lido is Versioned, StETHPermit, AragonApp {
         payable
         onlyInit
     {
+        _resumeStaking(); // @todo: make sure if it right
         _bootstrapInitialHolder();
         _initialize_v2(_lidoLocator, _eip712StETH);
         initialized();

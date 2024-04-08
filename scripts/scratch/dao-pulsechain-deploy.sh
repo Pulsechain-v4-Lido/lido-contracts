@@ -2,6 +2,10 @@
 set -e +u
 set -o pipefail
 
+export DEPLOYER="0x9F3cafA814362AF8963560070ea8636b39c84a70"
+export RPC_URL="https://rpc.v4.testnet.pulsechain.com"
+export GATE_SEAL_FACTORY="0x0000000000000000000000000000000000000000"
+
 if [[ -z "$DEPLOYER" ]]; then
     echo "Must set DEPLOYER env variable" 1>&2
     exit 1

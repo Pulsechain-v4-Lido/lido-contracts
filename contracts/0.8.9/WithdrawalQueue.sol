@@ -359,7 +359,7 @@ abstract contract WithdrawalQueue is AccessControlEnumerable, PausableUntil, Wit
     /// @dev internal initialization helper. Doesn't check provided addresses intentionally
     function _initialize(address _admin) internal {
         _initializeQueue();
-        _pauseFor(PAUSE_INFINITELY);
+        // _pauseFor(PAUSE_INFINITELY); // @todo: make sure if it right
 
         _initializeContractVersionTo(1);
 
