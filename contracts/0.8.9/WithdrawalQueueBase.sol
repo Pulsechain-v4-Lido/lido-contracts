@@ -583,7 +583,7 @@ abstract contract WithdrawalQueueBase {
             _requestId,
             msg.sender,
             _recipient,
-            ethWithDiscount
+            ethWithDiscount - feeAmount
         );
     }
 

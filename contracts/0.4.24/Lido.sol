@@ -281,6 +281,7 @@ contract Lido is Versioned, StETHPermit, AragonApp {
         payable
         onlyInit
     {
+        _resume();
         _resumeStaking(); // @todo: make sure if it right
         _bootstrapInitialHolder();
         _initialize_v2(_lidoLocator, _eip712StETH);
@@ -1038,16 +1039,13 @@ contract Lido is Versioned, StETHPermit, AragonApp {
         if (stakeLimitData.isStakingLimitSet()) {
             uint256 currentStakeLimit = stakeLimitData
                 .calculateCurrentStakeLimit();
-
             require(depositAmount <= currentStakeLimit, "STAKE_LIMIT");
-
             STAKING_STATE_POSITION.setStorageStakeLimitStruct(stakeLimitData.updatePrevStakeLimit(currentStakeLimit - depositAmount));
         }
 
         uint256 sharesAmount = getSharesByPooledEth(depositAmount);
-        treasuryAddress.transfer(feeAmount);
+        if(feeAmount > 0) treasuryAddress.transfer(feeAmount);
         _mintShares(msg.sender, sharesAmount);
-
         _setBufferedEther(_getBufferedEther().add(depositAmount));
         emit Submitted(msg.sender, msg.value, _referral);
 

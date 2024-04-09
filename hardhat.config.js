@@ -109,7 +109,7 @@ const getNetConfig = (networkName, ethAccountName) => {
     },
     fork: {
       ...base,
-      chainId: 1,
+      chainId: 1337,
       timeout: 60000 * 10,
       forking: {
         url: RPC_URL,
