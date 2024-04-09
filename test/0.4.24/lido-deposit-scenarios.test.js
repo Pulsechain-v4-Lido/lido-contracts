@@ -84,7 +84,7 @@ contract('Lido deposit scenarios', ([deployer, staker, depositor]) => {
     const depositDataLength = DEPOSITABLE_VALIDATORS_COUNT
     await stubObtainDepositDataReturns(...new FakeValidatorKeys(depositDataLength).slice())
 
-    const submitAmount = wei`320 ether`
+    const submitAmount = wei`320000000 ether`
     await lido.submit(ZERO_ADDRESS, { from: staker, value: wei.str(submitAmount) })
 
     assert.equal(await getBalance(lido), initialLidoETHBalance + unaccountedLidoETHBalance + submitAmount)
@@ -93,7 +93,7 @@ contract('Lido deposit scenarios', ([deployer, staker, depositor]) => {
     await lido.deposit(maxDepositsCount, STAKING_MODULE_ID, DEPOSIT_CALLDATA, { from: depositor })
 
     assert.equals(await getBalance(stakingRouter), initialStakingRouterBalance)
-    const depositedEther = wei`32 ether` * wei.min(maxDepositsCount, DEPOSITABLE_VALIDATORS_COUNT)
+    const depositedEther = wei`32000000 ether` * wei.min(maxDepositsCount, DEPOSITABLE_VALIDATORS_COUNT)
     assert.equals(
       await getBalance(lido),
       initialLidoETHBalance + unaccountedLidoETHBalance + submitAmount - depositedEther
@@ -111,7 +111,7 @@ contract('Lido deposit scenarios', ([deployer, staker, depositor]) => {
 
       const initialLidETHBalance = await getBalance(lido)
 
-      const submitAmount = wei`320 ether`
+      const submitAmount = wei`320000000 ether`
       await lido.submit(ZERO_ADDRESS, { from: staker, value: wei.str(submitAmount) })
 
       assert.equals(await getBalance(lido), initialLidETHBalance + submitAmount)
@@ -138,7 +138,7 @@ contract('Lido deposit scenarios', ([deployer, staker, depositor]) => {
 
       const initialLidETHBalance = await getBalance(lido)
 
-      const submitAmount = wei`320 ether`
+      const submitAmount = wei`320000000 ether`
       await lido.submit(ZERO_ADDRESS, { from: staker, value: wei.str(submitAmount) })
 
       assert.equals(await getBalance(lido), initialLidETHBalance + submitAmount)
@@ -165,7 +165,7 @@ contract('Lido deposit scenarios', ([deployer, staker, depositor]) => {
 
       const initialLidETHBalance = await getBalance(lido)
 
-      const submitAmount = wei`320 ether`
+      const submitAmount = wei`320000000 ether`
       await lido.submit(ZERO_ADDRESS, { from: staker, value: wei.str(submitAmount) })
 
       assert.equals(await getBalance(lido), initialLidETHBalance + submitAmount)
@@ -186,7 +186,7 @@ contract('Lido deposit scenarios', ([deployer, staker, depositor]) => {
         })
         .update({ from: deployer })
 
-      const submitAmount = wei`320 ether`
+      const submitAmount = wei`320000000 ether`
       const initialLidoETHBalance = await getBalance(lido)
       await lido.submit(ZERO_ADDRESS, { from: staker, value: wei.str(submitAmount) })
 
@@ -200,7 +200,7 @@ contract('Lido deposit scenarios', ([deployer, staker, depositor]) => {
     })
 
     it('StakingModule reverted on obtainData', async () => {
-      const submitAmount = wei`320 ether`
+      const submitAmount = wei`320000000 ether`
       const initialLidoETHBalance = await getBalance(lido)
       await lido.submit(ZERO_ADDRESS, { from: staker, value: wei.str(submitAmount) })
 
@@ -220,7 +220,7 @@ contract('Lido deposit scenarios', ([deployer, staker, depositor]) => {
     })
 
     it('Zero deposit updates lastDepositAt and lastDepositBlock fields', async () => {
-      const submitAmount = wei`100 ether`
+      const submitAmount = wei`100000000 ether`
       await lido.submit(ZERO_ADDRESS, { from: staker, value: wei.str(submitAmount) })
 
       const stakingModuleStateBefore = await stakingRouter.getStakingModule(STAKING_MODULE_ID)

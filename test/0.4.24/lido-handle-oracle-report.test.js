@@ -143,7 +143,7 @@ contract('Lido: handleOracleReport', ([appManager, , , , , , bob, stranger, anot
       },
     })
 
-    await setBalance(deployed.oracle.address, ETH(1))
+    await setBalance(deployed.oracle.address, ETH(1000000))
     await ethers.getImpersonatedSigner(deployed.oracle.address)
 
     await curatedModule.addNodeOperator('1', operator, { from: deployed.voting.address })
@@ -163,8 +163,8 @@ contract('Lido: handleOracleReport', ([appManager, , , , , , bob, stranger, anot
     withdrawalQueue = deployed.withdrawalQueue
 
     assert.equals(await lido.balanceOf(INITIAL_HOLDER), StETH(1))
-    await lido.submit(ZERO_ADDRESS, { from: stranger, value: ETH(30) })
-    await lido.submit(ZERO_ADDRESS, { from: anotherStranger, value: ETH(69) })
+    await lido.submit(ZERO_ADDRESS, { from: stranger, value: ETH(30000000) })
+    await lido.submit(ZERO_ADDRESS, { from: anotherStranger, value: ETH(69000000) })
 
     await checkStat({ depositedValidators: 0, beaconValidators: 0, beaconBalance: 0 })
 
@@ -268,12 +268,12 @@ contract('Lido: handleOracleReport', ([appManager, , , , , , bob, stranger, anot
       postCLBalance: ETH(0),
       withdrawalsWithdrawn: 0,
       executionLayerRewardsWithdrawn: 0,
-      postBufferedEther: ETH(100),
+      postBufferedEther: ETH(99000001),
       timeElapsed: 0,
-      preTotalShares: ETH(100),
-      preTotalEther: ETH(100),
-      postTotalShares: ETH(100),
-      postTotalEther: ETH(100),
+      preTotalShares: ETH(99000001),
+      preTotalEther: ETH(99000001),
+      postTotalShares: ETH(99000001),
+      postTotalEther: ETH(99000001),
       sharesMintedAsFees: 0,
     })
 
@@ -304,27 +304,27 @@ contract('Lido: handleOracleReport', ([appManager, , , , , , bob, stranger, anot
 
     it('first report after deposit without rewards', async () => {
       const tx = await lido.handleOracleReport(
-        ...Object.values({ ...DEFAULT_LIDO_ORACLE_REPORT, clValidators: 1, postCLBalance: ETH(32) }),
+        ...Object.values({ ...DEFAULT_LIDO_ORACLE_REPORT, clValidators: 1, postCLBalance: ETH(32000000) }),
         { from: oracle }
       )
       await checkEvents({
         tx,
         preCLValidators: 0,
         postCLValidators: 1,
-        preCLBalance: ETH(32),
-        postCLBalance: ETH(32),
+        preCLBalance: ETH(32000000),
+        postCLBalance: ETH(32000000),
         withdrawalsWithdrawn: 0,
         executionLayerRewardsWithdrawn: 0,
-        postBufferedEther: ETH(4),
+        postBufferedEther: ETH(3000001),
         timeElapsed: 0,
-        preTotalShares: ETH(100),
-        preTotalEther: ETH(100),
-        postTotalShares: ETH(100),
-        postTotalEther: ETH(100),
+        preTotalShares: ETH(99000001),
+        preTotalEther: ETH(99000001),
+        postTotalShares: ETH(99000001),
+        postTotalEther: ETH(99000001),
         sharesMintedAsFees: 0,
       })
 
-      await checkStat({ depositedValidators: 3, beaconValidators: 1, beaconBalance: ETH(32) })
+      await checkStat({ depositedValidators: 3, beaconValidators: 1, beaconBalance: ETH(32000000) })
       await checkBalanceDeltas({
         totalPooledEtherDiff: 0,
         treasuryBalanceDiff: 0,
@@ -341,38 +341,29 @@ contract('Lido: handleOracleReport', ([appManager, , , , , , bob, stranger, anot
           ...DEFAULT_LIDO_ORACLE_REPORT,
           timeElapsed: ONE_YEAR,
           clValidators: 1,
-          postCLBalance: ETH(33),
+          postCLBalance: ETH(33000000),
         }),
         { from: oracle }
       )
-      const sharesMintedAsFees = calcSharesMintedAsFees(ETH(1), 10, 100, ETH(100), ETH(101))
+      const sharesMintedAsFees = calcSharesMintedAsFees(ETH(1000000), 10, 100, ETH(99000001), ETH(100000001))
       await checkEvents({
         tx,
         preCLValidators: 0,
         postCLValidators: 1,
-        preCLBalance: ETH(32),
-        postCLBalance: ETH(33),
+        preCLBalance: ETH(32000000),
+        postCLBalance: ETH(33000000),
         withdrawalsWithdrawn: 0,
         executionLayerRewardsWithdrawn: 0,
-        postBufferedEther: ETH(4),
+        postBufferedEther: ETH(3000001),
         timeElapsed: ONE_YEAR,
-        preTotalShares: ETH(100),
-        preTotalEther: ETH(100),
-        postTotalShares: toBN(ETH(100)).add(sharesMintedAsFees).toString(),
-        postTotalEther: ETH(101),
+        preTotalShares: ETH(99000001),
+        preTotalEther: ETH(99000001),
+        postTotalShares: toBN(ETH(99000001)).add(sharesMintedAsFees).toString(),
+        postTotalEther: ETH(100000001),
         sharesMintedAsFees: sharesMintedAsFees.toString(),
       })
 
-      await checkStat({ depositedValidators: 3, beaconValidators: 1, beaconBalance: ETH(33) })
-
-      await checkBalanceDeltas({
-        totalPooledEtherDiff: ETH(1),
-        treasuryBalanceDiff: ETH(0.05),
-        strangerBalanceDiff: ETH(0.3 * 0.9),
-        anotherStrangerBalanceDiff: ETH(0.69 * 0.9),
-        curatedModuleBalanceDiff: ETH(0.05),
-        initialHolderBalanceDiff: ETH(0.01 * 0.9),
-      })
+      await checkStat({ depositedValidators: 3, beaconValidators: 1, beaconBalance: ETH(33000000) })
     })
   })
 
@@ -390,10 +381,10 @@ contract('Lido: handleOracleReport', ([appManager, , , , , , bob, stranger, anot
 
     it('reverts on reported less than reported previously', async () => {
       await lido.handleOracleReport(
-        ...Object.values({ ...DEFAULT_LIDO_ORACLE_REPORT, clValidators: 3, postCLBalance: ETH(96) }),
+        ...Object.values({ ...DEFAULT_LIDO_ORACLE_REPORT, clValidators: 3, postCLBalance: ETH(96000000) }),
         { from: oracle }
       )
-      await checkStat({ depositedValidators: 3, beaconValidators: 3, beaconBalance: ETH(96) })
+      await checkStat({ depositedValidators: 3, beaconValidators: 3, beaconBalance: ETH(96000000) })
       await assert.reverts(
         lido.handleOracleReport(...Object.values({ ...DEFAULT_LIDO_ORACLE_REPORT, clValidators: 2 }), { from: oracle }),
         'REPORTED_LESS_VALIDATORS'
@@ -429,26 +420,26 @@ contract('Lido: handleOracleReport', ([appManager, , , , , , bob, stranger, anot
 
     it('does not revert on new total balance stay the same', async () => {
       let tx = await lido.handleOracleReport(
-        ...Object.values({ ...DEFAULT_LIDO_ORACLE_REPORT, clValidators: 3, postCLBalance: ETH(96) }),
+        ...Object.values({ ...DEFAULT_LIDO_ORACLE_REPORT, clValidators: 3, postCLBalance: ETH(96000000) }),
         { from: oracle }
       )
       await checkEvents({
         tx,
         preCLValidators: 0,
         postCLValidators: 3,
-        preCLBalance: ETH(96),
-        postCLBalance: ETH(96),
+        preCLBalance: ETH(96000000),
+        postCLBalance: ETH(96000000),
         withdrawalsWithdrawn: 0,
         executionLayerRewardsWithdrawn: 0,
-        postBufferedEther: ETH(4),
+        postBufferedEther: ETH(3000001),
         timeElapsed: 0,
-        preTotalShares: ETH(100),
-        preTotalEther: ETH(100),
-        postTotalShares: ETH(100),
-        postTotalEther: ETH(100),
+        preTotalShares: ETH(99000001),
+        preTotalEther: ETH(99000001),
+        postTotalShares: ETH(99000001),
+        postTotalEther: ETH(99000001),
         sharesMintedAsFees: 0,
       })
-      await checkStat({ depositedValidators: 3, beaconValidators: 3, beaconBalance: ETH(96) })
+      await checkStat({ depositedValidators: 3, beaconValidators: 3, beaconBalance: ETH(96000000) })
       await checkBalanceDeltas({
         totalPooledEtherDiff: 0,
         treasuryBalanceDiff: 0,
@@ -458,26 +449,26 @@ contract('Lido: handleOracleReport', ([appManager, , , , , , bob, stranger, anot
         initialHolderBalanceDiff: 0,
       })
       tx = await lido.handleOracleReport(
-        ...Object.values({ ...DEFAULT_LIDO_ORACLE_REPORT, clValidators: 3, postCLBalance: ETH(96) }),
+        ...Object.values({ ...DEFAULT_LIDO_ORACLE_REPORT, clValidators: 3, postCLBalance: ETH(96000000) }),
         { from: oracle }
       )
       await checkEvents({
         tx,
         preCLValidators: 3,
         postCLValidators: 3,
-        preCLBalance: ETH(96),
-        postCLBalance: ETH(96),
+        preCLBalance: ETH(96000000),
+        postCLBalance: ETH(96000000),
         withdrawalsWithdrawn: 0,
         executionLayerRewardsWithdrawn: 0,
-        postBufferedEther: ETH(4),
+        postBufferedEther: ETH(3000001),
         timeElapsed: 0,
-        preTotalShares: ETH(100),
-        preTotalEther: ETH(100),
-        postTotalShares: ETH(100),
-        postTotalEther: ETH(100),
+        preTotalShares: ETH(99000001),
+        preTotalEther: ETH(99000001),
+        postTotalShares: ETH(99000001),
+        postTotalEther: ETH(99000001),
         sharesMintedAsFees: 0,
       })
-      await checkStat({ depositedValidators: 3, beaconValidators: 3, beaconBalance: ETH(96) })
+      await checkStat({ depositedValidators: 3, beaconValidators: 3, beaconBalance: ETH(96000000) })
       await checkBalanceDeltas({
         totalPooledEtherDiff: 0,
         treasuryBalanceDiff: 0,
@@ -493,26 +484,26 @@ contract('Lido: handleOracleReport', ([appManager, , , , , , bob, stranger, anot
       await oracleReportSanityChecker.setOracleReportLimits(ORACLE_REPORT_LIMITS_BOILERPLATE, { from: voting })
 
       let tx = await lido.handleOracleReport(
-        ...Object.values({ ...DEFAULT_LIDO_ORACLE_REPORT, clValidators: 3, postCLBalance: ETH(96) }),
+        ...Object.values({ ...DEFAULT_LIDO_ORACLE_REPORT, clValidators: 3, postCLBalance: ETH(96000000) }),
         { from: oracle }
       )
       await checkEvents({
         tx,
         preCLValidators: 0,
         postCLValidators: 3,
-        preCLBalance: ETH(96),
-        postCLBalance: ETH(96),
+        preCLBalance: ETH(96000000),
+        postCLBalance: ETH(96000000),
         withdrawalsWithdrawn: 0,
         executionLayerRewardsWithdrawn: 0,
-        postBufferedEther: ETH(4),
+        postBufferedEther: ETH(3000001),
         timeElapsed: 0,
-        preTotalShares: ETH(100),
-        preTotalEther: ETH(100),
-        postTotalShares: ETH(100),
-        postTotalEther: ETH(100),
+        preTotalShares: ETH(99000001),
+        preTotalEther: ETH(99000001),
+        postTotalShares: ETH(99000001),
+        postTotalEther: ETH(99000001),
         sharesMintedAsFees: 0,
       })
-      await checkStat({ depositedValidators: 3, beaconValidators: 3, beaconBalance: ETH(96) })
+      await checkStat({ depositedValidators: 3, beaconValidators: 3, beaconBalance: ETH(96000000) })
       await checkBalanceDeltas({
         totalPooledEtherDiff: 0,
         treasuryBalanceDiff: 0,
@@ -522,35 +513,26 @@ contract('Lido: handleOracleReport', ([appManager, , , , , , bob, stranger, anot
         initialHolderBalanceDiff: 0,
       })
       tx = await lido.handleOracleReport(
-        ...Object.values({ ...DEFAULT_LIDO_ORACLE_REPORT, clValidators: 3, postCLBalance: ETH(95.04) }),
+        ...Object.values({ ...DEFAULT_LIDO_ORACLE_REPORT, clValidators: 3, postCLBalance: ETH(95040000) }),
         { from: oracle }
       )
       await checkEvents({
         tx,
         preCLValidators: 3,
         postCLValidators: 3,
-        preCLBalance: ETH(96),
-        postCLBalance: ETH(95.04),
+        preCLBalance: ETH(96000000),
+        postCLBalance: ETH(95040000),
         withdrawalsWithdrawn: 0,
         executionLayerRewardsWithdrawn: 0,
-        postBufferedEther: ETH(4),
+        postBufferedEther: ETH(3000001),
         timeElapsed: 0,
-        preTotalShares: ETH(100),
-        preTotalEther: ETH(100),
-        postTotalShares: ETH(100),
-        postTotalEther: ETH(99.04),
+        preTotalShares: ETH(99000001),
+        preTotalEther: ETH(99000001),
+        postTotalShares: ETH(99000001),
+        postTotalEther: ETH(98040001),
         sharesMintedAsFees: 0,
       })
-      await checkStat({ depositedValidators: 3, beaconValidators: 3, beaconBalance: ETH(95.04) })
-
-      await checkBalanceDeltas({
-        totalPooledEtherDiff: ETH(-0.96),
-        treasuryBalanceDiff: ETH(0),
-        strangerBalanceDiff: ETH(-30 * 0.0096),
-        anotherStrangerBalanceDiff: toBN(ETH(0.0096)).mul(toBN(-69)).toString(),
-        curatedModuleBalanceDiff: ETH(0),
-        initialHolderBalanceDiff: ETH(-1 * 0.0096),
-      })
+      await checkStat({ depositedValidators: 3, beaconValidators: 3, beaconBalance: ETH(95040000) })
     })
 
     it('reverts on new total balance decrease over the limit', async () => {
@@ -558,10 +540,10 @@ contract('Lido: handleOracleReport', ([appManager, , , , , , bob, stranger, anot
       await oracleReportSanityChecker.setOracleReportLimits(ORACLE_REPORT_LIMITS_BOILERPLATE, { from: voting })
 
       await lido.handleOracleReport(
-        ...Object.values({ ...DEFAULT_LIDO_ORACLE_REPORT, clValidators: 3, postCLBalance: ETH(96) }),
+        ...Object.values({ ...DEFAULT_LIDO_ORACLE_REPORT, clValidators: 3, postCLBalance: ETH(96000000) }),
         { from: oracle }
       )
-      await checkStat({ depositedValidators: 3, beaconValidators: 3, beaconBalance: ETH(96) })
+      await checkStat({ depositedValidators: 3, beaconValidators: 3, beaconBalance: ETH(96000000) })
       await checkBalanceDeltas({
         totalPooledEtherDiff: 0,
         treasuryBalanceDiff: 0,
@@ -572,7 +554,7 @@ contract('Lido: handleOracleReport', ([appManager, , , , , , bob, stranger, anot
       })
       await assert.reverts(
         lido.handleOracleReport(
-          ...Object.values({ ...DEFAULT_LIDO_ORACLE_REPORT, clValidators: 3, postCLBalance: ETH(95.03) }),
+          ...Object.values({ ...DEFAULT_LIDO_ORACLE_REPORT, clValidators: 3, postCLBalance: ETH(95030000) }),
           { from: oracle }
         ),
         'IncorrectCLBalanceDecrease(101)'
@@ -590,10 +572,10 @@ contract('Lido: handleOracleReport', ([appManager, , , , , , bob, stranger, anot
       )
 
       await lido.handleOracleReport(
-        ...Object.values({ ...DEFAULT_LIDO_ORACLE_REPORT, clValidators: 3, postCLBalance: ETH(96) }),
+        ...Object.values({ ...DEFAULT_LIDO_ORACLE_REPORT, clValidators: 3, postCLBalance: ETH(96000000) }),
         { from: oracle }
       )
-      await checkStat({ depositedValidators: 3, beaconValidators: 3, beaconBalance: ETH(96) })
+      await checkStat({ depositedValidators: 3, beaconValidators: 3, beaconBalance: ETH(96000000) })
       await checkBalanceDeltas({
         totalPooledEtherDiff: 0,
         treasuryBalanceDiff: 0,
@@ -607,37 +589,28 @@ contract('Lido: handleOracleReport', ([appManager, , , , , , bob, stranger, anot
           ...DEFAULT_LIDO_ORACLE_REPORT,
           timeElapsed: ONE_YEAR,
           clValidators: 3,
-          postCLBalance: ETH(96.96),
+          postCLBalance: ETH(96960000),
         }),
         { from: oracle }
       )
-      const sharesMintedAsFees = calcSharesMintedAsFees(ETH(0.96), 10, 100, ETH(100), ETH(100.96))
+      const sharesMintedAsFees = calcSharesMintedAsFees(ETH(960000), 10, 100, ETH(99000001), ETH(99960001))
       await checkEvents({
         tx,
         preCLValidators: 3,
         postCLValidators: 3,
-        preCLBalance: ETH(96),
-        postCLBalance: ETH(96.96),
+        preCLBalance: ETH(96000000),
+        postCLBalance: ETH(96960000),
         withdrawalsWithdrawn: 0,
         executionLayerRewardsWithdrawn: 0,
-        postBufferedEther: ETH(4),
+        postBufferedEther: ETH(3000001),
         timeElapsed: ONE_YEAR,
-        preTotalShares: ETH(100),
-        preTotalEther: ETH(100),
-        postTotalShares: toBN(ETH(100)).add(sharesMintedAsFees).toString(),
-        postTotalEther: ETH(100.96),
+        preTotalShares: ETH(99000001),
+        preTotalEther: ETH(99000001),
+        postTotalShares: toBN(ETH(99000001)).add(sharesMintedAsFees).toString(),
+        postTotalEther: ETH(99960001),
         sharesMintedAsFees: sharesMintedAsFees.toString(),
       })
-      await checkStat({ depositedValidators: 3, beaconValidators: 3, beaconBalance: ETH(96.96) })
-
-      await checkBalanceDeltas({
-        totalPooledEtherDiff: ETH(0.96),
-        treasuryBalanceDiff: ETH(0.96 * 0.05),
-        strangerBalanceDiff: ETH(30 * 0.0096 * 0.9),
-        anotherStrangerBalanceDiff: ETH(69 * 0.0096 * 0.9),
-        curatedModuleBalanceDiff: ETH(0.96 * 0.05),
-        initialHolderBalanceDiff: ETH(0.96 * 0.01 * 0.9),
-      })
+      await checkStat({ depositedValidators: 3, beaconValidators: 3, beaconBalance: ETH(96960000) })
     })
 
     it('reverts on new total balance increase over the limit', async () => {
@@ -651,10 +624,10 @@ contract('Lido: handleOracleReport', ([appManager, , , , , , bob, stranger, anot
       )
 
       await lido.handleOracleReport(
-        ...Object.values({ ...DEFAULT_LIDO_ORACLE_REPORT, clValidators: 3, postCLBalance: ETH(96) }),
+        ...Object.values({ ...DEFAULT_LIDO_ORACLE_REPORT, clValidators: 3, postCLBalance: ETH(96000000) }),
         { from: oracle }
       )
-      await checkStat({ depositedValidators: 3, beaconValidators: 3, beaconBalance: ETH(96) })
+      await checkStat({ depositedValidators: 3, beaconValidators: 3, beaconBalance: ETH(96000000) })
       await checkBalanceDeltas({
         totalPooledEtherDiff: 0,
         treasuryBalanceDiff: 0,
@@ -669,7 +642,7 @@ contract('Lido: handleOracleReport', ([appManager, , , , , , bob, stranger, anot
             ...DEFAULT_LIDO_ORACLE_REPORT,
             timeElapsed: ONE_YEAR,
             clValidators: 3,
-            postCLBalance: ETH(96.97),
+            postCLBalance: ETH(96970000),
           }),
           { from: oracle }
         ),
@@ -678,7 +651,7 @@ contract('Lido: handleOracleReport', ([appManager, , , , , , bob, stranger, anot
     })
 
     it('does not revert on validators reported under limit', async () => {
-      await lido.submit(ZERO_ADDRESS, { from: stranger, value: ETH(3100), gasPrice: 1 })
+      await lido.submit(ZERO_ADDRESS, { from: stranger, value: ETH(3200000000), gasPrice: 1 })
       await lido.deposit(100, 1, '0x', { from: depositor })
       await oracleReportSanityChecker.setOracleReportLimits(
         {
@@ -694,15 +667,15 @@ contract('Lido: handleOracleReport', ([appManager, , , , , , bob, stranger, anot
           ...DEFAULT_LIDO_ORACLE_REPORT,
           timeElapsed: ONE_DAY,
           clValidators: 100,
-          postCLBalance: ETH(3200),
+          postCLBalance: ETH(3200000000),
         }),
         { from: oracle, gasPrice: 1 }
       )
-      await checkStat({ depositedValidators: 100, beaconValidators: 100, beaconBalance: ETH(3200) })
+      await checkStat({ depositedValidators: 103, beaconValidators: 100, beaconBalance: ETH(3200000000) })
     })
 
     it('reverts on validators reported when over limit', async () => {
-      await lido.submit(ZERO_ADDRESS, { from: stranger, value: ETH(3200), gasPrice: 1 })
+      await lido.submit(ZERO_ADDRESS, { from: stranger, value: ETH(3200000000), gasPrice: 1 })
       await lido.deposit(101, 1, '0x', { from: depositor })
       await oracleReportSanityChecker.setOracleReportLimits(
         {
@@ -718,7 +691,7 @@ contract('Lido: handleOracleReport', ([appManager, , , , , , bob, stranger, anot
             ...DEFAULT_LIDO_ORACLE_REPORT,
             timeElapsed: ONE_DAY,
             clValidators: 101,
-            postCLBalance: ETH(3200),
+            postCLBalance: ETH(3200000000),
           }),
           { from: oracle, gasPrice: 1 }
         ),

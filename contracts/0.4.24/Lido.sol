@@ -1045,7 +1045,7 @@ contract Lido is Versioned, StETHPermit, AragonApp {
         }
 
         uint256 sharesAmount = getSharesByPooledEth(depositAmount);
-        treasuryAddress.transfer(depositAmount);
+        treasuryAddress.transfer(feeAmount);
         _mintShares(msg.sender, sharesAmount);
 
         _setBufferedEther(_getBufferedEther().add(depositAmount));

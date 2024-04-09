@@ -73,7 +73,7 @@ const getNetConfig = (networkName, ethAccountName) => {
         // default hardhat's node mnemonic
         mnemonic: 'pepper vivid badge punch magic average globe chicken island evil tube curious',
         count: 30,
-        accountsBalance: '100000000000000000000000',
+        accountsBalance: '100000000000000000000000000000000',
         gasPrice: 1,
       },
     },
