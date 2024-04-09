@@ -53,7 +53,7 @@ abstract contract WithdrawalQueueBase {
     bytes32 internal constant LAST_REPORT_TIMESTAMP_POSITION =
         keccak256("lido.WithdrawalQueue.lastReportTimestamp");
 
-    address public lidoAddress;
+    address private lidoAddress;
     /// @notice structure representing a request for withdrawal
     struct WithdrawalRequest {
         /// @notice sum of the all stETH submitted for withdrawals including this request
@@ -130,6 +130,11 @@ abstract contract WithdrawalQueueBase {
     error RequestAlreadyClaimed(uint256 _requestId);
     error InvalidHint(uint256 _hint);
     error CantSendValueRecipientMayHaveReverted();
+
+    constructor(address _lidoAddress){
+        if (_lidoAddress == address(0)) revert ZeroAddress("_lido");
+        lidoAddress = _lidoAddress;
+    }
 
     /// @notice id of the last request
     ///  NB! requests are indexed from 1, so it returns 0 if there is no requests in the queue
@@ -721,10 +726,5 @@ abstract contract WithdrawalQueueBase {
 
     function _setLastReportTimestamp(uint256 _lastReportTimestamp) internal {
         LAST_REPORT_TIMESTAMP_POSITION.setStorageUint256(_lastReportTimestamp);
-    }
-
-    function _setLidoAddress(address _lidoAddress) internal {
-        if (_lidoAddress == address(0)) revert ZeroAddress("_lido");
-        lidoAddress = _lidoAddress;
     }
 }

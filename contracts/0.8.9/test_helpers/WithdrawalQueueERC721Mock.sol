@@ -10,8 +10,9 @@ contract WithdrawalQueueERC721Mock is WithdrawalQueueERC721 {
     constructor(
         address _wstETH,
         string memory _name,
-        string memory _symbol
-    ) WithdrawalQueueERC721(_wstETH, _name, _symbol) {
+        string memory _symbol,
+        address _lidoAddress
+    ) WithdrawalQueueERC721(_wstETH, _name, _symbol, _lidoAddress) {
     }
 
     function getQueueItem(uint256 id) external view returns (WithdrawalRequest memory) {
