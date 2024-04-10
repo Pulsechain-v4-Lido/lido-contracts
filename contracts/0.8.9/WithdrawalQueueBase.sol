@@ -53,7 +53,7 @@ abstract contract WithdrawalQueueBase {
     bytes32 internal constant LAST_REPORT_TIMESTAMP_POSITION =
         keccak256("lido.WithdrawalQueue.lastReportTimestamp");
 
-    address private immutable _lidoAddress;
+    address private immutable _lido;
     /// @notice structure representing a request for withdrawal
     struct WithdrawalRequest {
         /// @notice sum of the all stETH submitted for withdrawals including this request
@@ -133,7 +133,7 @@ abstract contract WithdrawalQueueBase {
 
     constructor(address lidoAddress_){
         if (lidoAddress_ == address(0)) revert ZeroAddress("_lido");
-        _lidoAddress = lidoAddress_;
+        _lido = lidoAddress_;
     }
 
     /// @notice id of the last request
@@ -568,8 +568,8 @@ abstract contract WithdrawalQueueBase {
 
         uint256 ethWithDiscount = _calculateClaimableEther(request, _requestId, _hint);
 
-        uint256 treasuryFeeRate = ILido(_lidoAddress).getWithdrawFee();
-        address treasuryAddress = ILido(_lidoAddress).getTreasury();
+        uint256 treasuryFeeRate = ILido(_lido).getWithdrawFee();
+        address treasuryAddress = ILido(_lido).getTreasury();
         uint256 feeAmount = ethWithDiscount * treasuryFeeRate / 1 ether;
         // because of the stETH rounding issue
         // (issue: https://github.com/lidofinance/lido-dao/issues/442 )
