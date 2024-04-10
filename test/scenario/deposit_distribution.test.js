@@ -54,7 +54,7 @@ contract('StakingRouter', ([depositor, stranger1, address1, address2]) => {
 
   describe('deposit', async () => {
     it('check two modules splitted deposit', async () => {
-      const sendEthForKeys = ETH(200 * 32)
+      const sendEthForKeys = ETH(200 * 32000000)
       const maxDepositsCount = 100
 
       const keysAmount = maxDepositsCount
@@ -74,7 +74,7 @@ contract('StakingRouter', ([depositor, stranger1, address1, address2]) => {
       assert.equals(await web3.eth.getBalance(stakingRouter.address), 0)
 
       await web3.eth.sendTransaction({ value: sendEthForKeys, to: lido.address, from: stranger1 })
-      assert.equals(await lido.getBufferedEther(), ETH(200 * 32 + 1))
+      assert.equals(await lido.getBufferedEther(), ETH(200 * 32000000 + 1))
 
       const keysAllocation = await stakingRouter.getDepositsAllocation(200)
 
@@ -88,10 +88,10 @@ contract('StakingRouter', ([depositor, stranger1, address1, address2]) => {
       assert.equals(await depositContract.totalCalls(), 100, 'invalid deposits count')
 
       // on deposit we return balance to Lido
-      assert.equals(await web3.eth.getBalance(lido.address), ETH(100 * 32 + 1), 'invalid lido balance')
+      assert.equals(await web3.eth.getBalance(lido.address), ETH(100 * 32000000 + 1), 'invalid lido balance')
       assert.equals(await web3.eth.getBalance(stakingRouter.address), 0, 'invalid staking_router balance')
 
-      assert.equals(await lido.getBufferedEther(), ETH(100 * 32 + 1), 'invalid total buffer')
+      assert.equals(await lido.getBufferedEther(), ETH(100 * 32000000 + 1), 'invalid total buffer')
     })
   })
 })
