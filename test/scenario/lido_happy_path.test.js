@@ -160,8 +160,8 @@ contract('Lido: happy path', (addresses) => {
     assert.equals(unusedKeys, 1, 'unused signing keys')
   })
 
-  it('the first user deposits 3 ETH to the pool', async () => {
-    await web3.eth.sendTransaction({ to: pool.address, from: user1, value: ETH(2) })
+  it('the first user deposits 3 mln PLS to the pool', async () => {
+    await web3.eth.sendTransaction({ to: pool.address, from: user1, value: ETH(3000000 - 1) })
     const block = await web3.eth.getBlock('latest')
     const keysOpIndex = await nodeOperatorsRegistry.getKeysOpIndex()
 
@@ -199,18 +199,18 @@ contract('Lido: happy path', (addresses) => {
 
     // All Ether was buffered within the pool contract atm
 
-    assert.equals(await pool.getBufferedEther(), ETH(3), 'buffered ether')
-    assert.equals(await pool.getTotalPooledEther(), ETH(3), 'total pooled ether')
+    assert.equals(await pool.getBufferedEther(), ETH(3000000), 'buffered ether')
+    assert.equals(await pool.getTotalPooledEther(), ETH(3000000), 'total pooled ether')
 
     // The amount of tokens corresponding to the deposited ETH value was minted to the user
 
-    assert.equals(await token.balanceOf(user1), tokens(2), 'user1 tokens')
+    assert.equals(await token.balanceOf(user1), tokens(2999999), 'user1 tokens')
 
-    assert.equals(await token.totalSupply(), tokens(3), 'token total supply')
+    assert.equals(await token.totalSupply(), tokens(3000000), 'token total supply')
   })
 
   it('the second user deposits 30 ETH to the pool', async () => {
-    await web3.eth.sendTransaction({ to: pool.address, from: user2, value: ETH(30) })
+    await web3.eth.sendTransaction({ to: pool.address, from: user2, value: ETH(30000000) })
     const block = await waitBlocks(await depositSecurityModule.getMinDepositBlockDistance())
     const keysOpIndex = await nodeOperatorsRegistry.getKeysOpIndex()
 
@@ -247,7 +247,7 @@ contract('Lido: happy path', (addresses) => {
     assert.equal(regCall.pubkey, nodeOperator1.validators[0].key)
     assert.equal(regCall.withdrawal_credentials, withdrawalCredentials)
     assert.equal(regCall.signature, nodeOperator1.validators[0].sig)
-    assert.equals(regCall.value, ETH(32))
+    assert.equals(regCall.value, ETH(32000000))
 
     const ether2Stat = await pool.getBeaconStat()
     assert.equals(ether2Stat.depositedValidators, 1, 'deposited ether2')
@@ -255,15 +255,15 @@ contract('Lido: happy path', (addresses) => {
 
     // Some Ether remained buffered within the pool contract
 
-    assert.equals(await pool.getBufferedEther(), ETH(1), 'buffered ether')
-    assert.equals(await pool.getTotalPooledEther(), ETH(1 + 32), 'total pooled ether')
+    assert.equals(await pool.getBufferedEther(), ETH(1000000), 'buffered ether')
+    assert.equals(await pool.getTotalPooledEther(), ETH(1000000 + 32000000), 'total pooled ether')
 
     // The amount of tokens corresponding to the deposited ETH value was minted to the users
 
-    assert.equals(await token.balanceOf(user1), tokens(2), 'user1 tokens')
-    assert.equals(await token.balanceOf(user2), tokens(30), 'user2 tokens')
+    assert.equals(await token.balanceOf(user1), tokens(2999999), 'user1 tokens')
+    assert.equals(await token.balanceOf(user2), tokens(30000000), 'user2 tokens')
 
-    assert.equals(await token.totalSupply(), tokens(3 + 30), 'token total supply')
+    assert.equals(await token.totalSupply(), tokens(3000000 + 30000000), 'token total supply')
   })
 
   it('at this point, the pool has ran out of signing keys', async () => {
@@ -322,7 +322,7 @@ contract('Lido: happy path', (addresses) => {
   })
 
   it('the third user deposits 64 ETH to the pool', async () => {
-    await web3.eth.sendTransaction({ to: pool.address, from: user3, value: ETH(64) })
+    await web3.eth.sendTransaction({ to: pool.address, from: user3, value: ETH(64000000) })
 
     const block = await waitBlocks(await depositSecurityModule.getMinDepositBlockDistance())
     const keysOpIndex = await nodeOperatorsRegistry.getKeysOpIndex()
@@ -360,7 +360,7 @@ contract('Lido: happy path', (addresses) => {
     assert.equal(regCall.pubkey, nodeOperator2.validators[0].key)
     assert.equal(regCall.withdrawal_credentials, withdrawalCredentials)
     assert.equal(regCall.signature, nodeOperator2.validators[0].sig)
-    assert.equals(regCall.value, ETH(32))
+    assert.equals(regCall.value, ETH(32000000))
 
     const ether2Stat = await pool.getBeaconStat()
     assert.equals(ether2Stat.depositedValidators, 2, 'deposited ether2')
@@ -369,71 +369,71 @@ contract('Lido: happy path', (addresses) => {
     // The pool ran out of validator keys, so the remaining 32 ETH were added to the
     // pool buffer
 
-    assert.equals(await pool.getBufferedEther(), ETH(1 + 32), 'buffered ether')
-    assert.equals(await pool.getTotalPooledEther(), ETH(33 + 64), 'total pooled ether')
+    assert.equals(await pool.getBufferedEther(), ETH(1000000 + 32000000), 'buffered ether')
+    assert.equals(await pool.getTotalPooledEther(), ETH(33000000 + 64000000), 'total pooled ether')
 
     // The amount of tokens corresponding to the deposited ETH value was minted to the users
 
-    assert.equals(await token.balanceOf(user1), tokens(2), 'user1 tokens')
-    assert.equals(await token.balanceOf(user2), tokens(30), 'user2 tokens')
-    assert.equals(await token.balanceOf(user3), tokens(64), 'user3 tokens')
+    assert.equals(await token.balanceOf(user1), tokens(2999999), 'user1 tokens')
+    assert.equals(await token.balanceOf(user2), tokens(30000000), 'user2 tokens')
+    assert.equals(await token.balanceOf(user3), tokens(64000000), 'user3 tokens')
 
-    assert.equals(await token.totalSupply(), tokens(3 + 30 + 64), 'token total supply')
+    assert.equals(await token.totalSupply(), tokens(3000000 + 30000000 + 64000000), 'token total supply')
   })
 
   it('the oracle reports balance increase on Ethereum2 side', async () => {
     // Total shares are equal to deposited eth before ratio change and fee mint
 
     const oldTotalShares = await token.getTotalShares()
-    assert.equals(oldTotalShares, ETH(97), 'total shares')
+    assert.equals(oldTotalShares, ETH(97000000), 'total shares')
 
     // Old total pooled Ether
 
     const oldTotalPooledEther = await pool.getTotalPooledEther()
-    assert.equals(oldTotalPooledEther, ETH(33 + 64), 'total pooled ether')
+    assert.equals(oldTotalPooledEther, ETH(33000000 + 64000000), 'total pooled ether')
 
     // Reporting 1.005-fold balance increase (64 => 64.32) to stay in limits
 
-    await pushOracleReport(consensus, oracle, 2, ETH(64.32), ETH(0))
+    await pushOracleReport(consensus, oracle, 2, ETH(64320000), ETH(0))
 
     // Total shares increased because fee minted (fee shares added)
     // shares = oldTotalShares + reward * totalFee * oldTotalShares / (newTotalPooledEther - reward * totalFee)
 
     const newTotalShares = await token.getTotalShares()
-    assert.equals(newTotalShares, '97031905270948112819', 'total shares')
+    assert.equals(newTotalShares, '97031905270948112819669435', 'total shares')
 
     // Total pooled Ether increased
 
     const newTotalPooledEther = await pool.getTotalPooledEther()
-    assert.equals(newTotalPooledEther, ETH(33 + 64.32), 'total pooled ether')
+    assert.equals(newTotalPooledEther, ETH(33000000 + 64320000), 'total pooled ether')
 
     // Ether2 stat reported by the pool changed correspondingly
 
     const ether2Stat = await pool.getBeaconStat()
     assert.equals(ether2Stat.depositedValidators, 2, 'deposited ether2')
-    assert.equals(ether2Stat.beaconBalance, ETH(64.32), 'remote ether2')
+    assert.equals(ether2Stat.beaconBalance, ETH(64320000), 'remote ether2')
 
     // Buffered Ether amount didn't change
 
-    assert.equals(await pool.getBufferedEther(), ETH(33), 'buffered ether')
+    assert.equals(await pool.getBufferedEther(), ETH(33000000), 'buffered ether')
 
     // New tokens was minted to distribute fee
-    assert.equals(await token.totalSupply(), tokens(97.32), 'token total supply')
+    assert.equals(await token.totalSupply(), tokens(97320000), 'token total supply')
 
-    const reward = toBN(ETH(64.32 - 64))
+    const reward = toBN(ETH(64320000 - 64000000))
     const mintedAmount = new BN(totalFeePoints).mul(reward).divn(10000)
 
     // Token user balances increased
 
     assert.equals(await token.balanceOf(INITIAL_HOLDER), '1002969072164948453', 'initial holder tokens')
-    assert.equals(await token.balanceOf(user1), '2005938144329896907', 'user1 tokens')
-    assert.equals(await token.balanceOf(user2), '30089072164948453608', 'user2 tokens')
-    assert.equals(await token.balanceOf(user3), '64190020618556701031', 'user3 tokens')
+    assert.equals(await token.balanceOf(user1), '3008906213525773195876288', 'user1 tokens')
+    assert.equals(await token.balanceOf(user2), '30089072164948453608247422', 'user2 tokens')
+    assert.equals(await token.balanceOf(user3), '64190020618556701030927835', 'user3 tokens')
 
     // Fee, in the form of minted tokens, was distributed between treasury, insurance fund
     // and node operators
     // treasuryTokenBalance ~= mintedAmount * treasuryFeePoints / 10000
-    assert.equalsDelta(await token.balanceOf(treasuryAddr), '16000000000000000', 1, 'treasury tokens')
+    assert.equalsDelta(await token.balanceOf(treasuryAddr), '16000000000000000000000', 1, 'treasury tokens')
     assert.equalsDelta(await token.balanceOf(nodeOperatorsRegistry.address), 0, 1, 'staking module tokens')
 
     // The node operators' fee is distributed between all active node operators,
@@ -443,8 +443,8 @@ contract('Lido: happy path', (addresses) => {
     // In our case, both node operators received the same fee since they have the same
     // effective stake (one signing key used from each operator, staking 32 ETH)
 
-    assert.equalsDelta(await token.balanceOf(nodeOperator1.address), '8000000000000000', 1, 'operator_1 tokens')
-    assert.equalsDelta(await token.balanceOf(nodeOperator2.address), '8000000000000000', 1, 'operator_2 tokens')
+    assert.equalsDelta(await token.balanceOf(nodeOperator1.address), '8000000000000000000000', 1, 'operator_1 tokens')
+    assert.equalsDelta(await token.balanceOf(nodeOperator2.address), '8000000000000000000000', 1, 'operator_2 tokens')
 
     // Real minted amount should be a bit less than calculated caused by round errors on mint and transfer operations
     assert(
@@ -495,7 +495,7 @@ contract('Lido: happy path', (addresses) => {
   })
 
   it('deposit to nodeOperator3 validators', async () => {
-    const amountToDeposit = ETH(32 * 10)
+    const amountToDeposit = ETH(32000000 * 10)
     await web3.eth.sendTransaction({ to: pool.address, from: user1, value: amountToDeposit })
     await waitBlocks(await depositSecurityModule.getMinDepositBlockDistance())
     const block = await web3.eth.getBlock('latest')
