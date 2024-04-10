@@ -384,7 +384,6 @@ async function postSetup({
 
   await depositContract.reset()
   await depositContract.set_deposit_root(deployParams.depositRoot)
-  await pool.resumeProtocolAndStaking({ from: voting.address })
 }
 
 async function grantRoles({ by, on, to, roles }) {

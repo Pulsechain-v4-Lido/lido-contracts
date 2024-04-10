@@ -58,7 +58,6 @@ contract('Lido deposit scenarios', ([deployer, staker, depositor]) => {
       depositContractFactory: () => depositContractStub,
       postSetup: async ({ pool, lidoLocator, eip712StETH, voting }) => {
         await pool.initialize(lidoLocator.address, eip712StETH.address, { value: wei.str`1 ether` })
-        await pool.resumeProtocolAndStaking({ from: voting.address })
       },
     })
     lido = protocol.pool
