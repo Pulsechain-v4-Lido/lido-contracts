@@ -56,7 +56,7 @@ contract('WithdrawalQueue', ([owner, daoAgent, finalizer, user, oracle]) => {
 
     const requestIds = [0, 0]
 
-    it(`share rate 1.0: a user requests a withdrawal of 1 stETH (10**18 shares)`, async () => {
+    it(`share rate 1.0: a user requests a withdrawal of 1 stPLS (10**18 shares)`, async () => {
       const tx = await queue.requestWithdrawals([e18(1)], user, { from: user })
       requestIds[0] = +getFirstEventArgs(tx, 'WithdrawalRequested').requestId
       assert.equals(await queue.unfinalizedStETH(), e18(1))
@@ -66,7 +66,7 @@ contract('WithdrawalQueue', ([owner, daoAgent, finalizer, user, oracle]) => {
       await setShareRate(2)
     })
 
-    it(`share rate 2.0: a user requests a withdrawal of 2 stETH (10**18 shares)`, async () => {
+    it(`share rate 2.0: a user requests a withdrawal of 2 stPLS (10**18 shares)`, async () => {
       const tx = await queue.requestWithdrawals([e18(2)], user, { from: user })
       requestIds[1] = +getFirstEventArgs(tx, 'WithdrawalRequested').requestId
       assert.equals(await queue.unfinalizedStETH(), e18(3))
@@ -78,7 +78,7 @@ contract('WithdrawalQueue', ([owner, daoAgent, finalizer, user, oracle]) => {
 
     let batches
 
-    it(`both requests can be finalized with 2 ETH`, async () => {
+    it(`both requests can be finalized with 2 mln PLS`, async () => {
       const result = await queue.calculateFinalizationBatches(e27(1), MAX_UINT256, 1000, [
         e18(2),
         false,
@@ -105,11 +105,11 @@ contract('WithdrawalQueue', ([owner, daoAgent, finalizer, user, oracle]) => {
       claimableEther = await queue.getClaimableEther(requestIds, hints)
     })
 
-    it(`first request is fullfilled with 1 ETH`, async () => {
+    it(`first request is fullfilled with 1 mln PLS`, async () => {
       assert.isClose(claimableEther[0], e18(1), 10)
     })
 
-    it(`second request is fullfilled with 1 ETH`, async () => {
+    it(`second request is fullfilled with 1 mln PLS`, async () => {
       assert.isClose(claimableEther[1], e18(1), 10)
     })
   })
@@ -126,7 +126,7 @@ contract('WithdrawalQueue', ([owner, daoAgent, finalizer, user, oracle]) => {
 
     const requestIds = [0, 0]
 
-    it(`share rate 1.0: a user requests a withdrawal of 1 stETH (10**18 shares)`, async () => {
+    it(`share rate 1.0: a user requests a withdrawal of 1 stPLS (10**18 shares)`, async () => {
       const tx = await queue.requestWithdrawals([e18(1)], user, { from: user })
       requestIds[0] = +getFirstEventArgs(tx, 'WithdrawalRequested').requestId
       assert.equals(await queue.unfinalizedStETH(), e18(1))
@@ -136,7 +136,7 @@ contract('WithdrawalQueue', ([owner, daoAgent, finalizer, user, oracle]) => {
       await setShareRate(2)
     })
 
-    it(`share rate 2.0: a user requests a withdrawal of 2 stETH (10**18 shares)`, async () => {
+    it(`share rate 2.0: a user requests a withdrawal of 2 stPLS (10**18 shares)`, async () => {
       const tx = await queue.requestWithdrawals([e18(2)], user, { from: user })
       requestIds[1] = +getFirstEventArgs(tx, 'WithdrawalRequested').requestId
       assert.equals(await queue.unfinalizedStETH(), e18(3))
@@ -149,7 +149,7 @@ contract('WithdrawalQueue', ([owner, daoAgent, finalizer, user, oracle]) => {
     let batches
     const maxShareRate = e27(1.5)
 
-    it(`both requests can be finalized with 2 ETH`, async () => {
+    it(`both requests can be finalized with 2 mln PLS`, async () => {
       const result = await queue.calculateFinalizationBatches(maxShareRate, MAX_UINT256, 1000, [
         e18(2.5),
         false,
@@ -176,11 +176,11 @@ contract('WithdrawalQueue', ([owner, daoAgent, finalizer, user, oracle]) => {
       claimableEther = await queue.getClaimableEther(requestIds, hints)
     })
 
-    it(`first request is fullfilled with 1 ETH`, async () => {
+    it(`first request is fullfilled with 1 mln PLS`, async () => {
       assert.isClose(claimableEther[0], e18(1), 10)
     })
 
-    it(`second request is fullfilled with 1 ETH`, async () => {
+    it(`second request is fullfilled with 1 mln PLS`, async () => {
       assert.isClose(claimableEther[1], e18(1.5), 10)
     })
   })

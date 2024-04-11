@@ -221,7 +221,7 @@ contract('Lido: merge acceptance', (addresses) => {
     assert.equals(unusedKeys, 1, 'unused signing keys')
   })
 
-  it('the first user deposits 3 ETH to the pool', async () => {
+  it('the first user deposits 3 mln PLS to the pool', async () => {
     await web3.eth.sendTransaction({ to: pool.address, from: user1, value: ETH(3000000) })
     const block = await web3.eth.getBlock('latest')
     const keysOpIndex = await nodeOperatorsRegistry.getKeysOpIndex()
@@ -271,7 +271,7 @@ contract('Lido: merge acceptance', (addresses) => {
     assert.equals(await token.totalSupply(), tokens(LIDO_INIT_BALANCE_ETH + 3000000), 'token total supply')
   })
 
-  it('the second user deposits 30 ETH to the pool', async () => {
+  it('the second user deposits 30 mln PLS to the pool', async () => {
     await web3.eth.sendTransaction({ to: pool.address, from: user2, value: ETH(30000000) })
     const block = await waitBlocks(await depositSecurityModule.getMinDepositBlockDistance())
     const keysOpIndex = await nodeOperatorsRegistry.getKeysOpIndex()
@@ -335,7 +335,7 @@ contract('Lido: merge acceptance', (addresses) => {
     assert.equals(await token.totalSupply(), tokens(LIDO_INIT_BALANCE_ETH + 3000000 + 30000000), 'token total supply')
   })
 
-  it('the third user deposits 64 ETH to the pool', async () => {
+  it('the third user deposits 64 mln PLS to the pool', async () => {
     await web3.eth.sendTransaction({ to: pool.address, from: user3, value: ETH(64000000) })
 
     const block = await waitBlocks(await depositSecurityModule.getMinDepositBlockDistance())
@@ -408,7 +408,7 @@ contract('Lido: merge acceptance', (addresses) => {
     )
   })
 
-  it('collect 9 ETH execution layer rewards to the vault', async () => {
+  it('collect 9 mln PLS execution layer rewards to the vault', async () => {
     await setBalance(elRewardsVault.address, ETH(9000000))
     assert.equals(
       await web3.eth.getBalance(elRewardsVault.address),
@@ -417,7 +417,7 @@ contract('Lido: merge acceptance', (addresses) => {
     )
   })
 
-  it('the oracle reports balance increase on Ethereum2 side (+0.35 ETH) and claims collected execution layer rewards (+9 ETH)', async () => {
+  it('the oracle reports balance increase on Ethereum2 side (+0.35 mln PLS) and claims collected execution layer rewards (+9 mln PLS)', async () => {
     // Total shares are equal to deposited eth before ratio change and fee mint
 
     const oldTotalShares = await token.getTotalShares()
@@ -523,7 +523,7 @@ contract('Lido: merge acceptance', (addresses) => {
     )
   })
 
-  it('collect another 7 ETH execution layer rewards to the vault', async () => {
+  it('collect another 7 mln PLS execution layer rewards to the vault', async () => {
     const balanceBefore = await web3.eth.getBalance(elRewardsVault.address)
     await setBalance(elRewardsVault.address, ETH(7000000))
 
@@ -534,7 +534,7 @@ contract('Lido: merge acceptance', (addresses) => {
     )
   })
 
-  it('the oracle reports same balance on Ethereum2 side (+0 ETH) and claims collected execution layer rewards (+7 ETH)', async () => {
+  it('the oracle reports same balance on Ethereum2 side (+0 mln PLS) and claims collected execution layer rewards (+7 mln PLS)', async () => {
     // Total shares are equal to deposited eth before ratio change and fee mint
     const oldTotalShares = await token.getTotalShares()
     assert.equals(oldTotalShares, new BN('97860362429347233037544628'), 'total shares')
@@ -629,7 +629,7 @@ contract('Lido: merge acceptance', (addresses) => {
     assert.equals(await token.balanceOf(nodeOperator2.address), 0, 'operator_2 tokens')
   })
 
-  it('collect another 5 ETH execution layer rewards to the vault', async () => {
+  it('collect another 5 mln PLS execution layer rewards to the vault', async () => {
     await setBalance(elRewardsVault.address, ETH(5000000))
     assert.equals(
       await web3.eth.getBalance(elRewardsVault.address),
@@ -638,7 +638,7 @@ contract('Lido: merge acceptance', (addresses) => {
     )
   })
 
-  it('the oracle reports loss on Ethereum2 side (-2 ETH) and claims collected execution layer rewards (+5 ETH)', async () => {
+  it('the oracle reports loss on Ethereum2 side (-2 mln PLS) and claims collected execution layer rewards (+5 mln PLS)', async () => {
     // Total shares are equal to deposited eth before ratio change and fee mint
     const oldTotalShares = await token.getTotalShares()
     assert.equals(oldTotalShares, new BN('97860362429347233037544628'), 'total shares')
@@ -726,7 +726,7 @@ contract('Lido: merge acceptance', (addresses) => {
     )
   })
 
-  it('collect another 3 ETH execution layer rewards to the vault', async () => {
+  it('collect another 3 mln PLS execution layer rewards to the vault', async () => {
     await setBalance(elRewardsVault.address, ETH(3000000))
     assert.equals(
       await web3.eth.getBalance(elRewardsVault.address),
@@ -735,7 +735,7 @@ contract('Lido: merge acceptance', (addresses) => {
     )
   })
 
-  it('the oracle reports loss on Ethereum2 side (-3 ETH) and claims collected execution layer rewards (+3 ETH)', async () => {
+  it('the oracle reports loss on Ethereum2 side (-3 mln PLS) and claims collected execution layer rewards (+3 mln PLS)', async () => {
     // Total shares are equal to deposited eth before ratio change and fee mint
     const oldTotalShares = await token.getTotalShares()
     assert.equals(oldTotalShares, new BN('97860362429347233037544628'), 'total shares')
@@ -802,7 +802,7 @@ contract('Lido: merge acceptance', (addresses) => {
     )
   })
 
-  it('collect another 2 ETH execution layer rewards to the vault', async () => {
+  it('collect another 2 mln PLS execution layer rewards to the vault', async () => {
     await setBalance(elRewardsVault.address, ETH(2000000))
     assert.equals(
       await web3.eth.getBalance(elRewardsVault.address),
@@ -811,7 +811,7 @@ contract('Lido: merge acceptance', (addresses) => {
     )
   })
 
-  it('the oracle reports loss on Ethereum2 side (-8 ETH) and claims collected execution layer rewards (+2 ETH)', async () => {
+  it('the oracle reports loss on Ethereum2 side (-8 mln PLS) and claims collected execution layer rewards (+2 mln PLS)', async () => {
     // Total shares are equal to deposited eth before ratio change and fee mint
 
     const oldTotalShares = await token.getTotalShares()
@@ -901,12 +901,12 @@ contract('Lido: merge acceptance', (addresses) => {
     assert.equals(await token.balanceOf(nodeOperator2.address), 0, 'operator_2 tokens')
   })
 
-  it('collect another 3 ETH execution layer rewards to the vault', async () => {
+  it('collect another 3 mln PLS execution layer rewards to the vault', async () => {
     await setBalance(elRewardsVault.address, ETH(3000000))
     assert.equals(await web3.eth.getBalance(elRewardsVault.address), ETH(3000000), 'Execution layer vault balance')
   })
 
-  it('the oracle reports balance increase on Ethereum2 side (+0.14 ETH) and claims collected execution layer rewards (+3 ETH)', async () => {
+  it('the oracle reports balance increase on Ethereum2 side (+0.14 mln PLS) and claims collected execution layer rewards (+3 mln PLS)', async () => {
     // Total shares are equal to deposited eth before ratio change and fee mint
 
     const oldTotalShares = await token.getTotalShares()

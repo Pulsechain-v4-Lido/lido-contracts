@@ -209,7 +209,7 @@ contract('Lido: happy path', (addresses) => {
     assert.equals(await token.totalSupply(), tokens(3000000), 'token total supply')
   })
 
-  it('the second user deposits 30 ETH to the pool', async () => {
+  it('the second user deposits 30 mln PLS to the pool', async () => {
     await web3.eth.sendTransaction({ to: pool.address, from: user2, value: ETH(30000000) })
     const block = await waitBlocks(await depositSecurityModule.getMinDepositBlockDistance())
     const keysOpIndex = await nodeOperatorsRegistry.getKeysOpIndex()
@@ -321,7 +321,7 @@ contract('Lido: happy path', (addresses) => {
     assert.equals(unusedKeys, 1, 'unused signing keys')
   })
 
-  it('the third user deposits 64 ETH to the pool', async () => {
+  it('the third user deposits 64 mln PLS to the pool', async () => {
     await web3.eth.sendTransaction({ to: pool.address, from: user3, value: ETH(64000000) })
 
     const block = await waitBlocks(await depositSecurityModule.getMinDepositBlockDistance())

@@ -94,7 +94,7 @@ contract('LidoExecutionLayerRewardsVault', ([deployer, anotherAccount]) => {
       await assert.reverts(elRewardsVault.recoverERC20(ZERO_ADDRESS, bn(10)))
     })
 
-    it(`can't recover stETH by recoverERC20`, async () => {
+    it(`can't recover stPLS by recoverERC20`, async () => {
       // initial stETH balance is zero
       assert.equals(await lido.balanceOf(anotherAccount), StETH(0))
       // submit 10 ETH to mint 10 stETH

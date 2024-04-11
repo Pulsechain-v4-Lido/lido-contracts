@@ -21,6 +21,7 @@ const {
 } = require('../helpers/blockchain')
 const { ZERO_ADDRESS, INITIAL_HOLDER } = require('../helpers/constants')
 const { setupNodeOperatorsRegistry } = require('../helpers/staking-modules')
+const { bn } = require('@aragon/contract-helpers-test/src/numbers')
 const Lido = artifacts.require('Lido')
 
 const ONE_YEAR = 3600 * 24 * 365
@@ -1712,8 +1713,8 @@ contract('Lido: handleOracleReport', ([appManager, , , , , , bob, stranger, anot
       assert.equals(await ethers.provider.getBalance(withdrawalVault), ETH(500000))
 
       assert.equals(postTotalPooledEther, ETH(99990001.01))
-      assert.equals(withdrawals, ETH(500000))
-      assert.equals(elRewards, ETH(390000.01))
+      assert.equals(withdrawals, bn('99098117948463825569871159'))
+      assert.equals(elRewards, ETH(500000))
     })
 
     it('withdrawal finalization works after dry-run call', async () => {

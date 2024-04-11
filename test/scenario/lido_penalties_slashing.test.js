@@ -146,7 +146,7 @@ contract('Lido: penalties, slashing, operator stops', (addresses) => {
     assert.equals(unusedKeys, 1, 'unused signing keys')
   })
 
-  it('the user deposits 32 ETH to the pool', async () => {
+  it('the user deposits 32 mln PLS to the pool', async () => {
     await web3.eth.sendTransaction({ to: pool.address, from: user1, value: ETH(33000000 - 1) })
 
     const block = await web3.eth.getBlock('latest')
@@ -217,7 +217,7 @@ contract('Lido: penalties, slashing, operator stops', (addresses) => {
     await nodeOperatorsRegistry.setNodeOperatorStakingLimit(nodeOperator1.id, 1, { from: voting })
   })
 
-  it(`new validator doesn't get buffered ether even if there's 32 ETH deposit in the pool`, async () => {
+  it(`new validator doesn't get buffered ether even if there's 32 mln PLS deposit in the pool`, async () => {
     assert.equals(
       await pool.getBufferedEther(),
       ETH(33000000),
@@ -267,7 +267,7 @@ contract('Lido: penalties, slashing, operator stops', (addresses) => {
     )
   })
 
-  it('new validator gets the 32 ETH deposit from the pool', async () => {
+  it('new validator gets the 32 mln PLS deposit from the pool', async () => {
     assert.equals(await pool.getBufferedEther(), ETH(1000000), `only initial eth is left`)
     assert.equals(await pool.getTotalPooledEther(), ETH(33000000), 'total pooled ether')
     assert.equals(
@@ -278,7 +278,7 @@ contract('Lido: penalties, slashing, operator stops', (addresses) => {
   })
 
   it('first oracle report is taken as-is for Lido', async () => {
-    assert.equals(await pool.getTotalPooledEther(), ETH(33000000), '32 ETH deposit + 1 ETH initial')
+    assert.equals(await pool.getTotalPooledEther(), ETH(33000000), '32 mln PLS deposit + 1 PLS initial')
 
     // Reporting 1 ETH balance loss (32 => 31)
     await pushReport(1, ETH(31000000))
@@ -315,7 +315,7 @@ contract('Lido: penalties, slashing, operator stops', (addresses) => {
     assert.equals(
       await pool.getTotalPooledEther(),
       ETH(32000000),
-      'Old total pooled Ether 31 ETH od previous report + 1 ETH initial'
+      'Old total pooled Ether 31 mln PLS od previous report + 1 PLS initial'
     )
 
     // Reporting 2 ETH balance loss (31 => 29)
@@ -395,7 +395,7 @@ contract('Lido: penalties, slashing, operator stops', (addresses) => {
     assert.equals(unusedKeys, 1, 'unused signing keys')
   })
 
-  it('the user deposits another 32 ETH to the pool', async () => {
+  it('the user deposits another 32 mln PLS to the pool', async () => {
     assert.equals(await token.totalSupply(), StETH(30000000), 'token total supply before')
     assert.equals(await token.getTotalShares(), shares(33000000), 'token total supply before')
 
@@ -498,7 +498,7 @@ contract('Lido: penalties, slashing, operator stops', (addresses) => {
     await assert.reverts(pushReport(0, ETH(31000000)))
   })
 
-  it(`user deposits another 32 ETH to the pool`, async () => {
+  it(`user deposits another 32 mln PLS to the pool`, async () => {
     assert.equals(await pool.getTotalPooledEther(), ETH(61000000), 'Old total pooled Ether')
     const oldTotalShares = bn(shares(1)).add(bn(expectedUser1Shares))
     assert.equals(await token.getTotalShares(), oldTotalShares, 'Old total shares')
@@ -533,7 +533,7 @@ contract('Lido: penalties, slashing, operator stops', (addresses) => {
     const ether2Stat = await pool.getBeaconStat()
     assert.equals(ether2Stat.depositedValidators, 2, 'no validators have received the current deposit')
 
-    assert.equals(await pool.getBufferedEther(), ETH(33000000), '33 ETH is pooled')
+    assert.equals(await pool.getBufferedEther(), ETH(33000000), '33 mln PLS is pooled')
     assert.equals(await pool.getTotalPooledEther(), ETH(93000000), 'Total pooled Ether')
     assert.equals(await token.totalSupply(), StETH(93000000), 'token total supply')
 
@@ -547,7 +547,7 @@ contract('Lido: penalties, slashing, operator stops', (addresses) => {
     )
 
     expectedUser1Shares = bn(expectedUser1Shares).add(sharesAdded)
-    assert.equals(await token.sharesOf(user1), expectedUser1Shares, 'User1 bought shares on 32 ETH')
+    assert.equals(await token.sharesOf(user1), expectedUser1Shares, 'User1 bought shares on 32 mln PLS')
     expectedUser1Balance = expectedUser1Balance.add(bn(StETH(32000000)))
     assert.equals(
       await token.balanceOf(user1),

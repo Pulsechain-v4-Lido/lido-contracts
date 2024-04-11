@@ -92,7 +92,7 @@ contract('StETHPermit', ([deployer, ...accounts]) => {
       await stEthPermit.mintShares(permitParams.owner, initialBalance, { from: deployer })
     })
 
-    it('EIP-712 signature helper reverts when zero stETH address passed', async () => {
+    it('EIP-712 signature helper reverts when zero stPLS address passed', async () => {
       await assert.revertsWithCustomError(EIP712StETH.new(ZERO_ADDRESS, { from: deployer }), `ZeroStETHAddress()`)
     })
 
