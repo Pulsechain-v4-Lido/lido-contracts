@@ -22,7 +22,14 @@ const { assertAPMRegistryPermissions } = require('./checks/apm')
 const { assertInstalledApps } = require('./checks/apps')
 const { assertVesting } = require('./checks/dao-token')
 
-const REQUIRED_NET_STATE = ['ens', 'lidoApmEnsName', 'daoAragonId', 'vestingParams', 'daoInitialSettings', 'lidoTemplate']
+const REQUIRED_NET_STATE = [
+  'ens',
+  'lidoApmEnsName',
+  'daoAragonId',
+  'vestingParams',
+  'daoInitialSettings',
+  'lidoTemplate',
+]
 
 const TOKEN_TRANSFERABLE = true
 const TOKEN_DECIMALS = 18
@@ -30,12 +37,12 @@ const TOKEN_DECIMALS = 18
 const TOKEN_MAX_PER_ACCOUNT = '115792089237316195423570985008687907853269984665640564039457584007913129639935'
 const FINANCE_DEFAULT_PERIOD = 60 * 60 * 24 * 30 // 30 days
 
-const STETH_TOKEN_NAME = 'Liquid staked Ether 2.0'
-const STETH_TOKEN_SYMBOL = 'stETH'
+const STETH_TOKEN_NAME = 'Liquid staked PLS'
+const STETH_TOKEN_SYMBOL = 'stPLS'
 const STETH_TOKEN_DECIMALS = 18
 
 const ZERO_WITHDRAWAL_CREDENTIALS = '0x0000000000000000000000000000000000000000000000000000000000000000'
-const PROTOCOL_PAUSED_AFTER_DEPLOY = true
+const PROTOCOL_PAUSED_AFTER_DEPLOY = false
 const OSSIFIABLE_PROXY = 'OssifiableProxy'
 const ACCESS_CONTROL_ENUMERABLE = 'AccessControlEnumerable'
 
@@ -66,7 +73,12 @@ async function checkDAO({ web3, artifacts }) {
   await assertLastEvent(template, 'TmplDaoFinalized', null, state.lidoTemplate.deployBlock)
 
   const apmDeployedEvt = await assertSingleEvent(template, 'TmplAPMDeployed', null, state.lidoTemplate.deployBlock)
-  const daoDeployedEvt = await assertSingleEvent(template, 'TmplDAOAndTokenDeployed', null, state.lidoTemplate.deployBlock)
+  const daoDeployedEvt = await assertSingleEvent(
+    template,
+    'TmplDAOAndTokenDeployed',
+    null,
+    state.lidoTemplate.deployBlock
+  )
 
   lidoApmAddress = apmDeployedEvt.args.apm
   daoAddress = daoDeployedEvt.args.dao
@@ -90,7 +102,7 @@ async function checkDAO({ web3, artifacts }) {
       template,
       dao,
       lidoApmEnsName: state.lidoApmEnsName,
-      appProxyUpgradeableArtifactName: 'external:AppProxyUpgradeable_DAO'
+      appProxyUpgradeableArtifactName: 'external:AppProxyUpgradeable_DAO',
     },
     state.lidoTemplate.deployBlock
   )
@@ -104,7 +116,18 @@ async function checkDAO({ web3, artifacts }) {
     state[key] = { ...state[key], ...app }
   }
 
-  const [lido, legacyOracle, nopsRegistry, agent, finance, tokenManager, voting, burner, elRewardsVault, stakingRouter] = await Promise.all([
+  const [
+    lido,
+    legacyOracle,
+    nopsRegistry,
+    agent,
+    finance,
+    tokenManager,
+    voting,
+    burner,
+    elRewardsVault,
+    stakingRouter,
+  ] = await Promise.all([
     artifacts.require('Lido').at(apps[APP_NAMES.LIDO].proxyAddress),
     artifacts.require('LegacyOracle').at(apps[APP_NAMES.ORACLE].proxyAddress),
     artifacts.require('NodeOperatorsRegistry').at(apps[APP_NAMES.NODE_OPERATORS_REGISTRY].proxyAddress),
@@ -113,7 +136,7 @@ async function checkDAO({ web3, artifacts }) {
     artifacts.require('TokenManager').at(apps[APP_NAMES.ARAGON_TOKEN_MANAGER].proxyAddress),
     artifacts.require('Voting').at(apps[APP_NAMES.ARAGON_VOTING].proxyAddress),
     artifacts.require('Burner').at(state.burner.address),
-    artifacts.require('LidoExecutionLayerRewardsVault').at(state.executionLayerRewardsVault["address"]),
+    artifacts.require('LidoExecutionLayerRewardsVault').at(state.executionLayerRewardsVault.address),
     artifacts.require('StakingRouter').at(state.stakingRouter.proxy.address),
   ])
 
@@ -157,7 +180,10 @@ async function checkDAO({ web3, artifacts }) {
 
   log.splitter()
 
-  const { registryACL } = await assertLidoAPMPermissions({ registry, votingAddress: voting.address }, state.lidoTemplate.deployBlock)
+  const { registryACL } = await assertLidoAPMPermissions(
+    { registry, votingAddress: voting.address },
+    state.lidoTemplate.deployBlock
+  )
 
   log.splitter()
 
@@ -169,7 +195,7 @@ async function checkDAO({ web3, artifacts }) {
     tokenManager,
     token: daoToken,
     vestingParams: state.vestingParams,
-    unvestedTokensManagerAddress: agent.address
+    unvestedTokensManagerAddress: agent.address,
   })
 
   log.splitter()
@@ -190,7 +216,7 @@ async function assertLidoAPMPermissions({ registry, votingAddress }, fromBlock =
 
   const [registryKernel, registrar] = await Promise.all([
     artifacts.require('Kernel').at(kernelAddress),
-    artifacts.require('ENSSubdomainRegistrar').at(registrarAddress)
+    artifacts.require('ENSSubdomainRegistrar').at(registrarAddress),
   ])
 
   const registryACLAddress = await registryKernel.acl()
@@ -202,7 +228,7 @@ async function assertLidoAPMPermissions({ registry, votingAddress }, fromBlock =
       registrar,
       registryACL,
       registryKernel,
-      rootAddress: votingAddress
+      rootAddress: votingAddress,
     },
     fromBlock
   )
@@ -224,7 +250,7 @@ async function assertReposPermissions({ registry, registryACL, votingAddress }, 
         appName: `repo<${evt.args.name}>`,
         roleName: 'CREATE_VERSION_ROLE',
         managerAddress: votingAddress,
-        granteeAddress: votingAddress
+        granteeAddress: votingAddress,
       },
       fromBlock
     )
@@ -263,19 +289,39 @@ async function assertDAOConfig({
 
   log.splitter()
 
-  assert.log(assert.addressEqual, await dao.getRecoveryVault(), agent.address, `dao.getRecoveryVault() is ${yl(agent.address)}`)
+  assert.log(
+    assert.addressEqual,
+    await dao.getRecoveryVault(),
+    agent.address,
+    `dao.getRecoveryVault() is ${yl(agent.address)}`
+  )
 
   log.splitter()
 
   assert.log(assert.equal, await daoToken.name(), settings.token.name, `daoToken.name is ${yl(settings.token.name)}`)
 
-  assert.log(assert.equal, await daoToken.symbol(), settings.token.symbol, `daoToken.symbol is ${yl(settings.token.symbol)}`)
+  assert.log(
+    assert.equal,
+    await daoToken.symbol(),
+    settings.token.symbol,
+    `daoToken.symbol is ${yl(settings.token.symbol)}`
+  )
 
   assert.log(assert.bnEqual, await daoToken.decimals(), TOKEN_DECIMALS, `daoToken.decimals is ${yl(TOKEN_DECIMALS)}`)
 
-  assert.log(assert.addressEqual, await daoToken.controller(), tokenManager.address, `daoToken.controller is ${yl(tokenManager.address)}`)
+  assert.log(
+    assert.addressEqual,
+    await daoToken.controller(),
+    tokenManager.address,
+    `daoToken.controller is ${yl(tokenManager.address)}`
+  )
 
-  assert.log(assert.equal, await daoToken.transfersEnabled(), TOKEN_TRANSFERABLE, `daoToken.transfersEnabled is ${yl(TOKEN_TRANSFERABLE)}`)
+  assert.log(
+    assert.equal,
+    await daoToken.transfersEnabled(),
+    TOKEN_TRANSFERABLE,
+    `daoToken.transfersEnabled is ${yl(TOKEN_TRANSFERABLE)}`
+  )
 
   log.splitter()
   await assertKernel(agent, 'agent')
@@ -311,7 +357,12 @@ async function assertDAOConfig({
   log.splitter()
   await assertKernel(tokenManager, 'tokenManager')
 
-  assert.log(assert.addressEqual, await tokenManager.token(), daoToken.address, `tokenManager.token is ${yl(daoToken.address)}`)
+  assert.log(
+    assert.addressEqual,
+    await tokenManager.token(),
+    daoToken.address,
+    `tokenManager.token is ${yl(daoToken.address)}`
+  )
 
   assert.log(
     assert.bnEqual,
@@ -339,13 +390,23 @@ async function assertDAOConfig({
 
   assert.log(assert.equal, await lido.symbol(), STETH_TOKEN_SYMBOL, `lido.symbol is ${yl(STETH_TOKEN_SYMBOL)}`)
 
-  assert.log(assert.bnEqual, await lido.decimals(), STETH_TOKEN_DECIMALS, `lido.decimals is ${yl(STETH_TOKEN_DECIMALS)}`)
+  assert.log(
+    assert.bnEqual,
+    await lido.decimals(),
+    STETH_TOKEN_DECIMALS,
+    `lido.decimals is ${yl(STETH_TOKEN_DECIMALS)}`
+  )
 
   // TODO
   // DAO_LIVE || assert.log(assert.bnEqual, await lido.totalSupply(), 0, `lido.totalSupply() is ${yl(0)}`)
 
   DAO_LIVE ||
-    assert.log(assert.equal, await lido.isStopped(), PROTOCOL_PAUSED_AFTER_DEPLOY, `lido.isStopped is ${yl(PROTOCOL_PAUSED_AFTER_DEPLOY)}`)
+    assert.log(
+      assert.equal,
+      await lido.isStopped(),
+      PROTOCOL_PAUSED_AFTER_DEPLOY,
+      `lido.isStopped is ${yl(PROTOCOL_PAUSED_AFTER_DEPLOY)}`
+    )
 
   DAO_LIVE ||
     assert.log(
@@ -355,7 +416,6 @@ async function assertDAOConfig({
       `lido.getWithdrawalCredentials() is ${yl(await lido.getWithdrawalCredentials())}`
     )
 
-
   assert.log(
     assert.addressEqual,
     await stakingRouter.DEPOSIT_CONTRACT(),
@@ -363,15 +423,24 @@ async function assertDAOConfig({
     `stakingRouter.DEPOSIT_CONTRACT() is ${yl(stakingRouter.DEPOSIT_CONTRACT())}`
   )
 
-  assert.log(assert.addressEqual, await lido.getOracle(), legacyOracle.address, `lido.getOracle() is ${yl(legacyOracle.address)}`)
-
+  assert.log(
+    assert.addressEqual,
+    await lido.getOracle(),
+    legacyOracle.address,
+    `lido.getOracle() is ${yl(legacyOracle.address)}`
+  )
 
   assert.log(assert.addressEqual, await lido.getTreasury(), agent.address, `lido.getTreasury() is ${yl(agent.address)}`)
 
   log.splitter()
   await assertKernel(legacyOracle, 'oracle')
 
-  assert.log(assert.addressEqual, await legacyOracle.getLido(), lido.address, `legacyOracle.getLido() is ${yl(lido.address)}`)
+  assert.log(
+    assert.addressEqual,
+    await legacyOracle.getLido(),
+    lido.address,
+    `legacyOracle.getLido() is ${yl(lido.address)}`
+  )
 
   const legacyOracleBeaconSpec = await legacyOracle.getBeaconSpec()
   assert.log(
@@ -398,7 +467,13 @@ async function assertDAOConfig({
   log.splitter()
   await assertKernel(nopsRegistry, 'nopsRegistry')
 
-  DAO_LIVE || assert.log(assert.bnEqual, await nopsRegistry.getNodeOperatorsCount(), 0, `nopsRegistry.getNodeOperatorsCount() is ${yl(0)}`)
+  DAO_LIVE ||
+    assert.log(
+      assert.bnEqual,
+      await nopsRegistry.getNodeOperatorsCount(),
+      0,
+      `nopsRegistry.getNodeOperatorsCount() is ${yl(0)}`
+    )
 
   DAO_LIVE ||
     assert.log(
@@ -409,7 +484,10 @@ async function assertDAOConfig({
     )
 }
 
-async function assertAragonPermissions({ kernel, lido, legacyOracle, nopsRegistry, agent, finance, tokenManager, voting, burner, stakingRouter }, fromBlock = 4532202) {
+async function assertAragonPermissions(
+  { kernel, lido, legacyOracle, nopsRegistry, agent, finance, tokenManager, voting, burner, stakingRouter },
+  fromBlock = 4532202
+) {
   const aclAddress = await kernel.acl()
   const acl = await artifacts.require('ACL').at(aclAddress)
   const allAclEvents = await acl.getPastEvents('allEvents', { fromBlock })
@@ -426,7 +504,7 @@ async function assertAragonPermissions({ kernel, lido, legacyOracle, nopsRegistr
             roleName,
             granteeAddress: group.grantee.address,
             managerAddress: group.manager === undefined ? manager.address : group.manager.address,
-            onlyGrantee: group.onlyGrantee === undefined ? true : group.onlyGrantee
+            onlyGrantee: group.onlyGrantee === undefined ? true : group.onlyGrantee,
           },
           fromBlock
         )
@@ -446,7 +524,7 @@ async function assertAragonPermissions({ kernel, lido, legacyOracle, nopsRegistr
       roleName: 'CREATE_PERMISSIONS_ROLE',
       managerAddress: voting.address,
       granteeAddress: voting.address,
-      onlyGrantee: true
+      onlyGrantee: true,
     },
     fromBlock
   )
@@ -460,7 +538,7 @@ async function assertAragonPermissions({ kernel, lido, legacyOracle, nopsRegistr
       roleName: 'APP_MANAGER_ROLE',
       managerAddress: voting.address,
       granteeAddress: voting.address,
-      onlyGrantee: true
+      onlyGrantee: true,
     },
     fromBlock
   )
@@ -477,9 +555,9 @@ async function assertAragonPermissions({ kernel, lido, legacyOracle, nopsRegistr
     groups: [
       {
         roleNames: ['REGISTRY_MANAGER_ROLE', 'REGISTRY_ADD_EXECUTOR_ROLE'],
-        grantee: voting
-      }
-    ]
+        grantee: voting,
+      },
+    ],
   })
 
   log.splitter()
@@ -491,16 +569,16 @@ async function assertAragonPermissions({ kernel, lido, legacyOracle, nopsRegistr
     groups: [
       {
         roleNames: ['EXECUTE_ROLE', 'RUN_SCRIPT_ROLE'],
-        grantee: voting
-      }
+        grantee: voting,
+      },
     ],
     missingRoleNames: [
       'SAFE_EXECUTE_ROLE',
       'ADD_PROTECTED_TOKEN_ROLE',
       'REMOVE_PROTECTED_TOKEN_ROLE',
       'ADD_PRESIGNED_HASH_ROLE',
-      'DESIGNATE_SIGNER_ROLE'
-    ]
+      'DESIGNATE_SIGNER_ROLE',
+    ],
   })
 
   log.splitter()
@@ -512,10 +590,10 @@ async function assertAragonPermissions({ kernel, lido, legacyOracle, nopsRegistr
     groups: [
       {
         roleNames: ['CREATE_PAYMENTS_ROLE', 'EXECUTE_PAYMENTS_ROLE', 'MANAGE_PAYMENTS_ROLE'],
-        grantee: voting
-      }
+        grantee: voting,
+      },
     ],
-    missingRoleNames: ['CHANGE_PERIOD_ROLE', 'CHANGE_BUDGETS_ROLE']
+    missingRoleNames: ['CHANGE_PERIOD_ROLE', 'CHANGE_BUDGETS_ROLE'],
   })
 
   log.splitter()
@@ -527,10 +605,10 @@ async function assertAragonPermissions({ kernel, lido, legacyOracle, nopsRegistr
     groups: [
       {
         roleNames: ['ASSIGN_ROLE'],
-        grantee: voting
-      }
+        grantee: voting,
+      },
     ],
-    missingRoleNames: ['MINT_ROLE', 'ISSUE_ROLE', 'REVOKE_VESTINGS_ROLE']
+    missingRoleNames: ['MINT_ROLE', 'ISSUE_ROLE', 'REVOKE_VESTINGS_ROLE'],
   })
 
   log.splitter()
@@ -542,13 +620,13 @@ async function assertAragonPermissions({ kernel, lido, legacyOracle, nopsRegistr
     groups: [
       {
         roleNames: ['MODIFY_SUPPORT_ROLE', 'MODIFY_QUORUM_ROLE'],
-        grantee: voting
+        grantee: voting,
       },
       {
         roleNames: ['CREATE_VOTES_ROLE'],
-        grantee: tokenManager
-      }
-    ]
+        grantee: tokenManager,
+      },
+    ],
   })
 
   log.splitter()
@@ -564,11 +642,11 @@ async function assertAragonPermissions({ kernel, lido, legacyOracle, nopsRegistr
           'RESUME_ROLE',
           'STAKING_PAUSE_ROLE',
           'STAKING_CONTROL_ROLE',
-          'UNSAFE_CHANGE_DEPOSITED_VALIDATORS_ROLE'
+          'UNSAFE_CHANGE_DEPOSITED_VALIDATORS_ROLE',
         ],
-        grantee: voting
-      }
-    ]
+        grantee: voting,
+      },
+    ],
   })
 
   log.splitter()
@@ -579,19 +657,14 @@ async function assertAragonPermissions({ kernel, lido, legacyOracle, nopsRegistr
     manager: voting,
     groups: [
       {
-        roleNames: [
-          'MANAGE_SIGNING_KEYS',
-          'SET_NODE_OPERATOR_LIMIT_ROLE'
-        ],
-        grantee: voting
+        roleNames: ['MANAGE_SIGNING_KEYS', 'SET_NODE_OPERATOR_LIMIT_ROLE'],
+        grantee: voting,
       },
       {
-        roleNames: [
-          'STAKING_ROUTER_ROLE',
-        ],
-        grantee: stakingRouter
-      }
-    ]
+        roleNames: ['STAKING_ROUTER_ROLE'],
+        grantee: stakingRouter,
+      },
+    ],
   })
 }
 
@@ -655,9 +728,12 @@ async function assertNonAragonPermissions(state, permissionsConfig) {
             `Contract ${stateField} ${contractType} has correct number of ${role} holders`
           )
           for (const holder of theHolders) {
-            assert.log(assert.equal, true,
+            assert.log(
+              assert.equal,
+              true,
               await contract.hasRole(roleHash, addressFromStateField(state, holder)),
-              `Contract ${stateField} ${contractType} has role ${role} holer ${holder}`)
+              `Contract ${stateField} ${contractType} has role ${role} holer ${holder}`
+            )
           }
         }
       } else if (permissionParams.specificViews !== undefined) {
