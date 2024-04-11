@@ -1111,7 +1111,7 @@ contract('WithdrawalQueue', ([owner, stranger, daoAgent, user, pauser, resumer, 
       const amount = bn(ETH(10)).mul(bn(withdrawalRequestsCount))
       const chainId = await wsteth.getChainId()
       const deadline = MAX_UINT256
-      const domainSeparator = makeDomainSeparator('Wrapped liquid staked Ether 2.0', '1', chainId, wsteth.address)
+      const domainSeparator = makeDomainSeparator('Wrapped liquid staked PLS', '1', chainId, wsteth.address)
       const { v, r, s } = signPermit(
         alice.address,
         withdrawalQueue.address,

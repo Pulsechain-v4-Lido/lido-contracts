@@ -33,8 +33,8 @@ contract WstETH is ERC20Permit {
      */
     constructor(IStETH _stETH)
         public
-        ERC20Permit("Wrapped liquid staked Ether 2.0")
-        ERC20("Wrapped liquid staked Ether 2.0", "wstETH")
+        ERC20Permit("Wrapped liquid staked PLS")
+        ERC20("Wrapped liquid staked PLS", "wstPLS")
     {
         stETH = _stETH;
     }
