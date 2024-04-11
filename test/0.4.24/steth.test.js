@@ -25,8 +25,8 @@ contract('StETH', ([_, __, user1, user2, user3, nobody]) => {
 
   context('ERC20 methods', () => {
     it('info is correct', async () => {
-      assert.equal(await stEth.name(), 'Liquid staked Ether 2.0')
-      assert.equal(await stEth.symbol(), 'stETH')
+      assert.equal(await stEth.name(), 'Liquid staked PLS')
+      assert.equal(await stEth.symbol(), 'stPLS')
       assert.equal(await stEth.decimals(), 18)
     })
 

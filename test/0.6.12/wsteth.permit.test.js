@@ -20,7 +20,7 @@ contract('WstETH.permit', function ([deployer, ...accounts]) {
     // from within the EVM as from the JSON RPC interface.
     // See https://github.com/trufflesuite/ganache-core/issues/515
     chainId = await wsteth.getChainId()
-    domainSeparator = makeDomainSeparator('Wrapped liquid staked Ether 2.0', '1', chainId, wsteth.address)
+    domainSeparator = makeDomainSeparator('Wrapped liquid staked PLS', '1', chainId, wsteth.address)
   })
   describe('permit', () => {
     const [alice, bob] = ACCOUNTS_AND_KEYS

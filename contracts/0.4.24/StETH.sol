@@ -120,7 +120,7 @@ contract StETH is IERC20, Pausable {
      * @return the name of the token.
      */
     function name() external pure returns (string) {
-        return "Liquid staked Ether 2.0";
+        return "Liquid staked PLS";
     }
 
     /**
@@ -128,7 +128,7 @@ contract StETH is IERC20, Pausable {
      * name.
      */
     function symbol() external pure returns (string) {
-        return "stETH";
+        return "stPLS";
     }
 
     /**
