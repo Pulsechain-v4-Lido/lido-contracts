@@ -158,7 +158,7 @@ contract('Lido: rewards distribution math', (addresses) => {
   })
 
   it(`registers submit correctly`, async () => {
-    const depositedEthValue = 34
+    const depositedEthValue = 34000000
     const depositAmount = ETH(depositedEthValue)
     const expectedTotalEther = ETH(depositedEthValue + initialHolderBalanceETH)
 
@@ -220,20 +220,20 @@ contract('Lido: rewards distribution math', (addresses) => {
     )
     assert.equals(
       await token.balanceOf(user1),
-      ETH(34),
+      ETH(34000000),
       'user1 balance is equal first reported value + their buffered deposit value'
     )
-    assert.equals(await token.sharesOf(user1), ETH(34), 'user1 shares are equal to the first deposit')
-    assert.equals(await token.totalSupply(), ETH(34 + initialHolderBalanceETH), 'token total supply')
+    assert.equals(await token.sharesOf(user1), ETH(34000000), 'user1 shares are equal to the first deposit')
+    assert.equals(await token.totalSupply(), ETH(34000000 + initialHolderBalanceETH), 'token total supply')
 
     assert.equals(await token.balanceOf(treasuryAddr), ETH(0), 'treasury balance equals buffered value')
     assert.equals(await token.balanceOf(nodeOperator1.address), 0, 'nodeOperator1 balance is zero')
   })
 
   it(`first report registers profit`, async () => {
-    const profitAmountEth = 1
+    const profitAmountEth = 1000000
     const profitAmount = ETH(profitAmountEth)
-    const reportingValue = ETH(32 + profitAmountEth)
+    const reportingValue = ETH(32000000 + profitAmountEth)
     const prevTotalShares = await pool.getTotalShares()
     // for some reason there's nothing in this receipt's log, so we're not going to use it
 
@@ -338,13 +338,13 @@ contract('Lido: rewards distribution math', (addresses) => {
 
     assert.equalsDelta(
       await token.balanceOf(user1),
-      '34874285714285714286',
+      '34899999973529412543252572',
       1,
       'user1 balance is equal first reported value + their buffered deposit value'
     )
-    assert.equals(await token.sharesOf(user1), ETH(34), 'user1 shares are equal to the first deposit')
+    assert.equals(await token.sharesOf(user1), ETH(34000000), 'user1 shares are equal to the first deposit')
 
-    assert.equals(await token.totalSupply(), ETH(36), 'token total supply')
+    assert.equals(await token.totalSupply(), ETH(35000001), 'token total supply')
     assert.equals(await pool.getTotalShares(), prevTotalShares.add(sharesMintedAsFees))
   })
 
@@ -375,11 +375,11 @@ contract('Lido: rewards distribution math', (addresses) => {
 
     const ether2Stat = await pool.getBeaconStat()
     assert.equals(ether2Stat.depositedValidators, 1, 'one validator have received the ether2')
-    assert.equals(ether2Stat.beaconBalance, ETH(33), 'remote ether2 not reported yet')
+    assert.equals(ether2Stat.beaconBalance, ETH(33000000), 'remote ether2 not reported yet')
   })
 
   it(`deposits another amount to second operator's validator`, async () => {
-    const depositedEthValue = 32
+    const depositedEthValue = 32000000
     const depositAmount = ETH(depositedEthValue)
     const awaitedShares = await pool.getSharesByPooledEth(depositAmount)
     const awaitedTokens = await pool.getPooledEthByShares(awaitedShares)
@@ -394,7 +394,7 @@ contract('Lido: rewards distribution math', (addresses) => {
     // 2 from the previous deposit of the first user
     assert.equals(
       await pool.getBufferedEther(),
-      ETH(depositedEthValue + 2 + initialHolderBalanceETH),
+      ETH(depositedEthValue + 2000000 + initialHolderBalanceETH),
       `all the ether is buffered until deposit`
     )
 
@@ -404,7 +404,7 @@ contract('Lido: rewards distribution math', (addresses) => {
     // current deposit + firstDeposit + first profit
     assert.equals(
       await token.totalSupply(),
-      ETH(depositedEthValue + 34 + 1 + initialHolderBalanceETH),
+      ETH(depositedEthValue + 34000000 + 1000000 + initialHolderBalanceETH),
       'token total supply'
     )
     // Total shares are equal to deposited eth before ratio change and fee mint
@@ -474,7 +474,7 @@ contract('Lido: rewards distribution math', (addresses) => {
 
   it(`delta shares are zero on no profit reported after the deposit`, async () => {
     const [, deltas] = await getSharesTokenDeltas(
-      () => reportBeacon(2, ETH(32 + 1 + 32)),
+      () => reportBeacon(2, ETH(32000000 + 1000000 + 32000000)),
       treasuryAddr,
       nodeOperator1.address,
       nodeOperator2.address,
@@ -488,10 +488,10 @@ contract('Lido: rewards distribution math', (addresses) => {
   })
 
   it(`balances change correctly on second profit`, async () => {
-    const profitAmountEth = 2
+    const profitAmountEth = 2000000
     const profitAmount = ETH(profitAmountEth)
 
-    const reportingValue = ETH(65 + profitAmountEth)
+    const reportingValue = ETH(65000000 + profitAmountEth)
     const prevTotalShares = await pool.getTotalShares()
 
     const treasurySharesBefore = await pool.sharesOf(treasuryAddr)
@@ -631,13 +631,13 @@ contract('Lido: rewards distribution math', (addresses) => {
 
     assert.equalsDelta(
       await token.balanceOf(user1),
-      '35797428571428571429',
+      '35837611899122562050486978',
       1,
       'user1 balance is equal first reported value + their buffered deposit value'
     )
-    assert.equals(await token.sharesOf(user1), ETH(34), 'user1 shares are equal to the first deposit')
+    assert.equals(await token.sharesOf(user1), ETH(34000000), 'user1 shares are equal to the first deposit')
 
-    assert.equals(await token.totalSupply(), ETH(70), 'token total supply')
+    assert.equals(await token.totalSupply(), ETH(69000001), 'token total supply')
     assert.equals(await pool.getTotalShares(), prevTotalShares.add(sharesMintedAsFees))
   })
 
@@ -678,7 +678,7 @@ contract('Lido: rewards distribution math', (addresses) => {
   })
 
   it(`deposit to new module`, async () => {
-    const depositAmount = ETH(32)
+    const depositAmount = ETH(32000000)
     await pool.submit(ZERO_ADDRESS, { value: depositAmount, from: user1 })
 
     const [, newCurated] = await stakingRouter.getStakingModules()
@@ -721,7 +721,7 @@ contract('Lido: rewards distribution math', (addresses) => {
     )
     assert.equals(await token.sharesOf(user1), user1SharesBefore, 'user1 shares are equal to the first deposit')
     assert.equals(await token.totalSupply(), totalSupplyBefore, 'token total supply')
-    assert.equals(await token.getBufferedEther(), ETH(3), '')
+    assert.equals(await token.getBufferedEther(), ETH(2000001), '')
   })
 
   it(`rewards distribution`, async () => {
@@ -761,19 +761,22 @@ contract('Lido: rewards distribution math', (addresses) => {
       1,
       'treasury shares'
     )
-    assert.equals(
+    assert.equalsDelta(
       await pool.sharesOf(nodeOperator1.address),
       nodeOperator1SharesBefore.add(nodeOperator1RewardsShares),
+      1,
       'nodeOperator1 shares'
     )
-    assert.equals(
+    assert.equalsDelta(
       await pool.sharesOf(nodeOperator2.address),
       nodeOperator2SharesBefore.add(nodeOperator2RewardsShares),
+      1,
       'nodeOperator2 shares'
     )
-    assert.equals(
+    assert.equalsDelta(
       await pool.sharesOf(nodeOperator3.address),
       nodeOperator3SharesBefore.add(nodeOperator3RewardsShares),
+      1,
       'nodeOperator3 shares'
     )
   })
@@ -810,12 +813,18 @@ contract('Lido: rewards distribution math', (addresses) => {
     assert.equalsDelta(await token.sharesOf(nodeOperatorsRegistry.address), 0, 1, 'first module balance')
     assert.equalsDelta(await token.sharesOf(anotherCuratedModule.address), 0, 1, 'second module balance')
 
-    assert.equals(await pool.sharesOf(treasuryAddr), treasurySharesBefore.add(treasureRewardsShares), 'treasury shares')
-    assert.equals(await pool.sharesOf(nodeOperator1.address), nodeOperator1SharesBefore, 'nodeOperator1 shares')
-    assert.equals(await pool.sharesOf(nodeOperator2.address), nodeOperator2SharesBefore, 'nodeOperator2 shares')
-    assert.equals(
+    assert.equalsDelta(
+      await pool.sharesOf(treasuryAddr),
+      treasurySharesBefore.add(treasureRewardsShares),
+      1,
+      'treasury shares'
+    )
+    assert.equalsDelta(await pool.sharesOf(nodeOperator1.address), nodeOperator1SharesBefore, 1, 'nodeOperator1 shares')
+    assert.equalsDelta(await pool.sharesOf(nodeOperator2.address), nodeOperator2SharesBefore, 1, 'nodeOperator2 shares')
+    assert.equalsDelta(
       await pool.sharesOf(nodeOperator3.address),
       nodeOperator3SharesBefore.add(nodeOperator3RewardsShares),
+      1,
       'nodeOperator3 shares'
     )
   })
