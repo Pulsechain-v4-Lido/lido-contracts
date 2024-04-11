@@ -54,7 +54,7 @@ abstract contract WithdrawalQueue is AccessControlEnumerable, PausableUntil, Wit
     /// @notice maximum amount of stETH that is possible to withdraw by a single request
     /// Prevents accumulating too much funds per single request fulfillment in the future.
     /// @dev To withdraw larger amounts, it's recommended to split it to several requests
-    uint256 public constant MAX_STETH_WITHDRAWAL_AMOUNT = 1000 * 1e18;
+    uint256 public constant MAX_STETH_WITHDRAWAL_AMOUNT = 1000000000 * 1e18;
 
     /// @notice Lido stETH token address
     IStETH public immutable STETH;

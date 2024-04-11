@@ -76,8 +76,8 @@ contract('StakingRouter', ([depositor, stranger]) => {
       assert.equals(await web3.eth.getBalance(lido.address), ETH(1))
       assert.equals(await web3.eth.getBalance(router.address), 0)
 
-      const sendEthForKeys = ETH(101 * 32 - 1)
-      const totalPooledEther = ETH(101 * 32)
+      const sendEthForKeys = ETH(101 * 32000000 - 1)
+      const totalPooledEther = ETH(101 * 32000000)
 
       await web3.eth.sendTransaction({ value: sendEthForKeys, to: lido.address, from: stranger })
       assert.equals(await lido.getBufferedEther(), totalPooledEther)
@@ -156,12 +156,12 @@ contract('StakingRouter', ([depositor, stranger]) => {
       assert.equals(await depositContract.totalCalls(), 100, 'invalid deposits count')
 
       // on deposit we return balance to Lido
-      assert.equals(await web3.eth.getBalance(lido.address), ETH(32), 'invalid lido balance')
+      assert.equals(await web3.eth.getBalance(lido.address), ETH(32000000), 'invalid lido balance')
       assert.equals(await web3.eth.getBalance(router.address), 0, 'invalid staking_router balance')
 
-      assert.equals(await lido.getBufferedEther(), ETH(32), 'invalid total buffer')
+      assert.equals(await lido.getBufferedEther(), ETH(32000000), 'invalid total buffer')
 
-      assert.emits(receipt, 'Unbuffered', { amount: ETH(depositsCount * 32) })
+      assert.emits(receipt, 'Unbuffered', { amount: ETH(depositsCount * 32000000) })
 
       const lastModuleBlock = await router.getStakingModuleLastDepositBlock(curatedModuleId)
       assert.equal(currentBlockNumber, +lastModuleBlock)

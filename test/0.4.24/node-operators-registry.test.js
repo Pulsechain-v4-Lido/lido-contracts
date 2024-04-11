@@ -149,7 +149,7 @@ contract('NodeOperatorsRegistry', (addresses) => {
       await assert.reverts(app.initialize(steth.address, CURATED_TYPE, PENALTY_DELAY), 'INIT_ALREADY_INITIALIZED')
     })
 
-    it('reverts with error "ZERO_ADDRESS" when stETH is zero address', async () => {
+    it('reverts with error "ZERO_ADDRESS" when stPLS is zero address', async () => {
       const registry = await dao.newAppInstance({ name: 'new-node-operators-registry', base: appBase })
       await assert.reverts(registry.initialize(ZERO_ADDRESS, CURATED_TYPE, PENALTY_DELAY), 'ZERO_ADDRESS')
     })

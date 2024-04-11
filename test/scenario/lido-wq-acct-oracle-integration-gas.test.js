@@ -55,8 +55,6 @@ contract('Lido, AccountingOracle, WithdrawalQueue integration', ([depositor, use
       await router.setWithdrawalCredentials(withdrawalCredentials, { from: voting })
 
       await deployed.oracleReportSanityChecker.setAnnualBalanceIncreaseBPLimit(10000, { from: voting })
-
-      await wQueue.resume({ from: deployed.appManager.address })
     })
 
     const advanceTimeToNextFrame = async () => {
@@ -87,7 +85,7 @@ contract('Lido, AccountingOracle, WithdrawalQueue integration', ([depositor, use
     let userBalance
 
     it(`a user submits ETH to the protocol`, async () => {
-      const ethToSubmit = toBN(e18(320)).sub(await lido.getTotalPooledEther())
+      const ethToSubmit = toBN(e18(320000000)).sub(await lido.getTotalPooledEther())
       await lido.submit(ZERO_ADDRESS, { from: user, value: ethToSubmit })
 
       userBalance = await lido.balanceOf(user)
@@ -102,7 +100,7 @@ contract('Lido, AccountingOracle, WithdrawalQueue integration', ([depositor, use
       let stat = await lido.getBeaconStat()
       assert.equals(stat.depositedValidators, 10)
 
-      const clBalance = toBN(stat.depositedValidators).mul(toBN(e18(32)))
+      const clBalance = toBN(stat.depositedValidators).mul(toBN(e18(32000000)))
 
       await advanceTimeToNextFrame()
 
@@ -205,8 +203,6 @@ contract('Lido, AccountingOracle, WithdrawalQueue integration', ([depositor, use
 
         console.log(`ethAvailForWithdrawals: ${ethAvailForWithdrawals.div(toBN(10).pow(toBN(18)))}`)
       })
-
-      it.skip('TODO: oracle report')
     })
   }
 

@@ -1,9 +1,13 @@
-const { artifacts, contract } = require('hardhat')
+const { artifacts, contract, ethers } = require('hardhat')
 const { ZERO_ADDRESS, MAX_UINT256 } = require('../helpers/constants')
 
 const { ETH, toBN } = require('../helpers/utils')
 const withdrawals = require('../helpers/withdrawals')
 const { assert } = require('../helpers/assert')
+const { DEFAULT_DEPLOY_PARAMS, DEFAULT_FACTORIES } = require('../helpers/config')
+const { newDao } = require('../helpers/dao')
+const { updateLocatorImplementation } = require('../helpers/locator-deploy')
+const { addStakingModules } = require('../helpers/protocol')
 
 const StETHMock = artifacts.require('StETHPermitMock.sol')
 const WstETH = artifacts.require('WstETHMock.sol')
@@ -21,11 +25,69 @@ async function deployWithdrawalQueue({
   queueResumer,
   queueFinalizer,
   queueOracle,
-  lido,
   queueName = QUEUE_NAME,
   symbol = QUEUE_SYMBOL,
   doResume = true,
 }) {
+  const protocol = {}
+  protocol.deployParams = { ...DEFAULT_DEPLOY_PARAMS }
+  protocol.factories = { ...DEFAULT_FACTORIES }
+
+  // accounts
+  protocol.signers = await ethers.getSigners()
+  protocol.appManager = await protocol.factories.appManagerFactory(protocol)
+  protocol.treasury = await protocol.factories.treasuryFactory(protocol)
+  protocol.voting = await protocol.factories.votingFactory(protocol)
+  protocol.guardians = await protocol.factories.guardiansFactory(protocol)
+
+  const { dao, acl } = await newDao(protocol.appManager.address)
+  protocol.dao = dao
+  protocol.acl = acl
+
+  protocol.pool = await protocol.factories.lidoFactory(protocol)
+  protocol.token = protocol.pool
+  protocol.wsteth = await protocol.factories.wstethFactory(protocol)
+
+  protocol.legacyOracle = await protocol.factories.legacyOracleFactory(protocol)
+
+  protocol.depositContract = await protocol.factories.depositContractFactory(protocol)
+
+  protocol.burner = await protocol.factories.burnerFactory(protocol)
+  protocol.lidoLocator = await protocol.factories.lidoLocatorFactory(protocol)
+
+  await updateLocatorImplementation(protocol.lidoLocator.address, protocol.appManager.address, {
+    lido: protocol.pool.address,
+    burner: protocol.burner.address,
+  })
+
+  protocol.validatorExitBus = await protocol.factories.validatorExitBusFactory(protocol)
+  protocol.oracleReportSanityChecker = await protocol.factories.oracleReportSanityCheckerFactory(protocol)
+  protocol.oracle = await protocol.factories.accountingOracleFactory(protocol)
+
+  protocol.withdrawalCredentials = await protocol.factories.withdrawalCredentialsFactory(protocol)
+  protocol.stakingRouter = await protocol.factories.stakingRouterFactory(protocol)
+  protocol.stakingModules = await addStakingModules(protocol.factories.stakingModulesFactory, protocol)
+  protocol.depositSecurityModule = await protocol.factories.depositSecurityModuleFactory(protocol)
+
+  protocol.elRewardsVault = await protocol.factories.elRewardsVaultFactory(protocol)
+  protocol.withdrawalVault = await protocol.factories.withdrawalVaultFactory(protocol)
+  protocol.eip712StETH = await protocol.factories.eip712StETHFactory(protocol)
+
+  await updateLocatorImplementation(protocol.lidoLocator.address, protocol.appManager.address, {
+    depositSecurityModule: protocol.depositSecurityModule.address,
+    elRewardsVault: protocol.elRewardsVault.address,
+    legacyOracle: protocol.legacyOracle.address,
+    stakingRouter: protocol.stakingRouter.address,
+    treasury: protocol.treasury.address,
+    withdrawalVault: protocol.withdrawalVault.address,
+    postTokenRebaseReceiver: protocol.legacyOracle.address,
+    accountingOracle: protocol.oracle.address,
+    oracleReportSanityChecker: protocol.oracleReportSanityChecker.address,
+    validatorsExitBusOracle: protocol.validatorExitBus.address,
+  })
+
+  await protocol.pool.initialize(protocol.lidoLocator.address, protocol.eip712StETH.address, { value: ETH(1) })
+
   const nftDescriptor = await NFTDescriptorMock.new(NFT_DESCRIPTOR_BASE_URI)
   const steth = await StETHMock.new({ value: ETH(1), from: stethOwner })
   const wsteth = await WstETH.new(steth.address, { from: stethOwner })
@@ -35,11 +97,12 @@ async function deployWithdrawalQueue({
   const { queue: withdrawalQueue, impl: withdrawalQueueImplementation } = await withdrawals.deploy(
     queueAdmin,
     wsteth.address,
+    protocol.pool.address,
     queueName,
     symbol
   )
 
-  const initTx = await withdrawalQueue.initialize(queueAdmin, lido)
+  const initTx = await withdrawalQueue.initialize(queueAdmin)
 
   await withdrawalQueue.grantRole(await withdrawalQueue.FINALIZE_ROLE(), queueFinalizer || steth.address, {
     from: queueAdmin,
@@ -49,10 +112,6 @@ async function deployWithdrawalQueue({
   await withdrawalQueue.grantRole(await withdrawalQueue.ORACLE_ROLE(), queueOracle || steth.address, {
     from: queueAdmin,
   })
-
-  if (doResume) {
-    await withdrawalQueue.resume({ from: queueResumer || queueAdmin })
-  }
 
   return {
     initTx,
@@ -75,17 +134,6 @@ contract(
   'WithdrawalQueue',
   ([stethOwner, queueAdmin, queuePauser, queueResumer, queueFinalizer, queueBunkerReporter]) => {
     context('initialization', () => {
-      it('is paused right after deploy', async () => {
-        const { withdrawalQueue } = await deployWithdrawalQueue({
-          stethOwner,
-          queueAdmin,
-          queuePauser,
-          queueResumer,
-          doResume: false,
-        })
-        assert.equals(await withdrawalQueue.isPaused(), true)
-      })
-
       it('bunker mode is disabled by default', async () => {
         const { withdrawalQueue } = await deployWithdrawalQueue({
           stethOwner,

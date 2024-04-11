@@ -153,7 +153,7 @@ contract('Burner', ([deployer, _, anotherAccount]) => {
       )
     })
 
-    it(`reverts on zero stETH amount cover/non-cover request`, async () => {
+    it(`reverts on zero stPLS amount cover/non-cover request`, async () => {
       // provide non-zero allowance
       await lido.approve(burner.address, StETH(1), { from: voting })
 
@@ -628,7 +628,7 @@ contract('Burner', ([deployer, _, anotherAccount]) => {
     })
   })
 
-  describe('Recover excess stETH', () => {
+  describe('Recover excess stPLS', () => {
     beforeEach(async () => {
       // initial stETH balance is zero
       assert.equals(await lido.balanceOf(voting), StETH(0))
@@ -638,7 +638,7 @@ contract('Burner', ([deployer, _, anotherAccount]) => {
       assert.equals(await lido.balanceOf(voting), StETH(10))
     })
 
-    it(`can't recover requested for burn stETH`, async () => {
+    it(`can't recover requested for burn stPLS`, async () => {
       // request to burn 7.1 stETH
       await lido.approve(burner.address, StETH(8), { from: voting })
       await burner.requestBurnMyStETHForCover(StETH(7.1), { from: voting })
@@ -660,7 +660,7 @@ contract('Burner', ([deployer, _, anotherAccount]) => {
       assert.equals(await lido.balanceOf(burner.address), StETH(7.1))
     })
 
-    it('recover some accidentally sent stETH', async () => {
+    it('recover some accidentally sent stPLS', async () => {
       // 'accidentally' sent stETH from voting
       await lido.transfer(burner.address, StETH(2.3), { from: voting })
 
@@ -681,7 +681,7 @@ contract('Burner', ([deployer, _, anotherAccount]) => {
       assert.equals(await lido.balanceOf(treasury), StETH(2.3))
     })
 
-    it(`recover some accidentally sent stETH, while burning requests happened in the middle`, async () => {
+    it(`recover some accidentally sent stPLS, while burning requests happened in the middle`, async () => {
       // 'accidentally' sent stETH from voting
       await lido.transfer(burner.address, StETH(5), { from: voting })
 
@@ -772,7 +772,7 @@ contract('Burner', ([deployer, _, anotherAccount]) => {
       await assert.reverts(burner.recoverERC20(ZERO_ADDRESS, bn(10), { from: anotherAccount }))
     })
 
-    it(`can't recover stETH by recoverERC20`, async () => {
+    it(`can't recover stPLS by recoverERC20`, async () => {
       // initial stETH balance is zero
       assert.equals(await lido.balanceOf(anotherAccount), StETH(0))
       // submit 10 ETH to mint 10 stETH
@@ -830,7 +830,7 @@ contract('Burner', ([deployer, _, anotherAccount]) => {
       )
     })
 
-    it(`can't recover stETH via ERC721(NFT)`, async () => {
+    it(`can't recover stPLS via ERC721(NFT)`, async () => {
       // initial stETH balance is zero
       assert.equals(await lido.balanceOf(anotherAccount), StETH(0))
       // submit 10 ETH to mint 10 stETH
