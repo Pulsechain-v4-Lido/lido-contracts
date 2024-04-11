@@ -2,14 +2,12 @@ const { artifacts, contract, ethers } = require('hardhat')
 
 const { assert } = require('../helpers/assert')
 const {
-  e9,
   shareRate,
   ETH,
   toBN,
   genKeys,
   StETH,
   calcSharesMintedAsFees,
-  calcShareRateDeltaE27,
   limitRebase,
   addSendWithResult,
 } = require('../helpers/utils')
@@ -948,7 +946,7 @@ contract('Lido: handleOracleReport', ([appManager, , , , , , bob, stranger, anot
         },
         { from: voting, gasPrice: 1 }
       )
-      const tx = await lido.handleOracleReport(
+      await lido.handleOracleReport(
         ...Object.values({
           ...DEFAULT_LIDO_ORACLE_REPORT,
           timeElapsed: ONE_YEAR,
@@ -1697,7 +1695,7 @@ contract('Lido: handleOracleReport', ([appManager, , , , , , bob, stranger, anot
         { from: voting, gasPrice: 1 }
       )
 
-      const [postTotalPooledEther, postTotalShares, withdrawals, elRewards] = await lido.handleOracleReport.call(
+      const [postTotalPooledEther, withdrawals, elRewards] = await lido.handleOracleReport.call(
         ...Object.values({
           ...DEFAULT_LIDO_ORACLE_REPORT,
           timeElapsed: ONE_DAY,

@@ -605,18 +605,8 @@ contract('Lido: penalties, slashing, operator stops', (addresses) => {
     const nodeOperator1TokenSharesBefore = await token.sharesOf(nodeOperator1.address)
     const nodeOperator2TokenSharesBefore = await token.sharesOf(nodeOperator2.address)
     const nodeOperatorsRegistrySharesBefore = await token.sharesOf(nodeOperatorsRegistry.address)
-    const prevTotalShares = await token.getTotalShares()
-
-    // Fee and its distribution are in basis points, 10000 corresponding to 100%
-    // Total fee is 10%
-    const totalFeePoints = 0.1 * 10000
-
-    const totalSupplyBefore = await token.getTotalPooledEther()
 
     await pushReport(2, ETH(90000000))
-
-    const totalSupplyAfter = await token.getTotalPooledEther()
-    const beaconBalanceIncrement = totalSupplyAfter - totalSupplyBefore
 
     const nodeOperator1TokenSharesAfter = await token.sharesOf(nodeOperator1.address)
     const nodeOperator2TokenSharesAfter = await token.sharesOf(nodeOperator2.address)

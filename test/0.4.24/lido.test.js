@@ -241,7 +241,6 @@ contract('Lido', ([appManager, , , , , , , , , , , , user1, user2, user3, nobody
       const user2Deposit = 31999999
       const totalDeposit = initialDeposit + user2Deposit
       const totalElRewards = totalDeposit / TOTAL_BASIS_POINTS
-      const user2Rewards = user2Deposit / TOTAL_BASIS_POINTS
 
       await setupNodeOperatorsForELRewardsVaultTests(user2, ETH(user2Deposit))
       await pushReport(1, ETH(totalDeposit))
