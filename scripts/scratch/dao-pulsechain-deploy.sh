@@ -24,7 +24,7 @@ export NETWORK_STATE_FILE="deployed-${NETWORK}.json"
 export NETWORK_STATE_DEFAULTS_FILE="deployed-testnet-defaults.json"
 
 # Holesky params: https://github.com/eth-clients/holesky/blob/main/README.md
-export GENESIS_TIME=1695902400
+export GENESIS_TIME=1713342650
 export DEPOSIT_CONTRACT=0x3693693693693693693693693693693693693693
 
 # export WITHDRAWAL_QUEUE_BASE_URI="<< SET IF REQUIED >>"

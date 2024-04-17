@@ -18,8 +18,8 @@
     "voting": {
       "minSupportRequired": "500000000000000000",
       "minAcceptanceQuorum": "50000000000000000",
-      "voteDuration": 300,
-      "objectionPhaseDuration": 100
+      "voteDuration": 900,
+      "objectionPhaseDuration": 300
     },
     "fee": {
       "totalPercent": 10,
@@ -118,8 +118,8 @@
   },
   "withdrawalQueueERC721": {
     "deployParameters": {
-      "name": "Lido: stETH Withdrawal NFT",
-      "symbol": "unstETH",
+      "name": "Poolsea: stPLS Withdrawal NFT",
+      "symbol": "unstPLS",
       "baseUri": null
     }
   }
