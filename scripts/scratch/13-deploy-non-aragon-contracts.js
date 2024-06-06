@@ -121,6 +121,7 @@ async function deployNewContracts({ web3, artifacts }) {
     wstETHAddress,
     withdrawalQueueERC721Params.name,
     withdrawalQueueERC721Params.symbol,
+    lidoAddress
   ]
   const withdrawalQueueERC721Address = await deployBehindOssifiableProxy(
     "withdrawalQueueERC721", "WithdrawalQueueERC721", proxyContractsOwner, deployer, withdrawalQueueERC721Args)

@@ -25,8 +25,8 @@ contract('StETH', ([_, __, user1, user2, user3, nobody]) => {
 
   context('ERC20 methods', () => {
     it('info is correct', async () => {
-      assert.equal(await stEth.name(), 'Liquid staked Ether 2.0')
-      assert.equal(await stEth.symbol(), 'stETH')
+      assert.equal(await stEth.name(), 'Liquid staked PLS')
+      assert.equal(await stEth.symbol(), 'stPLS')
       assert.equal(await stEth.decimals(), 18)
     })
 
@@ -91,7 +91,7 @@ contract('StETH', ([_, __, user1, user2, user3, nobody]) => {
           await assert.reverts(stEth.transfer(ZERO_ADDRESS, tokens(1), { from: user1 }), 'TRANSFER_TO_ZERO_ADDR')
         })
 
-        it('reverts when recipient is the `stETH` contract itself', async () => {
+        it('reverts when recipient is the `stPLS` contract itself', async () => {
           await assert.reverts(stEth.transfer(stEth.address, tokens(1), { from: user1 }), 'TRANSFER_TO_STETH_CONTRACT')
         })
 
@@ -177,7 +177,7 @@ contract('StETH', ([_, __, user1, user2, user3, nobody]) => {
           )
         })
 
-        it('reverts when recipient is the `stETH` contract itself', async () => {
+        it('reverts when recipient is the `stPLS` contract itself', async () => {
           await assert.reverts(
             stEth.transferFrom(user1, stEth.address, tokens(1), { from: user2 }),
             'TRANSFER_TO_STETH_CONTRACT'

@@ -39,7 +39,7 @@ contract('StakingRouter', ([admin, depositor]) => {
       const modulesIds = await router.getStakingModuleIds()
       const maxDepositsPerModule = []
       for (let i = 0; i < modulesIds.length; i++) {
-        const maxCount = +(await router.getStakingModuleMaxDepositsCount(modulesIds[i], ETH(1000000 * 32)))
+        const maxCount = +(await router.getStakingModuleMaxDepositsCount(modulesIds[i], ETH(1000000 * 32000000)))
         maxDepositsPerModule.push(maxCount)
       }
       return maxDepositsPerModule

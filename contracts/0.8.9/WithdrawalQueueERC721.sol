@@ -74,7 +74,7 @@ contract WithdrawalQueueERC721 is IERC721Metadata, IERC4906, WithdrawalQueue {
     /// @param _wstETH address of WstETH contract
     /// @param _name IERC721Metadata name string. Should be shorter than 32 bytes
     /// @param _symbol IERC721Metadata symbol string. Should be shorter than 32 bytes
-    constructor(address _wstETH, string memory _name, string memory _symbol) WithdrawalQueue(IWstETH(_wstETH)) {
+    constructor(address _wstETH, string memory _name, string memory _symbol, address _lidoAddress) WithdrawalQueue(IWstETH(_wstETH), _lidoAddress) {
         if (bytes(_name).length == 0 || bytes(_symbol).length == 0) revert ZeroMetadata();
         NAME = _toBytes32(_name);
         SYMBOL = _toBytes32(_symbol);

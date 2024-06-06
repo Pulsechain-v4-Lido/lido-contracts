@@ -56,7 +56,7 @@ contract('WstETH', function ([deployer, initialHolder, recipient, anotherAccount
       await expectRevert(this.wsteth.wrap(51, { from: user1 }), 'ERC20: transfer amount exceeds allowance')
     })
 
-    it(`cant wrap if sender hasn't any stETH`, async function () {
+    it(`cant wrap if sender hasn't any stPLS`, async function () {
       await this.steth.approve(this.wsteth.address, 50, { from: user2 })
       await expectRevert(this.wsteth.wrap(1, { from: user2 }), 'ERC20: transfer amount exceeds balance')
     })
@@ -69,7 +69,7 @@ contract('WstETH', function ([deployer, initialHolder, recipient, anotherAccount
 
         expect(await this.wsteth.balanceOf(user1)).to.be.bignumber.equal(
           shouldMintWstETHAmount,
-          'returns correct amount of wstETH'
+          'returns correct amount of wstPLS'
         )
 
         await this.wsteth.approve(any_contract, 25, { from: user1 })
@@ -92,7 +92,7 @@ contract('WstETH', function ([deployer, initialHolder, recipient, anotherAccount
         await expectRevert(this.wsteth.unwrap(51, { from: user1 }), 'ERC20: burn amount exceeds balance')
       })
 
-      it(`can't unwrap if sender hasn't any wstETH`, async function () {
+      it(`can't unwrap if sender hasn't any wstPLS`, async function () {
         await expectRevert(this.wsteth.unwrap(1, { from: user2 }), 'ERC20: burn amount exceeds balance')
       })
 
@@ -117,7 +117,7 @@ contract('WstETH', function ([deployer, initialHolder, recipient, anotherAccount
           expect(await this.wsteth.balanceOf(user1)).to.be.bignumber.equal('0')
         })
 
-        it(`wstETH allowances isn't changed`, async function () {
+        it(`wstPLS allowances isn't changed`, async function () {
           expect(await this.wsteth.allowance(user1, any_contract)).to.be.bignumber.equal('25')
         })
 
@@ -179,7 +179,7 @@ contract('WstETH', function ([deployer, initialHolder, recipient, anotherAccount
           expect(await this.wsteth.balanceOf(user1)).to.be.bignumber.equal('0')
         })
 
-        it(`wstETH allowances isn't changed`, async function () {
+        it(`wstPLS allowances isn't changed`, async function () {
           expect(await this.wsteth.allowance(user1, any_contract)).to.be.bignumber.equal('25')
         })
 
@@ -202,7 +202,7 @@ contract('WstETH', function ([deployer, initialHolder, recipient, anotherAccount
             expect(await this.steth.balanceOf(this.wsteth.address)).to.be.bignumber.equal('55')
           })
 
-          it(`wstETH allowances isn't changed`, async function () {
+          it(`wstPLS allowances isn't changed`, async function () {
             expect(await this.wsteth.allowance(user1, any_contract)).to.be.bignumber.equal('25')
           })
 
@@ -243,7 +243,7 @@ contract('WstETH', function ([deployer, initialHolder, recipient, anotherAccount
               expect(await this.steth.balanceOf(this.wsteth.address)).to.be.bignumber.equal('1') // low values round error
             })
 
-            it(`wstETH allowances isn't changed`, async function () {
+            it(`wstPLS allowances isn't changed`, async function () {
               expect(await this.wsteth.allowance(user1, any_contract)).to.be.bignumber.equal('25')
             })
           })
@@ -274,14 +274,14 @@ contract('WstETH', function ([deployer, initialHolder, recipient, anotherAccount
           expect(await this.wsteth.balanceOf(user1)).to.be.bignumber.equal('0')
         })
 
-        it(`wstETH allowances aren't changed`, async function () {
+        it(`wstPLS allowances aren't changed`, async function () {
           expect(await this.wsteth.allowance(user1, any_contract)).to.be.bignumber.equal('25')
         })
       })
     })
 
     describe(`send ETH directly`, function () {
-      it(`allows to send ETH directly and get wrapped stETH`, async function () {
+      it(`allows to send ETH directly and get wrapped stPLS`, async function () {
         const recipientBalanceBefore = await this.wsteth.balanceOf(recipient)
         const wstETHBalanceBefore = await this.steth.balanceOf(this.wsteth.address)
         const value = ETH(1)
@@ -292,15 +292,15 @@ contract('WstETH', function ([deployer, initialHolder, recipient, anotherAccount
 
         expect(wstETHBalanceAfter.sub(wstETHBalanceBefore)).to.be.bignumber.equal(
           value,
-          'wstETH has got some stETH on balance'
+          'wstPLS has got some stPLS on balance'
         )
         expect(recipientBalanceAfter.sub(recipientBalanceBefore)).to.be.bignumber.equal(
           value,
-          'recepient has got wrapped stETH'
+          'recepient has got wrapped stPLS'
         )
       })
 
-      it(`can unwrap stETH received with direct transfer`, async function () {
+      it(`can unwrap stPLS received with direct transfer`, async function () {
         const value = ETH(1)
         await web3.eth.sendTransaction({ to: this.wsteth.address, from: recipient, value })
 
@@ -320,25 +320,25 @@ contract('WstETH', function ([deployer, initialHolder, recipient, anotherAccount
       })
     })
 
-    describe(`interface for wstETH stETH convertions`, function () {
-      it(`has method for getting stETH by wstETH amount`, async function () {
+    describe(`interface for wstPLS stPLS convertions`, function () {
+      it(`has method for getting stPLS by wstPLS amount`, async function () {
         expect(await this.wsteth.getStETHByWstETH('1')).to.be.bignumber.least('1')
       })
-      it(`has method for getting wstETH by stETH amount`, async function () {
+      it(`has method for getting wstPLS by stPLS amount`, async function () {
         expect(await this.wsteth.getWstETHByStETH('1')).to.be.bignumber.most('1')
       })
-      it(`has method for getting stETH by 1 wstETH`, async function () {
+      it(`has method for getting stPLS by 1 wstPLS`, async function () {
         expect(await this.wsteth.stEthPerToken()).to.be.bignumber.least(ETH('1'))
       })
-      it(`has method for getting wstETH by 1 stETH`, async function () {
+      it(`has method for getting wstPLS by 1 stPLS`, async function () {
         expect(await this.wsteth.tokensPerStEth()).to.be.bignumber.most(ETH('1'))
       })
     })
   })
 
   describe(`ERC20 part`, function () {
-    const name = 'Wrapped liquid staked Ether 2.0'
-    const symbol = 'wstETH'
+    const name = 'Wrapped liquid staked PLS'
+    const symbol = 'wstPLS'
 
     const initialSupply = new BN(100)
 

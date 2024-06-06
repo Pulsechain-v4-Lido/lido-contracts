@@ -94,4 +94,5 @@ async function addStakingModules(stakingModulesFactory, protocol) {
 
 module.exports = {
   deployProtocol,
+  addStakingModules,
 }

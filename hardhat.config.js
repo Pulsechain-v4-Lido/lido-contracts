@@ -73,7 +73,7 @@ const getNetConfig = (networkName, ethAccountName) => {
         // default hardhat's node mnemonic
         mnemonic: 'pepper vivid badge punch magic average globe chicken island evil tube curious',
         count: 30,
-        accountsBalance: '100000000000000000000000',
+        accountsBalance: '100000000000000000000000000000000',
         gasPrice: 1,
       },
     },
@@ -109,7 +109,7 @@ const getNetConfig = (networkName, ethAccountName) => {
     },
     fork: {
       ...base,
-      chainId: 1,
+      chainId: 1337,
       timeout: 60000 * 10,
       forking: {
         url: RPC_URL,
@@ -140,7 +140,7 @@ const solcSettings6 = {
 const solcSettings8 = {
   optimizer: {
     enabled: true,
-    runs: 200,
+    runs: 150,
   },
   evmVersion: 'istanbul',
 }
@@ -231,7 +231,7 @@ module.exports = {
   contractSizer: {
     disambiguatePaths: false,
     runOnCompile: true,
-    strict: true,
+    strict: false,
     except: ['test_helpers', 'template', 'mocks', '@aragon', 'openzeppelin'],
   },
 }

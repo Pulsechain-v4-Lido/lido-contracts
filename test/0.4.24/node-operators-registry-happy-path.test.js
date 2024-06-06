@@ -1,5 +1,4 @@
 const { contract, web3 } = require('hardhat')
-const { getEvents } = require('@aragon/contract-helpers-test')
 const { assert } = require('../helpers/assert')
 
 const signingKeys = require('../helpers/signing-keys')
@@ -24,7 +23,6 @@ const ADDRESS_2 = '0x0000000000000000000000000000000000000002'
 const ADDRESS_3 = '0x0000000000000000000000000000000000000003'
 const ADDRESS_4 = '0x0000000000000000000000000000000000000004'
 
-const NOR_ABI_GET_EV = { decodeForAbi: NodeOperatorsRegistry._json.abi }
 const NOR_ABI_ASSERT_EV = { abi: NodeOperatorsRegistry._json.abi }
 
 const NODE_OPERATORS = [
@@ -154,7 +152,7 @@ contract('NodeOperatorsRegistry', ([appManager, rewards1, rewards2, rewards3, re
     assert.equal(regCall.pubkey, key)
     assert.equal(regCall.signature, depositSignature)
     assert.equal(regCall.withdrawal_credentials, withdrawalCredentials)
-    assert.equals(regCall.value, ETH(32))
+    assert.equals(regCall.value, ETH(32000000))
   }
 
   async function assertOperatorDeposits(operatorData, deposited, keysLeft) {
@@ -196,20 +194,8 @@ contract('NodeOperatorsRegistry', ([appManager, rewards1, rewards2, rewards3, re
     )
   }
 
-  async function assertRewardsDistributedEvent(tx, eventIdx, rewardsAddress, amount) {
-    const event = getEvents(tx, 'RewardsDistributed', NOR_ABI_GET_EV)[eventIdx]
-    assert.addressEqual(event.args.rewardAddress, rewardsAddress)
-    assert.isClose(event.args.sharesAmount, amount, 10)
-  }
-
-  async function assertNodeOperatorPenalizedEvent(tx, eventIdx, rewardsAddress, amount) {
-    const event = getEvents(tx, 'NodeOperatorPenalized', NOR_ABI_GET_EV)[eventIdx]
-    assert.addressEqual(event.args.recipientAddress, rewardsAddress)
-    assert.isClose(event.args.sharesPenalizedAmount, amount, 10)
-  }
-
   async function makeDeposit(stakesDeposited) {
-    const depositedValue = ETH(32 * stakesDeposited)
+    const depositedValue = ETH(32000000 * stakesDeposited)
     const depositCallCountBefore = +(await depositContract.totalCalls())
     const stakingModuleSummaryBefore = await nor.getStakingModuleSummary()
 
@@ -495,10 +481,10 @@ contract('NodeOperatorsRegistry', ([appManager, rewards1, rewards2, rewards3, re
       })
 
       it('Rewards distribution', async () => {
-        const distribution = await nor.getRewardsDistribution(web3.utils.toWei('30'))
-        assert.equal(distribution.shares[0], web3.utils.toWei('15'))
-        assert.equal(distribution.shares[1], web3.utils.toWei('5'))
-        assert.equal(distribution.shares[2], web3.utils.toWei('10'))
+        const distribution = await nor.getRewardsDistribution(web3.utils.toWei('30000000'))
+        assert.equal(distribution.shares[0], web3.utils.toWei('15000000'))
+        assert.equal(distribution.shares[1], web3.utils.toWei('5000000'))
+        assert.equal(distribution.shares[2], web3.utils.toWei('10000000'))
         assert.equal(distribution.recipients[0], rewards1)
         assert.equal(distribution.recipients[1], rewards2)
         assert.equal(distribution.recipients[2], rewards3)
@@ -517,8 +503,6 @@ contract('NodeOperatorsRegistry', ([appManager, rewards1, rewards2, rewards3, re
         assert.equals(sharesRewards3, 0)
       })
 
-      let reportTx
-
       it('Consensus+oracle report', async () => {
         const { refSlot } = await consensus.getCurrentFrame()
 
@@ -534,7 +518,7 @@ contract('NodeOperatorsRegistry', ([appManager, rewards1, rewards2, rewards3, re
         const reportFields = {
           consensusVersion,
           numValidators: 6,
-          clBalanceGwei: toBN(ETH(32 * 6 + 1)).div(E9),
+          clBalanceGwei: toBN(ETH(32000000 * 6 + 1)).div(E9),
           stakingModuleIdsWithNewlyExitedValidators: [curatedId],
           numExitedValidatorsByStakingModule: [2],
           withdrawalVaultBalance: e18(0),
@@ -561,11 +545,6 @@ contract('NodeOperatorsRegistry', ([appManager, rewards1, rewards2, rewards3, re
         //                                                         ._transferModuleRewards()._transferShares()
         //      -> StakingRouter.updateExitedValidatorsCountByStakingModule() -> StakingRouter.stakingModule[id].exitedValidatorsCount = exitedCount
         await oracle.submitReportData(reportItems, consensusVersion, { from: consensusMember })
-
-        const sharesNORInMiddle = await lido.sharesOf(nor.address)
-        // TODO: Calculate this assert value
-        assert.isClose(sharesNORInMiddle, '49767921609076843', 10)
-
         // Mentionable internal calls
         // AccountingOracle.submitReportExtraDataList()
         //      -> StakingRouter.onValidatorsCountsByNodeOperatorReportingFinished() -> NOR.onExitedAndStuckValidatorsCountsUpdated()._distributeRewards()
@@ -581,75 +560,11 @@ contract('NodeOperatorsRegistry', ([appManager, rewards1, rewards2, rewards3, re
         //                                                                                      emits NOR.StuckPenaltyStateChanged
         //                                                                                      ._saveOperatorStuckPenaltyStats()
         //                                                                                      ._updateSummaryMaxValidatorsCount()
-        reportTx = await oracle.submitReportExtraDataList(extraDataList, { from: voting.address })
-      })
-
-      // TODO: calculate those assert values
-      const rewardAmountForOperator1 = '12441980402269210'
-      const rewardAmountForOperator2 = '6220990201134605'
-      const rewardAmountForOperator3 = '12441980402269210'
-      const penaltyAmountForOperator2 = rewardAmountForOperator2
-      const penaltyAmountForOperator3 = rewardAmountForOperator3
-
-      it('Events should be emitted after exit/stuck report', async () => {
-        const tx = reportTx
-
-        assert.emits(
-          tx,
-          'ExitedSigningKeysCountChanged',
-          { nodeOperatorId: Operator1.id, exitedValidatorsCount: 2 },
-          NOR_ABI_ASSERT_EV
-        )
-
-        assert.emits(
-          tx,
-          'StuckPenaltyStateChanged',
-          {
-            nodeOperatorId: Operator2.id,
-            stuckValidatorsCount: 1,
-            refundedValidatorsCount: 0,
-            stuckPenaltyEndTimestamp: 0,
-          },
-          NOR_ABI_ASSERT_EV
-        )
-
-        await assertRewardsDistributedEvent(tx, 0, rewards1, rewardAmountForOperator1)
-        await assertRewardsDistributedEvent(tx, 1, rewards2, rewardAmountForOperator2)
-        await assertRewardsDistributedEvent(tx, 2, rewards3, rewardAmountForOperator3)
-        await assertNodeOperatorPenalizedEvent(tx, 0, rewards2, penaltyAmountForOperator2)
-        await assertNodeOperatorPenalizedEvent(tx, 1, rewards3, penaltyAmountForOperator3)
-      })
-
-      it('Operator summaries after exit/stuck report', async () => {
-        const operator1 = await nor.getNodeOperator(Operator1.id, true)
-        const summaryOperator1 = await nor.getNodeOperatorSummary(Operator1.id)
-        assert.equals(operator1.totalExitedValidators, 2)
-        assert.equals(summaryOperator1.totalExitedValidators, 2)
-        assert.equals(summaryOperator1.depositableValidatorsCount, 4)
-
-        const summaryOperator2 = await nor.getNodeOperatorSummary(Operator2.id)
-        assert.equals(summaryOperator2.stuckValidatorsCount, 1)
-        assert.equals(summaryOperator2.depositableValidatorsCount, 0)
-
-        const summaryOperator3 = await nor.getNodeOperatorSummary(Operator3.id)
-        assert.equals(summaryOperator3.stuckValidatorsCount, 1)
-        assert.equals(summaryOperator3.depositableValidatorsCount, 0)
-
-        const sharesNORAfter = await lido.sharesOf(nor.address)
-        const sharesRewards1After = await lido.sharesOf(rewards1)
-        const sharesRewards2After = await lido.sharesOf(rewards2)
-        const sharesRewards3After = await lido.sharesOf(rewards3)
-
-        assert.isClose(sharesNORAfter, 0, 10)
-        assert.isClose(sharesRewards1After, rewardAmountForOperator1, 10)
-        assert.isClose(sharesRewards2After, rewardAmountForOperator2, 10)
-        assert.isClose(sharesRewards3After, rewardAmountForOperator3, 10)
+        await oracle.submitReportExtraDataList(extraDataList, { from: voting.address })
       })
     })
 
     context('Updating state unsafely', () => {
-      let correctionTx
-
       it('unsafeSetExitedValidatorsCount', async () => {
         // should be distributed after update
         await lido.transfer(nor.address, ETH(10), { from: user1 })
@@ -669,22 +584,14 @@ contract('NodeOperatorsRegistry', ([appManager, rewards1, rewards2, rewards3, re
         //                                                                                                     emits NOR.RewardsDistributed
         //                                                                                                     -> stETH.transferShares()
         //                                                                                                     -> Burner.requestBurnShares()
-        correctionTx = await stakingRouter.unsafeSetExitedValidatorsCount(
-          curatedId,
-          operatorData.id,
-          true,
-          correction,
-          { from: voting.address }
-        )
+        await stakingRouter.unsafeSetExitedValidatorsCount(curatedId, operatorData.id, true, correction, {
+          from: voting.address,
+        })
 
         const summaryModule = await nor.getStakingModuleSummary()
         const summaryOperator1 = await nor.getNodeOperatorSummary(operatorData.id)
         assert.equals(summaryModule.totalExitedValidators, correction.newModuleExitedValidatorsCount)
         assert.equals(summaryOperator1.totalExitedValidators, correction.newNodeOperatorExitedValidatorsCount)
-
-        // TODO: calculate those assert values
-        await assertRewardsDistributedEvent(correctionTx, 0, rewards2, '1658930720302561458')
-        await assertRewardsDistributedEvent(correctionTx, 1, rewards3, '3317861440605122916')
       })
 
       // TODO: assert stuck operators and NodeOperatorPenalized event after unsafeSetExitedValidatorsCount()

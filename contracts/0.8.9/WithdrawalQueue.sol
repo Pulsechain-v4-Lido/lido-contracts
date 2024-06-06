@@ -54,7 +54,7 @@ abstract contract WithdrawalQueue is AccessControlEnumerable, PausableUntil, Wit
     /// @notice maximum amount of stETH that is possible to withdraw by a single request
     /// Prevents accumulating too much funds per single request fulfillment in the future.
     /// @dev To withdraw larger amounts, it's recommended to split it to several requests
-    uint256 public constant MAX_STETH_WITHDRAWAL_AMOUNT = 1000 * 1e18;
+    uint256 public constant MAX_STETH_WITHDRAWAL_AMOUNT = 1000000000 * 1e18;
 
     /// @notice Lido stETH token address
     IStETH public immutable STETH;
@@ -74,7 +74,7 @@ abstract contract WithdrawalQueue is AccessControlEnumerable, PausableUntil, Wit
     error ArraysLengthMismatch(uint256 _firstArrayLength, uint256 _secondArrayLength);
 
     /// @param _wstETH address of WstETH contract
-    constructor(IWstETH _wstETH) {
+    constructor(IWstETH _wstETH, address _lidoAddress) WithdrawalQueueBase(_lidoAddress) {
         // init immutables
         WSTETH = _wstETH;
         STETH = WSTETH.stETH();
@@ -359,7 +359,7 @@ abstract contract WithdrawalQueue is AccessControlEnumerable, PausableUntil, Wit
     /// @dev internal initialization helper. Doesn't check provided addresses intentionally
     function _initialize(address _admin) internal {
         _initializeQueue();
-        _pauseFor(PAUSE_INFINITELY);
+        // _pauseFor(PAUSE_INFINITELY); // @todo: make sure if it right
 
         _initializeContractVersionTo(1);
 
