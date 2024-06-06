@@ -6,7 +6,7 @@ const BaseOracle = artifacts.require('BaseOracleTimeTravellable')
 const MockConsensusContract = artifacts.require('MockConsensusContract')
 
 const SLOTS_PER_EPOCH = 32
-const SECONDS_PER_SLOT = 12
+const SECONDS_PER_SLOT = 10
 const GENESIS_TIME = 100
 const EPOCHS_PER_FRAME = 225 // one day
 const INITIAL_EPOCH = 1

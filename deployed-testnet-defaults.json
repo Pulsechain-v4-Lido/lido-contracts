@@ -10,7 +10,7 @@
   "daoAragonId": "lido-dao",
   "chainSpec": {
     "slotsPerEpoch": 32,
-    "secondsPerSlot": 12,
+    "secondsPerSlot": 10,
     "genesisTime": null,
     "depositContract": null
   },

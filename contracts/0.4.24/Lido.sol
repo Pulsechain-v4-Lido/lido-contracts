@@ -281,6 +281,7 @@ contract Lido is Versioned, StETHPermit, AragonApp {
         payable
         onlyInit
     {
+        poolFee = FeeStructure(0.01 ether, 0.01 ether);
         _resume();
         _resumeStaking();
         _bootstrapInitialHolder();
@@ -1572,7 +1573,7 @@ contract Lido is Versioned, StETHPermit, AragonApp {
         uint256 withdrawFee;
     }
 
-    uint256 private constant _maxFee = 0.01 ether; // maximum fee for deposits and withdrawals 1%
+    uint256 public constant MAX_FEE = 0.01 ether; // maximum fee for deposits and withdrawals 1%
 
     FeeStructure public poolFee;
 
@@ -1585,7 +1586,7 @@ contract Lido is Versioned, StETHPermit, AragonApp {
      */
     function setStakingFee(uint256 _depositFee, uint256 _withdrawFee) external {
         _auth(STAKING_CONTROL_ROLE);
-        require(_depositFee >= 0 && _withdrawFee >= 0 && _depositFee <= _maxFee && _withdrawFee <= _maxFee, "Invalid Fee %");
+        require(_depositFee >= 0 && _withdrawFee >= 0 && _depositFee <= MAX_FEE && _withdrawFee <= MAX_FEE, "Invalid Fee %");
 
         poolFee = FeeStructure(_depositFee, _withdrawFee);
     }
